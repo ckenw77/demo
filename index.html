@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Historical Tide Record Catalogue</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --text: #1f2a37;
+      --accent: #0f5c7a;
+      --accent-2: #1f8db3;
+      --card: #ffffff;
+      --muted: #5b6b7a;
+      --border: #d8e2ea;
+      --shadow: 0 10px 30px rgba(15, 92, 122, 0.08);
+      --hero-overlay: rgba(10, 37, 54, 0.62);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1rem 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .brand {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--accent);
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .nav a:hover { color: var(--accent); }
+
+    .hero {
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      background:
+        linear-gradient(var(--hero-overlay), var(--hero-overlay)),
+        url('images/hero-image.jpg') center/cover no-repeat;
+      color: white;
+    }
+
+    .hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 1.25rem;
+      width: 100%;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.25);
+      padding: 0.45rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: 3.2rem;
+      line-height: 1.08;
+      margin: 0 0 1rem;
+      max-width: 800px;
+    }
+
+    .subtitle {
+      max-width: 720px;
+      font-size: 1.15rem;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 1.5rem;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 0.85rem 1.2rem;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 700;
+      border: 1px solid rgba(255,255,255,0.3);
+      background: white;
+      color: var(--text);
+      box-shadow: var(--shadow);
+    }
+
+    .button.primary {
+      background: var(--accent-2);
+      color: white;
+      border-color: var(--accent-2);
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.25rem 3.5rem;
+    }
+
+    section {
+      padding-top: 2.5rem;
+    }
+
+    .section-title {
+      font-size: 1.9rem;
+      margin: 0 0 0.5rem;
+      color: var(--accent);
+    }
+
+    .section-intro {
+      margin: 0 0 1.25rem;
+      color: var(--muted);
+      max-width: 760px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 1.4rem;
+      box-shadow: var(--shadow);
+    }
+
+    .two-column {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.25rem;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin-top: 1rem;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      min-width: 520px;
+    }
+
+    th, td {
+      padding: 0.85rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      background: #eef5f8;
+      color: var(--accent);
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+
+    .figure-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .figure-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+      background: #dfe9ef;
+    }
+
+    .figure-card .caption {
+      padding: 1rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    footer {
+      margin-top: 3rem;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    @media (max-width: 800px) {
+      h1 { font-size: 2.4rem; }
+      .two-column,
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        gap: 0.75rem;
+      }
+
+      .hero-inner {
+        padding: 4rem 1.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <div class="brand">Historical Tide Record Catalogue</div>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#data">Data</a>
+        <a href="#figures">Figures</a>
+        <a href="#citation">Citation</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" id="home">
+    <div class="hero-inner">
+      <div class="hero-tag">Historical sea-level information</div>
+      <h1>Historical Tide Record Catalogue</h1>
+      <p class="subtitle">
+        A catalogue website for historical tide records, digitised datasets, undigitised records, and supporting figures.
+      </p>
+      <div class="button-row">
+        <a class="button primary" href="#data">Browse Data</a>
+        <a class="button" href="#figures">View Figures</a>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <section id="about">
+      <h2 class="section-title">About</h2>
+      <p class="section-intro">Add your project overview here.</p>
+      <div class="card">
+        <p>
+          <!-- WRITE YOUR ABOUT PARAGRAPH BELOW THIS LINE -->
+          Replace this text with your own paragraph describing the catalogue, why the records matter, how the data were compiled, and what visitors can find on this website.
+          <!-- WRITE YOUR ABOUT PARAGRAPH ABOVE THIS LINE -->
+        </p>
+      </div>
+    </section>
+
+    <section id="data">
+      <h2 class="section-title">Data</h2>
+      <p class="section-intro">This section can contain your digitised and undigitised record tables.</p>
+
+      <div class="two-column">
+        <div class="card">
+          <h3>Digitised Records</h3>
+          <p>Replace the example rows below with your digitised record table.</p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Record ID</th>
+                  <th>Location</th>
+                  <th>Year Range</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>D001</td>
+                  <td>Example Site</td>
+                  <td>1880–1900</td>
+                  <td>Digitised</td>
+                </tr>
+                <tr>
+                  <td>D002</td>
+                  <td>Example Harbour</td>
+                  <td>1901–1920</td>
+                  <td>Digitised</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Undigitised Records</h3>
+          <p>Replace the example rows below with your undigitised record table.</p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Record ID</th>
+                  <th>Location</th>
+                  <th>Year Range</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>U001</td>
+                  <td>Example Port</td>
+                  <td>1875–1888</td>
+                  <td>Undigitised</td>
+                </tr>
+                <tr>
+                  <td>U002</td>
+                  <td>Example Station</td>
+                  <td>1921–1935</td>
+                  <td>Undigitised</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="figures">
+      <h2 class="section-title">Figures</h2>
+      <p class="section-intro">Add your five figures below by replacing the example image files and captions.</p>
+
+      <div class="gallery">
+        <div class="figure-card">
+          <img src="images/figure1.jpg" alt="Figure 1" />
+          <div class="caption">
+            <strong>Figure 1.</strong> Replace with your first figure caption.
+          </div>
+        </div>
+
+        <div class="figure-card">
+          <img src="images/figure2.jpg" alt="Figure 2" />
+          <div class="caption">
+            <strong>Figure 2.</strong> Replace with your second figure caption.
+          </div>
+        </div>
+
+        <div class="figure-card">
+          <img src="images/figure3.jpg" alt="Figure 3" />
+          <div class="caption">
+            <strong>Figure 3.</strong> Replace with your third figure caption.
+          </div>
+        </div>
+
+        <div class="figure-card">
+          <img src="images/figure4.jpg" alt="Figure 4" />
+          <div class="caption">
+            <strong>Figure 4.</strong> Replace with your fourth figure caption.
+          </div>
+        </div>
+
+        <div class="figure-card">
+          <img src="images/figure5.jpg" alt="Figure 5" />
+          <div class="caption">
+            <strong>Figure 5.</strong> Replace with your fifth figure caption.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="citation">
+      <h2 class="section-title">Citation</h2>
+      <div class="card">
+        <p>
+          Add your preferred citation here. For example: Author name, year, project title, repository or website title, and link.
+        </p>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2 class="section-title">Contact</h2>
+      <div class="card">
+        <p>
+          Add your contact details here, such as your name, institutional affiliation, and email address.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2026 Historical Tide Record Catalogue
+  </footer>
+</body>
+</html>
