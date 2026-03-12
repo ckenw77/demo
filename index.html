@@ -18,7 +18,6 @@
     }
 
     * { box-sizing: border-box; }
-
     html { scroll-behavior: smooth; }
 
     body {
@@ -140,9 +139,7 @@
       padding: 0 1.25rem 3.5rem;
     }
 
-    section {
-      padding-top: 2.5rem;
-    }
+    section { padding-top: 2.5rem; }
 
     .section-title {
       font-size: 1.9rem;
@@ -164,35 +161,21 @@
       box-shadow: var(--shadow);
     }
 
-    .two-column {
+    .data-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 1.25rem;
     }
 
-    .table-wrap {
-      overflow-x: auto;
-      margin-top: 1rem;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background: white;
-      min-width: 520px;
-    }
-
-    th, td {
-      padding: 0.85rem 1rem;
-      text-align: left;
-      border-bottom: 1px solid var(--border);
-    }
-
-    th {
-      background: #eef5f8;
-      color: var(--accent);
+    .file-button {
+      display: inline-block;
+      margin-top: 0.8rem;
+      padding: 0.7rem 1rem;
+      background: var(--accent-2);
+      color: white;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
     }
 
     .gallery {
@@ -217,16 +200,7 @@
       background: #dfe9ef;
     }
 
-    .figure-card .caption {
-      padding: 1rem;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1rem;
-      margin-top: 2rem;
-    }
+    .figure-card .caption { padding: 1rem; }
 
     footer {
       margin-top: 3rem;
@@ -238,199 +212,131 @@
 
     @media (max-width: 800px) {
       h1 { font-size: 2.4rem; }
-      .two-column,
-      .footer-grid { grid-template-columns: 1fr; }
     }
 
-    @media (max-width: 640px) {
-      .nav {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      nav {
-        gap: 0.75rem;
-      }
-
-      .hero-inner {
-        padding: 4rem 1.25rem;
-      }
-    }
   </style>
 </head>
 <body>
-  <header>
-    <div class="nav">
-      <div class="brand">Historical Tide Record Catalogue</div>
-      <nav>
-        <a href="#about">About</a>
-        <a href="#data">Data</a>
-        <a href="#figures">Figures</a>
-        <a href="#citation">Citation</a>
-        <a href="#contact">Contact</a>
-      </nav>
+
+<header>
+  <div class="nav">
+    <div class="brand">Historical Tide Record Catalogue</div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#overview">Quick Overview</a>
+      <a href="#data">Data</a>
+      <a href="#citation">Citation</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div class="hero-tag">Historical sea-level information</div>
+    <h1>Historical Tide Record Catalogue</h1>
+    <p class="subtitle">
+      A catalogue of historical tide records including digitised datasets, undigitised archives, and supporting visual summaries.
+    </p>
+    <div class="button-row">
+      <a class="button primary" href="#data">Browse Data</a>
+      <a class="button" href="#overview">Quick Overview</a>
     </div>
-  </header>
+  </div>
+</section>
 
-  <section class="hero" id="home">
-    <div class="hero-inner">
-      <div class="hero-tag">Historical sea-level information</div>
-      <h1>Historical Tide Record Catalogue</h1>
-      <p class="subtitle">
-        A catalogue website for historical tide records, digitised datasets, undigitised records, and supporting figures.
-      </p>
-      <div class="button-row">
-        <a class="button primary" href="#data">Browse Data</a>
-        <a class="button" href="#figures">View Figures</a>
-      </div>
+<main>
+
+<section id="about">
+  <h2 class="section-title">About</h2>
+  <div class="card">
+    <p>
+      <!-- WRITE YOUR ABOUT PARAGRAPH BELOW THIS LINE -->
+      Replace this text with your description of the historical tide catalogue, its purpose, how the records were collected, and how the data can be used.
+      <!-- WRITE YOUR ABOUT PARAGRAPH ABOVE THIS LINE -->
+    </p>
+  </div>
+</section>
+
+<section id="overview">
+  <h2 class="section-title">Quick Overview</h2>
+  <p class="section-intro">Key figures summarising the catalogue and available records.</p>
+
+  <div class="gallery">
+
+    <div class="figure-card">
+      <img src="images/figure1.jpg" alt="Figure 1">
+      <div class="caption"><strong>Figure 1.</strong> Replace caption.</div>
     </div>
-  </section>
 
-  <main>
-    <section id="about">
-      <h2 class="section-title">About</h2>
-      <p class="section-intro">Add your project overview here.</p>
-      <div class="card">
-        <p>
-          <!-- WRITE YOUR ABOUT PARAGRAPH BELOW THIS LINE -->
-          Replace this text with your own paragraph describing the catalogue, why the records matter, how the data were compiled, and what visitors can find on this website.
-          <!-- WRITE YOUR ABOUT PARAGRAPH ABOVE THIS LINE -->
-        </p>
-      </div>
-    </section>
+    <div class="figure-card">
+      <img src="images/figure2.jpg" alt="Figure 2">
+      <div class="caption"><strong>Figure 2.</strong> Replace caption.</div>
+    </div>
 
-    <section id="data">
-      <h2 class="section-title">Data</h2>
-      <p class="section-intro">This section can contain your digitised and undigitised record tables.</p>
+    <div class="figure-card">
+      <img src="images/figure3.jpg" alt="Figure 3">
+      <div class="caption"><strong>Figure 3.</strong> Replace caption.</div>
+    </div>
 
-      <div class="two-column">
-        <div class="card">
-          <h3>Digitised Records</h3>
-          <p>Replace the example rows below with your digitised record table.</p>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Record ID</th>
-                  <th>Location</th>
-                  <th>Year Range</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>D001</td>
-                  <td>Example Site</td>
-                  <td>1880–1900</td>
-                  <td>Digitised</td>
-                </tr>
-                <tr>
-                  <td>D002</td>
-                  <td>Example Harbour</td>
-                  <td>1901–1920</td>
-                  <td>Digitised</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+    <div class="figure-card">
+      <img src="images/figure4.jpg" alt="Figure 4">
+      <div class="caption"><strong>Figure 4.</strong> Replace caption.</div>
+    </div>
 
-        <div class="card">
-          <h3>Undigitised Records</h3>
-          <p>Replace the example rows below with your undigitised record table.</p>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Record ID</th>
-                  <th>Location</th>
-                  <th>Year Range</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>U001</td>
-                  <td>Example Port</td>
-                  <td>1875–1888</td>
-                  <td>Undigitised</td>
-                </tr>
-                <tr>
-                  <td>U002</td>
-                  <td>Example Station</td>
-                  <td>1921–1935</td>
-                  <td>Undigitised</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </section>
+  </div>
+</section>
 
-    <section id="figures">
-      <h2 class="section-title">Figures</h2>
-      <p class="section-intro">Add your five figures below by replacing the example image files and captions.</p>
+<section id="data">
+  <h2 class="section-title">Data</h2>
+  <p class="section-intro">Download the catalogue tables containing digitised and undigitised tide records.</p>
 
-      <div class="gallery">
-        <div class="figure-card">
-          <img src="images/figure1.jpg" alt="Figure 1" />
-          <div class="caption">
-            <strong>Figure 1.</strong> Replace with your first figure caption.
-          </div>
-        </div>
+  <div class="data-grid">
 
-        <div class="figure-card">
-          <img src="images/figure2.jpg" alt="Figure 2" />
-          <div class="caption">
-            <strong>Figure 2.</strong> Replace with your second figure caption.
-          </div>
-        </div>
+    <div class="card">
+      <h3>Digitised Historical Tide Records</h3>
+      <p>Catalogue of historical tide records that have been digitised and are available for analysis.</p>
 
-        <div class="figure-card">
-          <img src="images/figure3.jpg" alt="Figure 3" />
-          <div class="caption">
-            <strong>Figure 3.</strong> Replace with your third figure caption.
-          </div>
-        </div>
+      <!-- CHANGE FILE LINK HERE IF NEEDED -->
+      <a class="file-button" href="Digitized Historical Tide Records.xlsx">Download File</a>
 
-        <div class="figure-card">
-          <img src="images/figure4.jpg" alt="Figure 4" />
-          <div class="caption">
-            <strong>Figure 4.</strong> Replace with your fourth figure caption.
-          </div>
-        </div>
+    </div>
 
-        <div class="figure-card">
-          <img src="images/figure5.jpg" alt="Figure 5" />
-          <div class="caption">
-            <strong>Figure 5.</strong> Replace with your fifth figure caption.
-          </div>
-        </div>
-      </div>
-    </section>
+    <div class="card">
+      <h3>Undigitised Historical Tide Records</h3>
+      <p>Catalogue of historical tide records that remain undigitised and may require future recovery work.</p>
 
-    <section id="citation">
-      <h2 class="section-title">Citation</h2>
-      <div class="card">
-        <p>
-          Add your preferred citation here. For example: Author name, year, project title, repository or website title, and link.
-        </p>
-      </div>
-    </section>
+      <!-- CHANGE FILE LINK HERE IF NEEDED -->
+      <a class="file-button" href="Undigitized Historical Tide Records.xlsx">Download File</a>
 
-    <section id="contact">
-      <h2 class="section-title">Contact</h2>
-      <div class="card">
-        <p>
-          Add your contact details here, such as your name, institutional affiliation, and email address.
-        </p>
-      </div>
-    </section>
-  </main>
+    </div>
 
-  <footer>
-    © 2026 Historical Tide Record Catalogue
-  </footer>
+  </div>
+</section>
+
+<section id="citation">
+  <h2 class="section-title">Citation</h2>
+  <div class="card">
+    <p>
+      Add your preferred citation here so users know how to reference this catalogue and repository.
+    </p>
+  </div>
+</section>
+
+<section id="contact">
+  <h2 class="section-title">Contact</h2>
+  <div class="card">
+    <p>
+      Add your contact details here (name, institution, email).
+    </p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+© 2026 Historical Tide Record Catalogue
+</footer>
+
 </body>
 </html>
