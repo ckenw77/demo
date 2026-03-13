@@ -237,15 +237,18 @@
     }
 
     th, td {
-      padding: 0.65rem 0.7rem;
+      padding: 0.55rem 0.6rem;
       text-align: left;
       border-bottom: 1px solid var(--border);
       vertical-align: top;
-      font-size: 0.86rem;
+      max-width: 0;
+    }
+
+    td {
+      font-size: 0.8rem;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      max-width: 0;
     }
 
     th {
@@ -255,11 +258,18 @@
       top: 0;
       z-index: 5;
       cursor: pointer;
+      font-size: 0.76rem;
+      line-height: 1.15;
+      white-space: normal;
+      overflow: visible;
+      text-overflow: clip;
+      word-break: break-word;
+      overflow-wrap: anywhere;
     }
 
     th .sort-indicator {
-      font-size: 0.72rem;
-      margin-left: 0.25rem;
+      font-size: 0.68rem;
+      margin-left: 0.2rem;
       color: var(--muted);
     }
 
@@ -428,7 +438,8 @@
       .dataset-tools,
       .map-controls { grid-template-columns: 1fr; }
       #map-frame { height: 340px; }
-      th, td { font-size: 0.8rem; padding: 0.55rem 0.55rem; }
+      td { font-size: 0.76rem; padding: 0.5rem 0.5rem; }
+      th { font-size: 0.72rem; padding: 0.5rem 0.5rem; }
     }
   </style>
 </head>
@@ -653,6 +664,8 @@
 
 <script>
   const PAGE_SIZE = 25;
+  const INITIAL_WORLD_ZOOM = 2;
+  const MAP_MAX_ZOOM = 10;
 
   let map;
   let digitisedLayer;
@@ -849,14 +862,14 @@
   function initialiseMap() {
     map = L.map('map-frame', {
       worldCopyJump: true,
-      minZoom: 2,
-      maxZoom: 8,
+      minZoom: INITIAL_WORLD_ZOOM,
+      maxZoom: MAP_MAX_ZOOM,
       zoomSnap: 1
-    }).setView([20, 0], 2);
+    }).setView([20, 0], INITIAL_WORLD_ZOOM);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 8,
-      minZoom: 2,
+      maxZoom: MAP_MAX_ZOOM,
+      minZoom: INITIAL_WORLD_ZOOM,
       attribution: '&copy; OpenStreetMap contributors'
     }).addTo(map);
 
@@ -871,8 +884,6 @@
 
     digitisedLayer.clearLayers();
     undigitisedLayer.clearLayers();
-
-    const bounds = [];
 
     datasets.digitised.rows.forEach(row => {
       const lat = Number(row[datasets.digitised.mapColumns.lat]);
@@ -889,7 +900,6 @@
       }).bindPopup(buildPopupContent(row, 'digitised'));
 
       marker.addTo(digitisedLayer);
-      bounds.push([lat, lng]);
     });
 
     datasets.undigitised.rows.forEach(row => {
@@ -903,24 +913,11 @@
       }).bindPopup(buildPopupContent(row, 'undigitised'));
 
       marker.addTo(undigitisedLayer);
-      bounds.push([lat, lng]);
     });
 
     updateMapVisibility();
 
-    if (bounds.length > 0) {
-      map.fitBounds(bounds, {
-        padding: [20, 20],
-        maxZoom: 4
-      });
-    }
-
-    if (map.getZoom() < 2) {
-      map.setZoom(2);
-    }
-    if (map.getZoom() > 8) {
-      map.setZoom(8);
-    }
+    map.setView([20, 0], INITIAL_WORLD_ZOOM);
 
     updateMapStatus();
   }
@@ -960,6 +957,8 @@
     } else {
       text += ' Showing both datasets.';
     }
+
+    text += ` Initial map view is fixed to the fully zoomed-out level.`;
 
     document.getElementById('map-status').textContent = text;
   }
