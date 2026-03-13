@@ -664,8 +664,10 @@
 
 <script>
   const PAGE_SIZE = 25;
-  const INITIAL_WORLD_ZOOM = 1;
+  const MAP_MIN_ZOOM = 1;
   const MAP_MAX_ZOOM = 10;
+  const INITIAL_CENTER = [0, 0];
+  const INITIAL_ZOOM = 2;
 
   let map;
   let digitisedLayer;
@@ -862,14 +864,18 @@
   function initialiseMap() {
     map = L.map('map-frame', {
       worldCopyJump: true,
-      minZoom: INITIAL_WORLD_ZOOM,
+      minZoom: MAP_MIN_ZOOM,
       maxZoom: MAP_MAX_ZOOM,
-      zoomSnap: 1
-    }).setView([20, 0], INITIAL_WORLD_ZOOM);
+      zoomSnap: 1,
+      maxBounds: [[-90, -180], [90, 180]],
+      maxBoundsViscosity: 1.0
+    }).setView(INITIAL_CENTER, INITIAL_ZOOM);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: MAP_MAX_ZOOM,
-      minZoom: INITIAL_WORLD_ZOOM,
+      minZoom: MAP_MIN_ZOOM,
+      noWrap: true,
+      bounds: [[-90, -180], [90, 180]],
       attribution: '&copy; OpenStreetMap contributors'
     }).addTo(map);
 
@@ -884,6 +890,8 @@
 
     digitisedLayer.clearLayers();
     undigitisedLayer.clearLayers();
+
+    const bounds = [];
 
     datasets.digitised.rows.forEach(row => {
       const lat = Number(row[datasets.digitised.mapColumns.lat]);
@@ -900,6 +908,7 @@
       }).bindPopup(buildPopupContent(row, 'digitised'));
 
       marker.addTo(digitisedLayer);
+      bounds.push([lat, lng]);
     });
 
     datasets.undigitised.rows.forEach(row => {
@@ -913,11 +922,25 @@
       }).bindPopup(buildPopupContent(row, 'undigitised'));
 
       marker.addTo(undigitisedLayer);
+      bounds.push([lat, lng]);
     });
 
     updateMapVisibility();
 
-    map.setView([20, 0], INITIAL_WORLD_ZOOM);
+    if (bounds.length > 0) {
+      const fitted = L.latLngBounds(bounds);
+      const worldTallBounds = L.latLngBounds(
+        [-90, fitted.getWest()],
+        [90, fitted.getEast()]
+      );
+
+      map.fitBounds(worldTallBounds, {
+        padding: [20, 20],
+        maxZoom: 3
+      });
+    } else {
+      map.setView(INITIAL_CENTER, INITIAL_ZOOM);
+    }
 
     updateMapStatus();
   }
@@ -958,7 +981,7 @@
       text += ' Showing both datasets.';
     }
 
-    text += ' The initial map view is fully zoomed out and cannot zoom out further.';
+    text += ' The initial map view spans the full latitude range from -90 to 90.';
 
     document.getElementById('map-status').textContent = text;
   }
