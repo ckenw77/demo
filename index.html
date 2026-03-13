@@ -362,7 +362,7 @@
 
     #map-frame {
       width: 100%;
-      height: 560px;
+      height: 420px;
       border-radius: 16px;
       overflow: hidden;
       border: 1px solid var(--border);
@@ -427,7 +427,7 @@
       .nav { flex-direction: column; align-items: flex-start; }
       .dataset-tools,
       .map-controls { grid-template-columns: 1fr; }
-      #map-frame { height: 460px; }
+      #map-frame { height: 340px; }
       th, td { font-size: 0.8rem; padding: 0.55rem 0.55rem; }
     }
   </style>
@@ -848,11 +848,15 @@
 
   function initialiseMap() {
     map = L.map('map-frame', {
-      worldCopyJump: true
+      worldCopyJump: true,
+      minZoom: 2,
+      maxZoom: 8,
+      zoomSnap: 1
     }).setView([20, 0], 2);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
+      maxZoom: 8,
+      minZoom: 2,
       attribution: '&copy; OpenStreetMap contributors'
     }).addTo(map);
 
@@ -905,7 +909,17 @@
     updateMapVisibility();
 
     if (bounds.length > 0) {
-      map.fitBounds(bounds, { padding: [30, 30] });
+      map.fitBounds(bounds, {
+        padding: [20, 20],
+        maxZoom: 4
+      });
+    }
+
+    if (map.getZoom() < 2) {
+      map.setZoom(2);
+    }
+    if (map.getZoom() > 8) {
+      map.setZoom(8);
     }
 
     updateMapStatus();
