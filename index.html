@@ -494,7 +494,7 @@
 </section>
 
 <section id="map">
-  <h2 class="section-title">Interactive Map</h2>
+  <h2 class="section-title">Map of Records</h2>
   <p class="section-intro">
     This map works without a Google Maps key. It reads latitude and longitude directly from the spreadsheets and lets users show digitised records, undigitised records, or both.
   </p>
@@ -542,7 +542,7 @@
       <h3>Digitised Historical Tide Records</h3>
       <p>Catalogue of historical tide records that have been digitised and are available for analysis.</p>
       <a class="file-button" href="Digitised_Records_2026_03_13.xlsx" download>Download File</a>
-      <button class="toggle-button secondary" onclick="toggleDataset('digitised')">View on Site</button>
+      <button class="toggle-button secondary" onclick="toggleDataset('digitised')">View Data</button>
 
       <div id="digitised-table" class="table-container">
         <div class="dataset-tools">
@@ -591,7 +591,7 @@
       <h3>Undigitised Historical Tide Records</h3>
       <p>Catalogue of historical tide records that remain undigitised and may require future recovery work.</p>
       <a class="file-button" href="Undigitized_Records_2026_03_13.xlsx" download>Download File</a>
-      <button class="toggle-button secondary" onclick="toggleDataset('undigitised')">View on Site</button>
+      <button class="toggle-button secondary" onclick="toggleDataset('undigitised')">View Data</button>
 
       <div id="undigitised-table" class="table-container">
         <div class="dataset-tools">
@@ -923,7 +923,6 @@
     });
 
     updateMapVisibility();
-
     map.setView([20, 0], INITIAL_WORLD_ZOOM);
   }
 
