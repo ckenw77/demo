@@ -38,7 +38,7 @@
     }
 
     .nav {
-      max-width: 1100px;
+      max-width: 1400px;
       margin: 0 auto;
       padding: 1rem 1.25rem;
       display: flex;
@@ -78,7 +78,7 @@
     }
 
     .hero-inner {
-      max-width: 1100px;
+      max-width: 1400px;
       margin: 0 auto;
       padding: 5rem 1.25rem;
       width: 100%;
@@ -130,7 +130,6 @@
 
     .button:hover,
     .file-button:hover,
-    .figure-card:hover,
     .toggle-button:hover,
     .pager button:hover {
       transform: translateY(-2px);
@@ -143,7 +142,7 @@
     }
 
     main {
-      max-width: 1100px;
+      max-width: 1400px;
       margin: 0 auto;
       padding: 0 1.25rem 3.5rem;
     }
@@ -172,8 +171,8 @@
 
     .data-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 1.25rem;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
     }
 
     .file-button,
@@ -221,7 +220,7 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      min-width: 920px;
+      min-width: 1100px;
     }
 
     th, td {
@@ -320,47 +319,6 @@
       transform: none;
     }
 
-    .lightbox {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.88);
-      z-index: 2000;
-      padding: 2rem;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-    }
-
-    .lightbox.active { display: flex; }
-
-    .lightbox img {
-      max-width: min(1100px, 92vw);
-      max-height: 75vh;
-      border-radius: 14px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.35);
-      background: white;
-    }
-
-    .lightbox-caption {
-      color: white;
-      margin-top: 1rem;
-      max-width: 900px;
-      text-align: center;
-      font-size: 1rem;
-    }
-
-    .lightbox-close {
-      position: absolute;
-      top: 18px;
-      right: 24px;
-      background: transparent;
-      color: white;
-      border: none;
-      font-size: 2rem;
-      cursor: pointer;
-    }
-
     footer {
       margin-top: 3rem;
       border-top: 1px solid var(--border);
@@ -432,7 +390,7 @@
 
 <section id="data">
   <h2 class="section-title">Data</h2>
-  <p class="section-intro">Each catalogue file can now be downloaded and also opened live on the page as a searchable, sortable table with filters.</p>
+  <p class="section-intro">Each catalogue file can be downloaded and also opened live on the page as a searchable, sortable table with filters.</p>
 
   <div class="data-grid">
 
@@ -556,12 +514,6 @@
 </section>
 
 </main>
-
-<div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
-  <button class="lightbox-close" aria-label="Close image">&times;</button>
-  <img id="lightbox-image" src="" alt="Expanded figure">
-  <div id="lightbox-caption" class="lightbox-caption"></div>
-</div>
 
 <footer>
   © 2026 Historical Tide Record Catalogue
@@ -814,25 +766,26 @@
     const tbody = document.createElement('tbody');
     rowsForPage.forEach(row => {
       const tr = document.createElement('tr');
+
       dataset.headers.forEach(header => {
         const td = document.createElement('td');
         const value = row[header];
         const text = normalizeValue(value);
 
-        if ((header.toLowerCase() === 'link' || header.toLowerCase() === 'link ') && text) {
-          const looksLikePdf = text.toLowerCase().endsWith('.pdf');
-          const looksLikeUrl = /^https?:\/\//i.test(text);
+        if (header.toLowerCase().trim() === 'link' && text) {
           const a = document.createElement('a');
+          a.href = text;
           a.target = '_blank';
           a.rel = 'noopener noreferrer';
-          a.textContent = looksLikePdf ? 'Open source file' : text;
-          a.href = looksLikeUrl ? text : text;
+          a.textContent = 'Open source file';
           td.appendChild(a);
         } else {
           td.textContent = text;
         }
+
         tr.appendChild(td);
       });
+
       tbody.appendChild(tr);
     });
 
@@ -887,24 +840,6 @@
     container.classList.toggle('active');
   }
 
-  function openLightbox(imageSrc, captionText) {
-    document.getElementById('lightbox-image').src = imageSrc;
-    document.getElementById('lightbox-caption').textContent = captionText;
-    document.getElementById('lightbox').classList.add('active');
-  }
-
-  function closeLightbox(event) {
-    if (event.target.id === 'lightbox' || event.target.classList.contains('lightbox-close')) {
-      document.getElementById('lightbox').classList.remove('active');
-    }
-  }
-
-  document.addEventListener('keydown', function(event) {
-    if (event.key === 'Escape') {
-      document.getElementById('lightbox').classList.remove('active');
-    }
-  });
-
   function initMap() {
     const locations = [
       { name: 'Amsterdam, Netherlands', lat: 52.3676, lng: 4.9041 },
@@ -944,6 +879,7 @@
     loadDataset('undigitised');
   });
 </script>
+
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initMap"></script>
 </body>
 </html>
