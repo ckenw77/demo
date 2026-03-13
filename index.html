@@ -321,7 +321,6 @@
     <div class="brand">Historical Tide Record Catalogue</div>
     <nav>
       <a href="#about">About</a>
-      <a href="#overview">Quick Overview</a>
       <a href="#data">Data</a>
       <a href="#citation">Citation</a>
       <a href="#contact">Contact</a>
@@ -338,7 +337,7 @@
     </p>
     <div class="button-row">
       <a class="button primary" href="#data">Browse Data</a>
-      <a class="button" href="#overview">Quick Overview</a>
+      <a class="button" href="#map">Explore Map</a>
     </div>
   </div>
 </section>
@@ -350,36 +349,24 @@
   <div class="card">
     <p>
       <!-- WRITE YOUR ABOUT PARAGRAPH BELOW THIS LINE -->
-      Replace this text with your description of the historical tide catalogue, its purpose, how the records were collected, and how the data can be used.
+      Sea level rise is a major consequence of climate change, increasing the risk of flooding, erosion, and other impacts in coastal regions. Developing effective adaptation strategies requires accurate projections of future sea level change, which depend on long observational records.<br><br>
+      Tidal measurements have been collected for centuries and represent some of the longest continuous environmental datasets available. However, much of this information remains stored in historical paper records and has not yet been digitised, limiting its accessibility and use in scientific analysis. As a result, many existing sea level datasets extend back only to the late nineteenth century despite the existence of earlier observations.<br><br>
+      Data archaeology initiatives have demonstrated the value of recovering and digitising historical tide records. Examples include extended tide gauge records from Amsterdam (Netherlands), Brest (France), and Sheerness (UK). Nevertheless, many historical records remain undigitized and are at risk of deterioration or loss.<br><br>
+      This website provides a catalogue of historical tide records worldwide. The aim is to improve the discoverability of these records, support data rescue initiatives, and provide information that can help prioritise and plan digitisation efforts. By facilitating access to these historical observations, the catalogue contributes to the preservation and extension of long-term sea level datasets for use in climate research and coastal planning.
       <!-- WRITE YOUR ABOUT PARAGRAPH ABOVE THIS LINE -->
     </p>
   </div>
 </section>
 
-<section id="overview">
-  <h2 class="section-title">Quick Overview</h2>
-  <p class="section-intro">Key figures summarising the catalogue and available records. Click any figure to enlarge it.</p>
+<section id="map">
+  <h2 class="section-title">Interactive Map</h2>
+  <p class="section-intro">Explore example record locations on the map below. Later, these markers can be replaced with your full catalogue.</p>
 
-  <div class="gallery">
-    <div class="figure-card" onclick="openLightbox('images/figure1.jpg', 'Figure 1. Replace caption.')">
-      <img src="images/figure1.jpg" alt="Figure 1">
-      <div class="caption"><strong>Figure 1.</strong> Replace caption.</div>
-    </div>
-
-    <div class="figure-card" onclick="openLightbox('images/figure2.jpg', 'Figure 2. Replace caption.')">
-      <img src="images/figure2.jpg" alt="Figure 2">
-      <div class="caption"><strong>Figure 2.</strong> Replace caption.</div>
-    </div>
-
-    <div class="figure-card" onclick="openLightbox('images/figure3.jpg', 'Figure 3. Replace caption.')">
-      <img src="images/figure3.jpg" alt="Figure 3">
-      <div class="caption"><strong>Figure 3.</strong> Replace caption.</div>
-    </div>
-
-    <div class="figure-card" onclick="openLightbox('images/figure4.jpg', 'Figure 4. Replace caption.')">
-      <img src="images/figure4.jpg" alt="Figure 4">
-      <div class="caption"><strong>Figure 4.</strong> Replace caption.</div>
-    </div>
+  <div class="card">
+    <div id="map-frame" style="width: 100%; height: 500px; border-radius: 16px; overflow: hidden; border: 1px solid var(--border);"></div>
+    <p style="margin-top: 1rem; color: var(--muted);">
+      This is a starter interactive map using example locations. We can later connect it to your real catalogue data so markers are generated automatically.
+    </p>
   </div>
 </section>
 
@@ -533,7 +520,42 @@
       document.getElementById('lightbox').classList.remove('active');
     }
   });
+
+  function initMap() {
+    const locations = [
+      { name: 'Amsterdam, Netherlands', lat: 52.3676, lng: 4.9041 },
+      { name: 'Brest, France', lat: 48.3904, lng: -4.4861 },
+      { name: 'Sheerness, UK', lat: 51.4404, lng: 0.7629 },
+      { name: 'New York, USA', lat: 40.7128, lng: -74.0060 },
+      { name: 'Sydney, Australia', lat: -33.8688, lng: 151.2093 }
+    ];
+
+    const map = new google.maps.Map(document.getElementById('map-frame'), {
+      center: { lat: 20, lng: 0 },
+      zoom: 2,
+      mapTypeControl: false,
+      streetViewControl: false,
+      fullscreenControl: true
+    });
+
+    locations.forEach((location) => {
+      const marker = new google.maps.Marker({
+        position: { lat: location.lat, lng: location.lng },
+        map,
+        title: location.name
+      });
+
+      const info = new google.maps.InfoWindow({
+        content: `<strong>${location.name}</strong><br>Example historical tide record location`
+      });
+
+      marker.addListener('click', () => {
+        info.open({ anchor: marker, map });
+      });
+    });
+  }
 </script>
 
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initMap"></script>
 </body>
 </html>
