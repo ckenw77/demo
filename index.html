@@ -174,7 +174,7 @@
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 20px;
-      padding: 1.4rem;
+      padding: 1rem;
       box-shadow: var(--shadow);
     }
 
@@ -218,10 +218,13 @@
       background: white;
     }
 
-    .table-container.active { display: block; }
+    .table-container.active {
+      display: block;
+    }
 
     .table-scroll {
-      overflow: auto;
+      overflow-x: hidden;
+      overflow-y: auto;
       max-height: 560px;
       border-top: 1px solid var(--border);
     }
@@ -229,15 +232,20 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      min-width: 1100px;
+      table-layout: fixed;
+      min-width: 0;
     }
 
     th, td {
-      padding: 0.85rem 1rem;
+      padding: 0.65rem 0.7rem;
       text-align: left;
       border-bottom: 1px solid var(--border);
       vertical-align: top;
-      font-size: 0.95rem;
+      font-size: 0.86rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 0;
     }
 
     th {
@@ -247,29 +255,50 @@
       top: 0;
       z-index: 5;
       cursor: pointer;
-      white-space: nowrap;
     }
 
     th .sort-indicator {
-      font-size: 0.8rem;
-      margin-left: 0.35rem;
+      font-size: 0.72rem;
+      margin-left: 0.25rem;
       color: var(--muted);
+    }
+
+    .cell-clip {
+      display: block;
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .cell-link {
+      display: block;
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .cell-link:hover {
+      text-decoration: underline;
     }
 
     .dataset-tools {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 0.75rem;
-      padding: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 0.65rem;
+      padding: 0.85rem;
       background: #fbfdff;
     }
 
     .dataset-tools label,
     .map-controls label {
       display: block;
-      font-size: 0.82rem;
+      font-size: 0.78rem;
       color: var(--muted);
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.25rem;
       font-weight: 700;
     }
 
@@ -277,19 +306,20 @@
     .dataset-tools select,
     .map-controls select {
       width: 100%;
-      padding: 0.65rem 0.75rem;
+      padding: 0.55rem 0.65rem;
       border: 1px solid var(--border);
       border-radius: 10px;
       font: inherit;
+      font-size: 0.9rem;
       background: white;
       color: var(--text);
     }
 
     .dataset-meta,
     .empty-message {
-      padding: 0.9rem 1rem;
+      padding: 0.85rem 1rem;
       color: var(--muted);
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       border-top: 1px solid var(--border);
       background: #fcfeff;
     }
@@ -308,7 +338,7 @@
       align-items: center;
       gap: 1rem;
       flex-wrap: wrap;
-      padding: 0.9rem 1rem 1rem;
+      padding: 0.85rem 1rem 1rem;
       border-top: 1px solid var(--border);
       background: #fbfdff;
     }
@@ -398,6 +428,7 @@
       .dataset-tools,
       .map-controls { grid-template-columns: 1fr; }
       #map-frame { height: 460px; }
+      th, td { font-size: 0.8rem; padding: 0.55rem 0.55rem; }
     }
   </style>
 </head>
@@ -447,7 +478,7 @@
 <section id="map">
   <h2 class="section-title">Interactive Map</h2>
   <p class="section-intro">
-    This map now works without a Google Maps API key. It reads the coordinates directly from the uploaded spreadsheets and lets users switch between digitised records, undigitised records, or both.
+    This map works without a Google Maps key. It reads latitude and longitude directly from the spreadsheets and lets users show digitised records, undigitised records, or both.
   </p>
 
   <div class="card">
@@ -483,7 +514,9 @@
 
 <section id="data">
   <h2 class="section-title">Data</h2>
-  <p class="section-intro">Each catalogue file can be downloaded and also opened live on the page as a searchable, sortable table with filters.</p>
+  <p class="section-intro">
+    Each catalogue file can be downloaded and also opened live on the page as a searchable, sortable table with filters.
+  </p>
 
   <div class="data-grid">
 
@@ -748,6 +781,7 @@
   function populateSelect(selectId, values, placeholder) {
     const select = document.getElementById(selectId);
     select.innerHTML = '';
+
     const firstOption = document.createElement('option');
     firstOption.value = '';
     firstOption.textContent = placeholder;
@@ -892,12 +926,8 @@
       if (map.hasLayer(undigitisedLayer)) map.removeLayer(undigitisedLayer);
     }
 
-    if (map.hasLayer(undigitisedLayer)) {
-      undigitisedLayer.bringToBack();
-    }
-    if (map.hasLayer(digitisedLayer)) {
-      digitisedLayer.bringToFront();
-    }
+    if (map.hasLayer(undigitisedLayer)) undigitisedLayer.bringToBack();
+    if (map.hasLayer(digitisedLayer)) digitisedLayer.bringToFront();
 
     updateMapStatus();
   }
@@ -954,7 +984,11 @@
       dataset.loaded = true;
 
       Object.entries(dataset.selectColumns).forEach(([filterName, columnName]) => {
-        populateSelect(dataset.filters[filterName], getUniqueValues(rows, columnName), `All ${filterName}s`);
+        populateSelect(
+          dataset.filters[filterName],
+          getUniqueValues(rows, columnName),
+          `All ${filterName}s`
+        );
       });
 
       attachDatasetEvents(datasetKey);
@@ -977,6 +1011,7 @@
     Object.values(dataset.filters).forEach(id => {
       const element = document.getElementById(id);
       if (!element) return;
+
       const eventName = element.tagName === 'SELECT' ? 'change' : 'input';
       element.addEventListener(eventName, () => {
         dataset.page = 1;
@@ -1059,6 +1094,7 @@
 
     dataset.headers.forEach(header => {
       const th = document.createElement('th');
+      th.title = header;
       th.innerHTML = `${header}<span class="sort-indicator">${
         dataset.sort.column === header
           ? (dataset.sort.direction === 'asc' ? '▲' : '▼')
@@ -1071,6 +1107,7 @@
     thead.appendChild(headerRow);
 
     const tbody = document.createElement('tbody');
+
     rowsForPage.forEach(row => {
       const tr = document.createElement('tr');
 
@@ -1078,16 +1115,23 @@
         const td = document.createElement('td');
         const value = row[header];
         const text = normalizeValue(value);
+        td.title = text;
 
         if (header.toLowerCase().trim() === 'link' && text) {
           const a = document.createElement('a');
           a.href = text;
           a.target = '_blank';
           a.rel = 'noopener noreferrer';
-          a.textContent = 'Open source file';
+          a.className = 'cell-link';
+          a.textContent = text;
+          a.title = text;
           td.appendChild(a);
         } else {
-          td.textContent = text;
+          const span = document.createElement('span');
+          span.className = 'cell-clip';
+          span.textContent = text;
+          span.title = text;
+          td.appendChild(span);
         }
 
         tr.appendChild(td);
@@ -1116,12 +1160,14 @@
 
   function toggleSort(datasetKey, column) {
     const dataset = datasets[datasetKey];
+
     if (dataset.sort.column === column) {
       dataset.sort.direction = dataset.sort.direction === 'asc' ? 'desc' : 'asc';
     } else {
       dataset.sort.column = column;
       dataset.sort.direction = 'asc';
     }
+
     applyFilters(datasetKey);
   }
 
@@ -1133,11 +1179,13 @@
 
   function resetFilters(datasetKey) {
     const dataset = datasets[datasetKey];
+
     Object.values(dataset.filters).forEach(id => {
       const element = document.getElementById(id);
       if (!element) return;
       element.value = '';
     });
+
     dataset.sort = { column: null, direction: 'asc' };
     dataset.page = 1;
     applyFilters(datasetKey);
