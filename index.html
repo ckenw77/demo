@@ -131,7 +131,8 @@
     .button:hover,
     .file-button:hover,
     .figure-card:hover,
-    .toggle-button:hover {
+    .toggle-button:hover,
+    .pager button:hover {
       transform: translateY(-2px);
     }
 
@@ -176,7 +177,8 @@
     }
 
     .file-button,
-    .toggle-button {
+    .toggle-button,
+    .clear-button {
       display: inline-block;
       margin-top: 0.8rem;
       margin-right: 0.6rem;
@@ -192,7 +194,8 @@
       transition: transform 0.2s ease, opacity 0.2s ease;
     }
 
-    .toggle-button.secondary {
+    .toggle-button.secondary,
+    .clear-button {
       background: #e9f2f6;
       color: var(--accent);
       border: 1px solid var(--border);
@@ -203,18 +206,22 @@
       margin-top: 1rem;
       border: 1px solid var(--border);
       border-radius: 14px;
-      overflow: auto;
+      overflow: hidden;
       background: white;
     }
 
-    .table-container.active {
-      display: block;
+    .table-container.active { display: block; }
+
+    .table-scroll {
+      overflow: auto;
+      max-height: 560px;
+      border-top: 1px solid var(--border);
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      min-width: 680px;
+      min-width: 920px;
     }
 
     th, td {
@@ -222,6 +229,7 @@
       text-align: left;
       border-bottom: 1px solid var(--border);
       vertical-align: top;
+      font-size: 0.95rem;
     }
 
     th {
@@ -229,33 +237,88 @@
       color: var(--accent);
       position: sticky;
       top: 0;
-    }
-
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1rem;
-    }
-
-    .figure-card {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      overflow: hidden;
-      box-shadow: var(--shadow);
+      z-index: 5;
       cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      white-space: nowrap;
     }
 
-    .figure-card img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
+    th .sort-indicator {
+      font-size: 0.8rem;
+      margin-left: 0.35rem;
+      color: var(--muted);
+    }
+
+    .dataset-tools {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 0.75rem;
+      padding: 1rem;
+      background: #fbfdff;
+    }
+
+    .dataset-tools label {
       display: block;
-      background: #dfe9ef;
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-bottom: 0.3rem;
+      font-weight: 700;
     }
 
-    .figure-card .caption { padding: 1rem; }
+    .dataset-tools input,
+    .dataset-tools select {
+      width: 100%;
+      padding: 0.65rem 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font: inherit;
+      background: white;
+      color: var(--text);
+    }
+
+    .dataset-meta,
+    .empty-message {
+      padding: 0.9rem 1rem;
+      color: var(--muted);
+      font-size: 0.92rem;
+      border-top: 1px solid var(--border);
+      background: #fcfeff;
+    }
+
+    .empty-message {
+      display: none;
+    }
+
+    .empty-message.active {
+      display: block;
+    }
+
+    .pager {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      padding: 0.9rem 1rem 1rem;
+      border-top: 1px solid var(--border);
+      background: #fbfdff;
+    }
+
+    .pager button {
+      padding: 0.6rem 0.9rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: white;
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--text);
+      transition: transform 0.2s ease;
+    }
+
+    .pager button:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      transform: none;
+    }
 
     .lightbox {
       display: none;
@@ -269,9 +332,7 @@
       flex-direction: column;
     }
 
-    .lightbox.active {
-      display: flex;
-    }
+    .lightbox.active { display: flex; }
 
     .lightbox img {
       max-width: min(1100px, 92vw);
@@ -311,6 +372,7 @@
     @media (max-width: 800px) {
       h1 { font-size: 2.4rem; }
       .nav { flex-direction: column; align-items: flex-start; }
+      .dataset-tools { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -348,12 +410,10 @@
   <h2 class="section-title">About</h2>
   <div class="card">
     <p>
-      <!-- WRITE YOUR ABOUT PARAGRAPH BELOW THIS LINE -->
       Sea level rise is a major consequence of climate change, increasing the risk of flooding, erosion, and other impacts in coastal regions. Developing effective adaptation strategies requires accurate projections of future sea level change, which depend on long observational records.<br><br>
       Tidal measurements have been collected for centuries and represent some of the longest continuous environmental datasets available. However, much of this information remains stored in historical paper records and has not yet been digitised, limiting its accessibility and use in scientific analysis. As a result, many existing sea level datasets extend back only to the late nineteenth century despite the existence of earlier observations.<br><br>
       Data archaeology initiatives have demonstrated the value of recovering and digitising historical tide records. Examples include extended tide gauge records from Amsterdam (Netherlands), Brest (France), and Sheerness (UK). Nevertheless, many historical records remain undigitized and are at risk of deterioration or loss.<br><br>
       This website provides a catalogue of historical tide records worldwide. The aim is to improve the discoverability of these records, support data rescue initiatives, and provide information that can help prioritise and plan digitisation efforts. By facilitating access to these historical observations, the catalogue contributes to the preservation and extension of long-term sea level datasets for use in climate research and coastal planning.
-      <!-- WRITE YOUR ABOUT PARAGRAPH ABOVE THIS LINE -->
     </p>
   </div>
 </section>
@@ -372,95 +432,105 @@
 
 <section id="data">
   <h2 class="section-title">Data</h2>
-  <p class="section-intro">Download the catalogue files or expand the preview tables directly on the website.</p>
+  <p class="section-intro">Each catalogue file can now be downloaded and also opened live on the page as a searchable, sortable table with filters.</p>
 
   <div class="data-grid">
 
     <div class="card">
       <h3>Digitised Historical Tide Records</h3>
       <p>Catalogue of historical tide records that have been digitised and are available for analysis.</p>
-      <a class="file-button" href="Digitized Historical Tide Records.xlsx">Download File</a>
-      <button class="toggle-button secondary" onclick="toggleTable('digitised-table')">View on Site</button>
+      <a class="file-button" href="Digitised_Records_2026_03_13.xlsx" download>Download File</a>
+      <button class="toggle-button secondary" onclick="toggleDataset('digitised')">View on Site</button>
 
       <div id="digitised-table" class="table-container">
-        <table>
-          <thead>
-            <tr>
-              <th>Record ID</th>
-              <th>Location</th>
-              <th>Year Range</th>
-              <th>Status</th>
-              <th>Notes</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>D001</td>
-              <td>Example Harbour</td>
-              <td>1880–1900</td>
-              <td>Digitised</td>
-              <td>Replace with your real data rows.</td>
-            </tr>
-            <tr>
-              <td>D002</td>
-              <td>Example Port</td>
-              <td>1901–1920</td>
-              <td>Digitised</td>
-              <td>Add or remove columns as needed.</td>
-            </tr>
-            <tr>
-              <td>D003</td>
-              <td>Example Station</td>
-              <td>1921–1935</td>
-              <td>Digitised</td>
-              <td>You can paste a larger table here later.</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="dataset-tools">
+          <div>
+            <label for="digitised-search">Search any field</label>
+            <input id="digitised-search" type="text" placeholder="Location, country, method, study...">
+          </div>
+          <div>
+            <label for="digitised-country">Country</label>
+            <select id="digitised-country"><option value="">All countries</option></select>
+          </div>
+          <div>
+            <label for="digitised-type">Data type</label>
+            <select id="digitised-type"><option value="">All data types</option></select>
+          </div>
+          <div>
+            <label for="digitised-method">Method</label>
+            <select id="digitised-method"><option value="">All methods</option></select>
+          </div>
+          <div>
+            <label for="digitised-start">Start year from</label>
+            <input id="digitised-start" type="number" placeholder="e.g. 1800">
+          </div>
+          <div>
+            <label for="digitised-finish">Finish year to</label>
+            <input id="digitised-finish" type="number" placeholder="e.g. 1950">
+          </div>
+        </div>
+        <div class="dataset-meta" id="digitised-meta">Loading spreadsheet...</div>
+        <div class="table-scroll">
+          <table id="digitised-live-table"></table>
+        </div>
+        <div class="empty-message" id="digitised-empty">No rows match the current filters.</div>
+        <div class="pager">
+          <div id="digitised-page-info">Page 1</div>
+          <div>
+            <button type="button" onclick="changePage('digitised', -1)">Previous</button>
+            <button type="button" onclick="changePage('digitised', 1)">Next</button>
+            <button type="button" class="clear-button" onclick="resetFilters('digitised')">Clear filters</button>
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="card">
       <h3>Undigitised Historical Tide Records</h3>
       <p>Catalogue of historical tide records that remain undigitised and may require future recovery work.</p>
-      <a class="file-button" href="Undigitized Historical Tide Records.xlsx">Download File</a>
-      <button class="toggle-button secondary" onclick="toggleTable('undigitised-table')">View on Site</button>
+      <a class="file-button" href="Undigitized_Records_2026_03_13.xlsx" download>Download File</a>
+      <button class="toggle-button secondary" onclick="toggleDataset('undigitised')">View on Site</button>
 
       <div id="undigitised-table" class="table-container">
-        <table>
-          <thead>
-            <tr>
-              <th>Record ID</th>
-              <th>Location</th>
-              <th>Year Range</th>
-              <th>Status</th>
-              <th>Notes</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>U001</td>
-              <td>Example Estuary</td>
-              <td>1875–1888</td>
-              <td>Undigitised</td>
-              <td>Replace with your real data rows.</td>
-            </tr>
-            <tr>
-              <td>U002</td>
-              <td>Example Coast</td>
-              <td>1890–1912</td>
-              <td>Undigitised</td>
-              <td>Add the columns you need.</td>
-            </tr>
-            <tr>
-              <td>U003</td>
-              <td>Example Dock</td>
-              <td>1913–1927</td>
-              <td>Undigitised</td>
-              <td>You can paste a larger table here later.</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="dataset-tools">
+          <div>
+            <label for="undigitised-search">Search any field</label>
+            <input id="undigitised-search" type="text" placeholder="Location, country, source, type...">
+          </div>
+          <div>
+            <label for="undigitised-country">Country</label>
+            <select id="undigitised-country"><option value="">All countries</option></select>
+          </div>
+          <div>
+            <label for="undigitised-type">Data type</label>
+            <select id="undigitised-type"><option value="">All data types</option></select>
+          </div>
+          <div>
+            <label for="undigitised-study">Study</label>
+            <select id="undigitised-study"><option value="">All studies</option></select>
+          </div>
+          <div>
+            <label for="undigitised-start">Start year from</label>
+            <input id="undigitised-start" type="number" placeholder="e.g. 1800">
+          </div>
+          <div>
+            <label for="undigitised-finish">Finish year to</label>
+            <input id="undigitised-finish" type="number" placeholder="e.g. 1950">
+          </div>
+        </div>
+        <div class="dataset-meta" id="undigitised-meta">Loading spreadsheet...</div>
+        <div class="table-scroll">
+          <table id="undigitised-live-table"></table>
+        </div>
+        <div class="empty-message" id="undigitised-empty">No rows match the current filters.</div>
+        <div class="pager">
+          <div id="undigitised-page-info">Page 1</div>
+          <div>
+            <button type="button" onclick="changePage('undigitised', -1)">Previous</button>
+            <button type="button" onclick="changePage('undigitised', 1)">Next</button>
+            <button type="button" class="clear-button" onclick="resetFilters('undigitised')">Clear filters</button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -497,10 +567,324 @@
   © 2026 Historical Tide Record Catalogue
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <script>
-  function toggleTable(id) {
-    const table = document.getElementById(id);
-    table.classList.toggle('active');
+  const PAGE_SIZE = 25;
+
+  const datasets = {
+    digitised: {
+      key: 'digitised',
+      file: 'Digitised_Records_2026_03_13.xlsx',
+      sheet: 'Sheet1',
+      containerId: 'digitised-table',
+      tableId: 'digitised-live-table',
+      metaId: 'digitised-meta',
+      emptyId: 'digitised-empty',
+      pageInfoId: 'digitised-page-info',
+      filters: {
+        search: 'digitised-search',
+        country: 'digitised-country',
+        type: 'digitised-type',
+        method: 'digitised-method',
+        start: 'digitised-start',
+        finish: 'digitised-finish'
+      },
+      selectColumns: {
+        country: 'Country',
+        type: 'Data Type',
+        method: 'Method'
+      },
+      yearColumns: {
+        start: 'Record start',
+        finish: 'Record finish'
+      },
+      sort: { column: null, direction: 'asc' },
+      page: 1,
+      rows: [],
+      filteredRows: [],
+      headers: []
+    },
+    undigitised: {
+      key: 'undigitised',
+      file: 'Undigitized_Records_2026_03_13.xlsx',
+      sheet: 'Sheet1',
+      containerId: 'undigitised-table',
+      tableId: 'undigitised-live-table',
+      metaId: 'undigitised-meta',
+      emptyId: 'undigitised-empty',
+      pageInfoId: 'undigitised-page-info',
+      filters: {
+        search: 'undigitised-search',
+        country: 'undigitised-country',
+        type: 'undigitised-type',
+        study: 'undigitised-study',
+        start: 'undigitised-start',
+        finish: 'undigitised-finish'
+      },
+      selectColumns: {
+        country: 'Country',
+        type: 'Data Type',
+        study: 'Study'
+      },
+      yearColumns: {
+        start: 'Start',
+        finish: 'Finish'
+      },
+      sort: { column: null, direction: 'asc' },
+      page: 1,
+      rows: [],
+      filteredRows: [],
+      headers: []
+    }
+  };
+
+  function cleanHeaders(headers) {
+    return headers
+      .filter(header => header !== null && header !== undefined && String(header).trim() !== '')
+      .map(header => String(header).trim());
+  }
+
+  function rowObject(headers, row) {
+    const obj = {};
+    headers.forEach((header, index) => {
+      const value = row[index];
+      obj[header] = value === undefined || value === null ? '' : value;
+    });
+    return obj;
+  }
+
+  function normalizeValue(value) {
+    return value === null || value === undefined ? '' : String(value).trim();
+  }
+
+  function normalizeForSearch(value) {
+    return normalizeValue(value).toLowerCase();
+  }
+
+  function getUniqueValues(rows, columnName) {
+    return [...new Set(
+      rows
+        .map(row => normalizeValue(row[columnName]))
+        .filter(Boolean)
+    )].sort((a, b) => a.localeCompare(b));
+  }
+
+  function populateSelect(selectId, values, placeholder) {
+    const select = document.getElementById(selectId);
+    select.innerHTML = '';
+    const firstOption = document.createElement('option');
+    firstOption.value = '';
+    firstOption.textContent = placeholder;
+    select.appendChild(firstOption);
+
+    values.forEach(value => {
+      const option = document.createElement('option');
+      option.value = value;
+      option.textContent = value;
+      select.appendChild(option);
+    });
+  }
+
+  async function loadDataset(datasetKey) {
+    const dataset = datasets[datasetKey];
+    const meta = document.getElementById(dataset.metaId);
+
+    try {
+      const response = await fetch(dataset.file);
+      if (!response.ok) throw new Error(`Could not load ${dataset.file}`);
+      const arrayBuffer = await response.arrayBuffer();
+      const workbook = XLSX.read(arrayBuffer, { type: 'array' });
+      const worksheet = workbook.Sheets[dataset.sheet || workbook.SheetNames[0]];
+      const raw = XLSX.utils.sheet_to_json(worksheet, { header: 1, defval: '' });
+
+      const headers = cleanHeaders(raw[0] || []);
+      const rows = raw
+        .slice(1)
+        .map(row => rowObject(headers, row))
+        .filter(row => Object.values(row).some(value => normalizeValue(value) !== ''));
+
+      dataset.headers = headers;
+      dataset.rows = rows;
+      dataset.filteredRows = [...rows];
+
+      Object.entries(dataset.selectColumns).forEach(([filterName, columnName]) => {
+        populateSelect(dataset.filters[filterName], getUniqueValues(rows, columnName), `All ${filterName}s`);
+      });
+
+      attachDatasetEvents(datasetKey);
+      applyFilters(datasetKey);
+    } catch (error) {
+      meta.textContent = `There was a problem loading ${dataset.file}. Make sure the spreadsheet is in the same folder as this HTML file.`;
+      console.error(error);
+    }
+  }
+
+  function attachDatasetEvents(datasetKey) {
+    const dataset = datasets[datasetKey];
+    if (dataset.eventsBound) return;
+
+    Object.values(dataset.filters).forEach(id => {
+      const element = document.getElementById(id);
+      if (!element) return;
+      const eventName = element.tagName === 'SELECT' ? 'change' : 'input';
+      element.addEventListener(eventName, () => {
+        dataset.page = 1;
+        applyFilters(datasetKey);
+      });
+    });
+
+    dataset.eventsBound = true;
+  }
+
+  function applyFilters(datasetKey) {
+    const dataset = datasets[datasetKey];
+    const searchTerm = normalizeForSearch(document.getElementById(dataset.filters.search).value);
+    const startYear = parseFloat(document.getElementById(dataset.filters.start).value);
+    const finishYear = parseFloat(document.getElementById(dataset.filters.finish).value);
+
+    let filtered = dataset.rows.filter(row => {
+      const searchMatch = !searchTerm || Object.values(row).some(value => normalizeForSearch(value).includes(searchTerm));
+      if (!searchMatch) return false;
+
+      for (const [filterName, columnName] of Object.entries(dataset.selectColumns)) {
+        const selected = document.getElementById(dataset.filters[filterName]).value;
+        if (selected && normalizeValue(row[columnName]) !== selected) return false;
+      }
+
+      const rowStart = parseFloat(row[dataset.yearColumns.start]);
+      const rowFinish = parseFloat(row[dataset.yearColumns.finish]);
+
+      if (!Number.isNaN(startYear) && (Number.isNaN(rowStart) || rowStart < startYear)) return false;
+      if (!Number.isNaN(finishYear) && (Number.isNaN(rowFinish) || rowFinish > finishYear)) return false;
+
+      return true;
+    });
+
+    filtered = sortRows(filtered, dataset.sort.column, dataset.sort.direction);
+    dataset.filteredRows = filtered;
+    renderTable(datasetKey);
+  }
+
+  function sortRows(rows, column, direction) {
+    if (!column) return [...rows];
+
+    return [...rows].sort((a, b) => {
+      const aValue = a[column];
+      const bValue = b[column];
+      const aNum = parseFloat(aValue);
+      const bNum = parseFloat(bValue);
+
+      let comparison = 0;
+      if (!Number.isNaN(aNum) && !Number.isNaN(bNum)) {
+        comparison = aNum - bNum;
+      } else {
+        comparison = normalizeValue(aValue).localeCompare(normalizeValue(bValue), undefined, { numeric: true, sensitivity: 'base' });
+      }
+
+      return direction === 'asc' ? comparison : -comparison;
+    });
+  }
+
+  function renderTable(datasetKey) {
+    const dataset = datasets[datasetKey];
+    const table = document.getElementById(dataset.tableId);
+    const meta = document.getElementById(dataset.metaId);
+    const empty = document.getElementById(dataset.emptyId);
+    const pageInfo = document.getElementById(dataset.pageInfoId);
+
+    const totalRows = dataset.filteredRows.length;
+    const totalPages = Math.max(1, Math.ceil(totalRows / PAGE_SIZE));
+    dataset.page = Math.min(dataset.page, totalPages);
+
+    const startIndex = (dataset.page - 1) * PAGE_SIZE;
+    const rowsForPage = dataset.filteredRows.slice(startIndex, startIndex + PAGE_SIZE);
+
+    const thead = document.createElement('thead');
+    const headerRow = document.createElement('tr');
+
+    dataset.headers.forEach(header => {
+      const th = document.createElement('th');
+      th.innerHTML = `${header}<span class="sort-indicator">${dataset.sort.column === header ? (dataset.sort.direction === 'asc' ? '▲' : '▼') : '↕'}</span>`;
+      th.addEventListener('click', () => toggleSort(datasetKey, header));
+      headerRow.appendChild(th);
+    });
+
+    thead.appendChild(headerRow);
+
+    const tbody = document.createElement('tbody');
+    rowsForPage.forEach(row => {
+      const tr = document.createElement('tr');
+      dataset.headers.forEach(header => {
+        const td = document.createElement('td');
+        const value = row[header];
+        const text = normalizeValue(value);
+
+        if ((header.toLowerCase() === 'link' || header.toLowerCase() === 'link ') && text) {
+          const looksLikePdf = text.toLowerCase().endsWith('.pdf');
+          const looksLikeUrl = /^https?:\/\//i.test(text);
+          const a = document.createElement('a');
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+          a.textContent = looksLikePdf ? 'Open source file' : text;
+          a.href = looksLikeUrl ? text : text;
+          td.appendChild(a);
+        } else {
+          td.textContent = text;
+        }
+        tr.appendChild(td);
+      });
+      tbody.appendChild(tr);
+    });
+
+    table.innerHTML = '';
+    table.appendChild(thead);
+    table.appendChild(tbody);
+
+    empty.classList.toggle('active', totalRows === 0);
+    meta.textContent = totalRows === 0
+      ? '0 matching rows.'
+      : `Showing ${startIndex + 1}-${Math.min(startIndex + PAGE_SIZE, totalRows)} of ${totalRows} matching rows.`;
+    pageInfo.textContent = `Page ${dataset.page} of ${totalPages}`;
+
+    const buttons = document.querySelectorAll(`#${dataset.containerId} .pager button`);
+    if (buttons.length >= 2) {
+      buttons[0].disabled = dataset.page <= 1;
+      buttons[1].disabled = dataset.page >= totalPages;
+    }
+  }
+
+  function toggleSort(datasetKey, column) {
+    const dataset = datasets[datasetKey];
+    if (dataset.sort.column === column) {
+      dataset.sort.direction = dataset.sort.direction === 'asc' ? 'desc' : 'asc';
+    } else {
+      dataset.sort.column = column;
+      dataset.sort.direction = 'asc';
+    }
+    applyFilters(datasetKey);
+  }
+
+  function changePage(datasetKey, delta) {
+    const dataset = datasets[datasetKey];
+    dataset.page += delta;
+    renderTable(datasetKey);
+  }
+
+  function resetFilters(datasetKey) {
+    const dataset = datasets[datasetKey];
+    Object.values(dataset.filters).forEach(id => {
+      const element = document.getElementById(id);
+      if (!element) return;
+      element.value = '';
+    });
+    dataset.sort = { column: null, direction: 'asc' };
+    dataset.page = 1;
+    applyFilters(datasetKey);
+  }
+
+  function toggleDataset(datasetKey) {
+    const container = document.getElementById(datasets[datasetKey].containerId);
+    container.classList.toggle('active');
   }
 
   function openLightbox(imageSrc, captionText) {
@@ -554,8 +938,12 @@
       });
     });
   }
-</script>
 
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initMap"></script>
+  window.addEventListener('DOMContentLoaded', () => {
+    loadDataset('digitised');
+    loadDataset('undigitised');
+  });
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initMap"></script>
 </body>
 </html>
