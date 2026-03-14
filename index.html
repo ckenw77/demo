@@ -690,8 +690,12 @@
     <div class="card">
       <!-- EDIT CITATION TEXT -->
       <p>
-        If you use this site please cite it as: Kenwright, C., DATE, <em>Tidal Time Capsules: A Global Catalogue of Historical Tide Records</em>, available at: .................................
-        Additionally please cite the paper: Kenwright, C., Haigh, I.D., Williams, J., Chan, D., Nicholls, R.J., McFarland, S. and Becker, M., (DATE) <em>Tidal Time Capsules: A Global Catalogue of Historical Tide Records</em>. Journal, VOL, PAGE.
+        If you use this site please cite it as: 
+        Kenwright, C., DATE, <em>Tidal Time Capsules: A Global Catalogue of Historical Tide Records</em>, available at: .................................
+
+        
+        Additionally please cite the paper that details the work behind this site: 
+        Kenwright, C., Haigh, I.D., Williams, J., Chan, D., Nicholls, R.J., McFarland, S. and Becker, M., (DATE) <em>Tidal Time Capsules: A Global Catalogue of Historical Tide Records</em>. Journal, VOL, PAGE.
       </p>
     </div>
   </section>
@@ -1164,14 +1168,18 @@
   }
 
   // For the tools table, only show these three columns
-  if (datasetKey === 'tools') {
-    visibleHeaders = visibleHeaders.filter(
-      header =>
-        header === 'Digitisation Tool' ||
-        header === 'Price (USD)' ||
-        header === 'Link'
+if (datasetKey === 'tools') {
+  visibleHeaders = visibleHeaders.filter(header => {
+    const cleaned = String(header).trim().toLowerCase();
+
+    return (
+      cleaned.includes('tool') ||
+      cleaned.includes('price') ||
+      cleaned.includes('cost') ||
+      cleaned === 'link'
     );
-  }
+  });
+}
 
   const totalRows = dataset.filteredRows.length;
   const totalPages = Math.max(1, Math.ceil(totalRows / PAGE_SIZE));
@@ -1208,11 +1216,13 @@
       let text = normalizeValue(value);
 
       // Round selected numeric columns to 2 decimal places
+      const cleanedHeader = String(header).trim().toLowerCase();
+      
       if (
-        header === 'Latitude' ||
-        header === 'Longitude' ||
-        header === 'No. recorded years' ||
-        header === 'No. missing years'
+        cleanedHeader === 'latitude' ||
+        cleanedHeader === 'longitude' ||
+        cleanedHeader.includes('recorded years') ||
+        cleanedHeader.includes('missing years')
       ) {
         const num = Number(text);
         if (!Number.isNaN(num)) {
