@@ -664,7 +664,7 @@
         <div class="dataset-tools">
           <div>
             <label for="tools-search">Search any field</label>
-            <input id="tools-search" type="text" placeholder="Tool name or link...">
+            <input id="tools-search" type="text" placeholder="Tool name, price, or link...">
           </div>
         </div>
         <div class="dataset-meta" id="tools-meta">Loading spreadsheet...</div>
@@ -1148,113 +1148,124 @@
   }
 
   function renderTable(datasetKey) {
-    const dataset = datasets[datasetKey];
-    const table = document.getElementById(dataset.tableId);
-    const meta = document.getElementById(dataset.metaId);
-    const empty = document.getElementById(dataset.emptyId);
-    const pageInfo = document.getElementById(dataset.pageInfoId);
+  const dataset = datasets[datasetKey];
+  const table = document.getElementById(dataset.tableId);
+  const meta = document.getElementById(dataset.metaId);
+  const empty = document.getElementById(dataset.emptyId);
+  const pageInfo = document.getElementById(dataset.pageInfoId);
 
-    let visibleHeaders = dataset.headers.filter(
+  let visibleHeaders = dataset.headers;
+
+  // Remove Resolution column from the digitised records table
+  if (datasetKey === 'digitised') {
+    visibleHeaders = visibleHeaders.filter(
       header => header.trim().toLowerCase() !== 'resolution'
     );
+  }
 
-    if (datasetKey === 'tools') {
-      visibleHeaders = visibleHeaders.filter(
-        header => header === 'Digitisation Tool' || header === 'Link'
-      );
-    }
+  // For the tools table, only show these three columns
+  if (datasetKey === 'tools') {
+    visibleHeaders = visibleHeaders.filter(
+      header =>
+        header === 'Digitisation Tool' ||
+        header === 'Price (USD)' ||
+        header === 'Link'
+    );
+  }
 
-    const totalRows = dataset.filteredRows.length;
-    const totalPages = Math.max(1, Math.ceil(totalRows / PAGE_SIZE));
-    dataset.page = Math.min(dataset.page, totalPages);
+  const totalRows = dataset.filteredRows.length;
+  const totalPages = Math.max(1, Math.ceil(totalRows / PAGE_SIZE));
+  dataset.page = Math.min(dataset.page, totalPages);
 
-    const startIndex = (dataset.page - 1) * PAGE_SIZE;
-    const rowsForPage = dataset.filteredRows.slice(startIndex, startIndex + PAGE_SIZE);
+  const startIndex = (dataset.page - 1) * PAGE_SIZE;
+  const rowsForPage = dataset.filteredRows.slice(startIndex, startIndex + PAGE_SIZE);
 
-    const thead = document.createElement('thead');
-    const headerRow = document.createElement('tr');
+  const thead = document.createElement('thead');
+  const headerRow = document.createElement('tr');
+
+  visibleHeaders.forEach(header => {
+    const th = document.createElement('th');
+    th.title = header;
+    th.innerHTML = `${header}<span class="sort-indicator">${
+      dataset.sort.column === header
+        ? (dataset.sort.direction === 'asc' ? '▲' : '▼')
+        : '↕'
+    }</span>`;
+    th.addEventListener('click', () => toggleSort(datasetKey, header));
+    headerRow.appendChild(th);
+  });
+
+  thead.appendChild(headerRow);
+
+  const tbody = document.createElement('tbody');
+
+  rowsForPage.forEach(row => {
+    const tr = document.createElement('tr');
 
     visibleHeaders.forEach(header => {
-      const th = document.createElement('th');
-      th.title = header;
-      th.innerHTML = `${header}<span class="sort-indicator">${
-        dataset.sort.column === header
-          ? (dataset.sort.direction === 'asc' ? '▲' : '▼')
-          : '↕'
-      }</span>`;
-      th.addEventListener('click', () => toggleSort(datasetKey, header));
-      headerRow.appendChild(th);
+      const td = document.createElement('td');
+      const value = row[header];
+      let text = normalizeValue(value);
+
+      // Round selected numeric columns to 2 decimal places
+      if (
+        header === 'Latitude' ||
+        header === 'Longitude' ||
+        header === 'No. recorded years' ||
+        header === 'No. missing years'
+      ) {
+        const num = Number(text);
+        if (!Number.isNaN(num)) {
+          text = num.toFixed(2);
+        }
+      }
+
+      td.title = text;
+
+      const isLinkColumn = header.toLowerCase().trim() === 'link';
+      const looksLikeUrl = /^https?:\/\//i.test(text);
+
+      if (isLinkColumn && looksLikeUrl) {
+        const a = document.createElement('a');
+        a.href = text;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        a.className = 'cell-link';
+        a.textContent = text;
+        a.title = text;
+        td.appendChild(a);
+      } else {
+        const span = document.createElement('span');
+        span.className = 'cell-clip';
+        span.textContent = text;
+        span.title = text;
+        td.appendChild(span);
+      }
+
+      tr.appendChild(td);
     });
 
-    thead.appendChild(headerRow);
+    tbody.appendChild(tr);
+  });
 
-    const tbody = document.createElement('tbody');
+  table.innerHTML = '';
+  table.appendChild(thead);
+  table.appendChild(tbody);
 
-    rowsForPage.forEach(row => {
-      const tr = document.createElement('tr');
+  empty.classList.toggle('active', totalRows === 0);
+  meta.textContent = totalRows === 0
+    ? '0 matching rows.'
+    : `Showing ${startIndex + 1}-${Math.min(startIndex + PAGE_SIZE, totalRows)} of ${totalRows} matching rows.`;
 
-      visibleHeaders.forEach(header => {
-        const td = document.createElement('td');
-        const value = row[header];
-        let text = normalizeValue(value);
+  pageInfo.textContent = `Page ${dataset.page} of ${totalPages}`;
 
-        if (
-          header === 'Latitude' ||
-          header === 'Longitude' ||
-          header === 'Recorded years' ||
-          header === 'Missing years'
-        ) {
-          const num = Number(text);
-          if (!Number.isNaN(num)) {
-            text = num.toFixed(2);
-          }
-        }
-
-        td.title = text;
-
-        const isLinkColumn = header.toLowerCase().trim() === 'link';
-        const looksLikeUrl = /^https?:\/\//i.test(text);
-
-        if (isLinkColumn && looksLikeUrl) {
-          const a = document.createElement('a');
-          a.href = text;
-          a.target = '_blank';
-          a.rel = 'noopener noreferrer';
-          a.className = 'cell-link';
-          a.textContent = text;
-          a.title = text;
-          td.appendChild(a);
-        } else {
-          const span = document.createElement('span');
-          span.className = 'cell-clip';
-          span.textContent = text;
-          span.title = text;
-          td.appendChild(span);
-        }
-
-        tr.appendChild(td);
-      });
-
-      tbody.appendChild(tr);
-    });
-
-    table.innerHTML = '';
-    table.appendChild(thead);
-    table.appendChild(tbody);
-
-    empty.classList.toggle('active', totalRows === 0);
-    meta.textContent = totalRows === 0
-      ? '0 matching rows.'
-      : `Showing ${startIndex + 1}-${Math.min(startIndex + PAGE_SIZE, totalRows)} of ${totalRows} matching rows.`;
-
-    pageInfo.textContent = `Page ${dataset.page} of ${totalPages}`;
-
-    const buttons = document.querySelectorAll(`#${dataset.containerId} .pager button`);
-    if (buttons.length >= 2) {
-      buttons[0].disabled = dataset.page <= 1;
-      buttons[1].disabled = dataset.page >= totalPages;
-    }
+  const buttons = document.querySelectorAll(`#${dataset.containerId} .pager button`);
+  if (buttons.length >= 2) {
+    buttons[0].disabled = dataset.page <= 1;
+    buttons[1].disabled = dataset.page >= totalPages;
   }
+}
+
 
   function toggleSort(datasetKey, column) {
     const dataset = datasets[datasetKey];
