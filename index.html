@@ -1226,139 +1226,146 @@
     });
   }
 
- function renderTable(datasetKey) {
-  const dataset = datasets[datasetKey];
-  const table = document.getElementById(dataset.tableId);
-  const meta = document.getElementById(dataset.metaId);
-  const empty = document.getElementById(dataset.emptyId);
-  const pageInfo = document.getElementById(dataset.pageInfoId);
-
-  let visibleHeaders = dataset.headers;
-
-  if (datasetKey === 'digitised') {
-    visibleHeaders = visibleHeaders.filter(header => {
-      const cleaned = String(header).trim().toLowerCase();
-      return !cleaned.includes('resolution');
-    });
-  }
-
-  if (datasetKey === 'tools') {
-    visibleHeaders = visibleHeaders.filter(header => {
-      const cleaned = String(header).trim().toLowerCase();
-      return (
-        cleaned.includes('tool') ||
-        cleaned.includes('price') ||
-        cleaned.includes('cost') ||
-        cleaned === 'link'
-      );
-    });
-  }
-
-  const totalRows = dataset.filteredRows.length;
-  const totalPages = Math.max(1, Math.ceil(totalRows / PAGE_SIZE));
-  dataset.page = Math.min(dataset.page, totalPages);
-
-  const startIndex = (dataset.page - 1) * PAGE_SIZE;
-  const rowsForPage = dataset.filteredRows.slice(startIndex, startIndex + PAGE_SIZE);
-
-  const thead = document.createElement('thead');
-  const headerRow = document.createElement('tr');
-
-  visibleHeaders.forEach(header => {
-    const th = document.createElement('th');
-    th.title = header;
-    th.innerHTML = `${header}<span class="sort-indicator">${
-      dataset.sort.column === header
-        ? (dataset.sort.direction === 'asc' ? '▲' : '▼')
-        : '↕'
-    }</span>`;
-    th.addEventListener('click', () => toggleSort(datasetKey, header));
-    headerRow.appendChild(th);
-  });
-
-  thead.appendChild(headerRow);
-
-  const tbody = document.createElement('tbody');
-
-  rowsForPage.forEach(row => {
-    const tr = document.createElement('tr');
-
+  function renderTable(datasetKey) {
+    const dataset = datasets[datasetKey];
+    const table = document.getElementById(dataset.tableId);
+    const meta = document.getElementById(dataset.metaId);
+    const empty = document.getElementById(dataset.emptyId);
+    const pageInfo = document.getElementById(dataset.pageInfoId);
+  
+    let visibleHeaders = dataset.headers;
+  
+    // Remove any Resolution-style column from the digitised table
+    if (datasetKey === 'digitised') {
+      visibleHeaders = visibleHeaders.filter(header => {
+        const cleaned = String(header).trim().toLowerCase();
+        return !cleaned.includes('resolution');
+      });
+    }
+  
+    // For the tools table, keep tool / price / cost / link columns
+    if (datasetKey === 'tools') {
+      visibleHeaders = visibleHeaders.filter(header => {
+        const cleaned = String(header).trim().toLowerCase();
+        return (
+          cleaned.includes('tool') ||
+          cleaned.includes('price') ||
+          cleaned.includes('cost') ||
+          cleaned === 'link'
+        );
+      });
+    }
+  
+    const totalRows = dataset.filteredRows.length;
+    const totalPages = Math.max(1, Math.ceil(totalRows / PAGE_SIZE));
+    dataset.page = Math.min(dataset.page, totalPages);
+  
+    const startIndex = (dataset.page - 1) * PAGE_SIZE;
+    const rowsForPage = dataset.filteredRows.slice(startIndex, startIndex + PAGE_SIZE);
+  
+    const thead = document.createElement('thead');
+    const headerRow = document.createElement('tr');
+  
     visibleHeaders.forEach(header => {
-      const td = document.createElement('td');
-      const value = row[header];
-      let text = normalizeValue(value);
-
-      const cleanedHeader = String(header).trim().toLowerCase();
-
-      const shouldRoundTwoDecimals =
-        cleanedHeader === 'latitude' ||
-        cleanedHeader === 'longitude' ||
-        (cleanedHeader.includes('recorded') && cleanedHeader.includes('year')) ||
-        (cleanedHeader.includes('missing') && cleanedHeader.includes('year'));
-
-      if (shouldRoundTwoDecimals) {
-        text = formatTwoDecimalsIfPlainNumber(text);
-      }
-
-      const isPriceColumn =
-        datasetKey === 'tools' &&
-        (cleanedHeader.includes('price') || cleanedHeader.includes('cost'));
-
-      if (isPriceColumn) {
-        text = formatTwoDecimalsIfPlainNumber(text);
-      }
-
-      td.title = text;
-
-      let linkUrl = null;
-      if (value && typeof value === 'object' && value.url) {
-        linkUrl = value.url;
-      } else if (/^https?:\/\//i.test(text)) {
-        linkUrl = text;
-      }
-
-      const isLinkColumn = cleanedHeader === 'link';
-
-      if (isLinkColumn && linkUrl) {
-        const a = document.createElement('a');
-        a.href = linkUrl;
-        a.target = '_blank';
-        a.rel = 'noopener noreferrer';
-        a.className = 'cell-link';
-        a.textContent = text || linkUrl;
-        a.title = linkUrl;
-        td.appendChild(a);
-      } else {
-        const span = document.createElement('span');
-        span.className = 'cell-clip';
-        span.textContent = text;
-        span.title = text;
-        td.appendChild(span);
-      }
-
-      tr.appendChild(td);
+      const th = document.createElement('th');
+      th.title = header;
+      th.innerHTML = `${header}<span class="sort-indicator">${
+        dataset.sort.column === header
+          ? (dataset.sort.direction === 'asc' ? '▲' : '▼')
+          : '↕'
+      }</span>`;
+      th.addEventListener('click', () => toggleSort(datasetKey, header));
+      headerRow.appendChild(th);
     });
-
-    tbody.appendChild(tr);
-  });
-
-  table.innerHTML = '';
-  table.appendChild(thead);
-  table.appendChild(tbody);
-
-  empty.classList.toggle('active', totalRows === 0);
-  meta.textContent = totalRows === 0
-    ? '0 matching rows.'
-    : `Showing ${startIndex + 1}-${Math.min(startIndex + PAGE_SIZE, totalRows)} of ${totalRows} matching rows.`;
-
-  pageInfo.textContent = `Page ${dataset.page} of ${totalPages}`;
-
-  const buttons = document.querySelectorAll(`#${dataset.containerId} .pager button`);
-  if (buttons.length >= 2) {
-    buttons[0].disabled = dataset.page <= 1;
-    buttons[1].disabled = dataset.page >= totalPages;
+  
+    thead.appendChild(headerRow);
+  
+    const tbody = document.createElement('tbody');
+  
+    rowsForPage.forEach(row => {
+      const tr = document.createElement('tr');
+  
+      visibleHeaders.forEach(header => {
+        const td = document.createElement('td');
+        const value = row[header];
+        let text = normalizeValue(value);
+        const cleanedHeader = String(header).trim().toLowerCase();
+  
+        // Only round if the WHOLE cell is a plain number.
+        // This avoids breaking values like:
+        // "1888 - 1900", "1888-1900", "unspecified", "unknown"
+        const isPlainNumber = /^-?\d+(\.\d+)?$/.test(text.trim());
+  
+        const shouldRoundTwoDecimals =
+          cleanedHeader === 'latitude' ||
+          cleanedHeader === 'longitude' ||
+          (cleanedHeader.includes('recorded') && cleanedHeader.includes('year')) ||
+          (cleanedHeader.includes('missing') && cleanedHeader.includes('year'));
+  
+        if (shouldRoundTwoDecimals && isPlainNumber) {
+          text = Number(text).toFixed(2);
+        }
+  
+        const isPriceColumn =
+          datasetKey === 'tools' &&
+          (cleanedHeader.includes('price') || cleanedHeader.includes('cost'));
+  
+        if (isPriceColumn && isPlainNumber) {
+          text = Number(text).toFixed(2);
+        }
+  
+        td.title = text;
+  
+        let linkUrl = null;
+        if (value && typeof value === 'object' && value.url) {
+          linkUrl = value.url;
+        } else if (/^https?:\/\//i.test(text)) {
+          linkUrl = text;
+        }
+  
+        const isLinkColumn = cleanedHeader === 'link';
+  
+        if (isLinkColumn && linkUrl) {
+          const a = document.createElement('a');
+          a.href = linkUrl;
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+          a.className = 'cell-link';
+          a.textContent = text || linkUrl;
+          a.title = linkUrl;
+          td.appendChild(a);
+        } else {
+          const span = document.createElement('span');
+          span.className = 'cell-clip';
+          span.textContent = text;
+          span.title = text;
+          td.appendChild(span);
+        }
+  
+        tr.appendChild(td);
+      });
+  
+      tbody.appendChild(tr);
+    });
+  
+    table.innerHTML = '';
+    table.appendChild(thead);
+    table.appendChild(tbody);
+  
+    empty.classList.toggle('active', totalRows === 0);
+    meta.textContent = totalRows === 0
+      ? '0 matching rows.'
+      : `Showing ${startIndex + 1}-${Math.min(startIndex + PAGE_SIZE, totalRows)} of ${totalRows} matching rows.`;
+  
+    pageInfo.textContent = `Page ${dataset.page} of ${totalPages}`;
+  
+    const buttons = document.querySelectorAll(`#${dataset.containerId} .pager button`);
+    if (buttons.length >= 2) {
+      buttons[0].disabled = dataset.page <= 1;
+      buttons[1].disabled = dataset.page >= totalPages;
+    }
   }
-}
+  
 
 
   function toggleSort(datasetKey, column) {
