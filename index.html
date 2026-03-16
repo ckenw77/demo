@@ -415,7 +415,29 @@
       font-size: 0.84rem;
       font-style: italic;
     }
-
+    .about-figures {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    
+    .about-figures figure {
+      margin: 0;
+    }
+    
+    .about-figures img {
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+    }
+    
+    .about-figures figcaption {
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
     .leaflet-popup-content {
       line-height: 1.5;
       font-size: 0.95rem;
@@ -506,11 +528,30 @@
     <div class="card">
       <!-- EDIT ABOUT TEXT -->
       <p>
-        Sea level rise is a major consequence of climate change, increasing the risk of flooding, erosion, and other impacts in coastal regions. Developing effective adaptation strategies requires accurate projections of future sea level change, the accuracy of which depends on the length of the time series.<br><br>
+        Sea level rise is a major consequence of climate change, increasing the risk of flooding, erosion, and other impacts in coastal regions. Developing effective adaptation strategies requires accurate projections of future sea level change, the accuracy of which depends on the length of the available time series.<br><br>
         Tidal measurements have been collected for centuries and represent some of the longest continuous environmental datasets available. However, much of this information remains stored in historical paper records and has not yet been digitised, limiting its accessibility and use in scientific analysis. As a result, many existing sea level datasets extend back only to the late nineteenth century despite the existence of earlier observations.<br><br>
         Data archaeology initiatives have demonstrated the value of recovering and digitising historical tide records. Examples include extended tide gauge records from Amsterdam (Netherlands), Brest (France), and Sheerness (UK). Nevertheless, many historical records remain undigitized and are at risk of deterioration or loss.<br><br>
-        This website provides a catalogue of historical tide records worldwide. The aim is to improve the discoverability of these records, support data rescue initiatives, and provide information that can help prioritise and plan digitisation efforts. By facilitating access to these historical observations, the catalogue contributes to the preservation and extension of long-term sea level datasets for use in climate research and coastal planning.
+        This website provides a catalogue of historical tide records worldwide. The aim is to improve the discoverability of these records, support data rescue initiatives, and provide information that can help prioritise and plan digitisation efforts. By facilitating access to these historical observations, the catalogue contributes to the preservation and extension of long-term sea level datasets for use in climate research and coastal planning.<br><br>
+        Historical tidal observations were recorded in 2 primary formats: ledgers and marigrams (tide charts). Examples of both formats are shown below.
       </p>
+      <div class="about-figures">
+
+  <figure>
+    <img src="ledger.jpg" alt="Historical tide ledger showing daily tide and weather observations">
+    <figcaption>
+      <strong>Figure 1.</strong> Example of a historical tide ledger. These records typically contain handwritten observations of tidal heights, times of high and low water, and weather conditions. This ledger is from Bowling Harbour in the Clyde Estuary, Scotland.
+    </figcaption>
+  </figure>
+
+  <figure>
+    <img src="marigram.jpg" alt="Historical marigram showing tidal cycles plotted on graph paper">
+    <figcaption>
+      <strong>Figure 2.</strong> Example of a historical marigram (tide chart). These diagrams were produced by tide gauges that continuously recorded water level on chart paper, providing detailed information on tidal cycles and variability. This marigram is from Gourock at the mouth of the Clyde Estuary, Scotland.
+    </figcaption>
+  </figure>
+
+</div>
+
     </div>
   </section>
 
@@ -723,15 +764,15 @@
     </p>
 
     <p>
-      • historical tide records not currently listed<br>
-      • newly digitised datasets<br>
-      • undigitized paper records or archive holdings<br>
-      • software or tools useful for digitisation and transcription<br>
-      • corrections or updates to existing entries
+      • Historical tide records not currently listed<br>
+      • Newly digitised datasets<br>
+      • Undigitized paper records or archive holdings<br>
+      • Useful digitisation tools, for both marigrams and ledgers<br>
+      • Corrections or updates to existing entries
     </p>
 
     <p>
-      To contribute, please get in touch by email with as much relevant information as possible, such as the record location, date range, source archive, supporting references, download links, or details of the software/tool.
+      To contribute, please get in touch by email with as much detail as possible, providing information in the same format as currently shown on the site would be ideal.
     </p>
 
   </div>
