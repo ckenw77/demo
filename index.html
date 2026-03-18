@@ -641,63 +641,96 @@
     </div>
   </section>
 
-  <section id="data">
-    <!-- EDIT SECTION HEADING -->
-    <h2 class="section-title" data-i18n="data.title">>Data</h2>
+<section id="data">
+  <h2 class="section-title" data-i18n="data.title">Data</h2>
 
-    <div class="data-grid">
-      <div class="card">
-        <!-- EDIT DATASET HEADING -->
-        <h3>Digitised Historical Tide Records</h3>
+  <div class="data-grid">
+    <div class="card">
+      <h3 data-i18n="data.digitised.title">Digitised Historical Tide Records</h3>
 
-        <!-- EDIT DATASET DESCRIPTION -->
-        <p>A compilation of all digitised historical records. The catalogue contains information on the location, duration, type of record, method of recovery and who recovered the data. The file may be downloaded as an excel file or viewed on the website.</p>
+      <p data-i18n="data.digitised.desc">
+        A compilation of all digitised historical records. The catalogue contains information on the location, duration, type of record, method of recovery and who recovered the data. The file may be downloaded as an excel file or viewed on the website.
+      </p>
 
-        <a class="file-button" href="Digitised_Records_2026_03_13.xlsx" download>Download File</a>
-        <button class="toggle-button secondary" onclick="toggleDataset('digitised')">View Data</button>
+      <a
+        class="file-button"
+        href="Digitised_Records_2026_03_13.xlsx"
+        download
+        data-i18n="button.downloadFile"
+      >
+        Download File
+      </a>
 
-        <div id="digitised-table" class="table-container">
-          <div class="dataset-tools">
-            <div>
-              <label for="digitised-search">Search any field</label>
-              <input id="digitised-search" type="text" placeholder="Location, country, method, study...">
-            </div>
-            <div>
-              <label for="digitised-country">Country</label>
-              <select id="digitised-country"><option value="">All countries</option></select>
-            </div>
-            <div>
-              <label for="digitised-type">Data type</label>
-              <select id="digitised-type"><option value="">All data types</option></select>
-            </div>
-            <div>
-              <label for="digitised-method">Method</label>
-              <select id="digitised-method"><option value="">All methods</option></select>
-            </div>
-            <div>
-              <label for="digitised-start">Start year from</label>
-              <input id="digitised-start" type="number" placeholder="e.g. 1800">
-            </div>
-            <div>
-              <label for="digitised-finish">Finish year to</label>
-              <input id="digitised-finish" type="number" placeholder="e.g. 1950">
-            </div>
+      <button
+        class="toggle-button secondary"
+        onclick="toggleDataset('digitised')"
+        data-i18n="button.viewData"
+      >
+        View Data
+      </button>
+
+      <div id="digitised-table" class="table-container">
+        <div class="dataset-tools">
+          <div>
+            <label for="digitised-search" data-i18n="filters.searchAnyField">Search any field</label>
+            <input id="digitised-search" type="text" placeholder="Location, country, method, study...">
           </div>
-          <div class="dataset-meta" id="digitised-meta">Loading spreadsheet...</div>
-          <div class="table-scroll">
-            <table id="digitised-live-table"></table>
+          <div>
+            <label for="digitised-country" data-i18n="filters.country">Country</label>
+            <select id="digitised-country">
+              <option value="" data-i18n="filters.allCountries">All countries</option>
+            </select>
           </div>
-          <div class="empty-message" id="digitised-empty">No rows match the current filters.</div>
-          <div class="pager">
-            <div id="digitised-page-info">Page 1</div>
-            <div>
-              <button type="button" onclick="changePage('digitised', -1)">Previous</button>
-              <button type="button" onclick="changePage('digitised', 1)">Next</button>
-              <button type="button" class="clear-button" onclick="resetFilters('digitised')">Clear filters</button>
-            </div>
+          <div>
+            <label for="digitised-type" data-i18n="filters.dataType">Data type</label>
+            <select id="digitised-type">
+              <option value="" data-i18n="filters.allDataTypes">All data types</option>
+            </select>
+          </div>
+          <div>
+            <label for="digitised-method" data-i18n="filters.method">Method</label>
+            <select id="digitised-method">
+              <option value="" data-i18n="filters.allMethods">All methods</option>
+            </select>
+          </div>
+          <div>
+            <label for="digitised-start" data-i18n="filters.startYearFrom">Start year from</label>
+            <input id="digitised-start" type="number" placeholder="e.g. 1800">
+          </div>
+          <div>
+            <label for="digitised-finish" data-i18n="filters.finishYearTo">Finish year to</label>
+            <input id="digitised-finish" type="number" placeholder="e.g. 1950">
+          </div>
+        </div>
+
+        <div class="dataset-meta" id="digitised-meta" data-i18n="messages.loadingSpreadsheet">
+          Loading spreadsheet...
+        </div>
+
+        <div class="table-scroll">
+          <table id="digitised-live-table"></table>
+        </div>
+
+        <div class="empty-message" id="digitised-empty" data-i18n="messages.noRowsMatch">
+          No rows match the current filters.
+        </div>
+
+        <div class="pager">
+          <div id="digitised-page-info">Page 1</div>
+          <div>
+            <button type="button" onclick="changePage('digitised', -1)" data-i18n="pager.previous">
+              Previous
+            </button>
+            <button type="button" onclick="changePage('digitised', 1)" data-i18n="pager.next">
+              Next
+            </button>
+            <button type="button" class="clear-button" onclick="resetFilters('digitised')" data-i18n="pager.clearFilters">
+              Clear filters
+            </button>
           </div>
         </div>
       </div>
+    </div>
 
       <div class="card">
         <!-- EDIT DATASET HEADING -->
