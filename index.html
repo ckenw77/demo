@@ -490,31 +490,66 @@
   <div class="nav">
     <div class="brand" data-i18n="brand">Tidal Time Capsules</div>
 
-    <div class="nav-right">
-      <nav>
-        <a href="#about" data-i18n="nav.about">About</a>
-        <a href="#map" data-i18n="nav.map">Map</a>
-        <a href="#data" data-i18n="nav.data">Data</a>
-        <a href="#tools" data-i18n="nav.tools">Tools</a>
-        <a href="#contribute" data-i18n="nav.contribute">Contribute</a>
-        <a href="#citation" data-i18n="nav.citation">Citation</a>
-        <a href="#contact" data-i18n="nav.contact">Contact</a>
-      </nav>
+    <nav>
+      <a href="#about" data-i18n="nav.about">About</a>
+      <a href="#map" data-i18n="nav.map">Map</a>
+      <a href="#data" data-i18n="nav.data">Data</a>
+      <a href="#tools" data-i18n="nav.tools">Tools</a>
+      <a href="#contribute" data-i18n="nav.contribute">Contribute</a>
+      <a href="#citation" data-i18n="nav.citation">Citation</a>
+      <a href="#contact" data-i18n="nav.contact">Contact</a>
 
       <div class="language-control">
         <label for="language-switcher" data-i18n="language.label">Language</label>
         <select id="language-switcher">
-        <option value="en">English</option>
-        <option value="fr">Français</option>
-        <option value="es">Español</option>
-        <option value="de">Deutsch</option>
-        <option value="nl">Nederlands</option>
-        <option value="it">Italiano</option>
-      </select>
+          <option value="en">English</option>
+          <option value="fr">Français</option>
+          <option value="es">Español</option>
+          <option value="de">Deutsch</option>
+          <option value="nl">Nederlands</option>
+          <option value="it">Italiano</option>
+        </select>
       </div>
-    </div>
+    </nav>
   </div>
 </header>
+  nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+
+.language-control {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-left: 0.5rem;
+}
+
+.language-control label {
+  color: var(--text);
+  font-weight: 600;
+  font-size: inherit;
+}
+
+.language-control select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+}
+
+.language-control select:hover,
+.language-control label:hover {
+  color: var(--accent);
+}
   
 <section class="hero" id="home">
   <div class="hero-inner">
