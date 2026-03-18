@@ -1312,7 +1312,71 @@
 
     dataset.eventsBound = true;
   }
+function updatePlaceholders(lang) {
+  const placeholderTranslations = {
+    en: {
+      "digitised-search": "Location, country, method, study...",
+      "digitised-start": "e.g. 1800",
+      "digitised-finish": "e.g. 1950",
+      "undigitised-search": "Location, country, source, type...",
+      "undigitised-start": "e.g. 1800",
+      "undigitised-finish": "e.g. 1950",
+      "tools-search": "Tool name, price, or link..."
+    },
+    fr: {
+      "digitised-search": "Lieu, pays, méthode, étude...",
+      "digitised-start": "ex. 1800",
+      "digitised-finish": "ex. 1950",
+      "undigitised-search": "Lieu, pays, source, type...",
+      "undigitised-start": "ex. 1800",
+      "undigitised-finish": "ex. 1950",
+      "tools-search": "Nom de l’outil, prix ou lien..."
+    },
+    es: {
+      "digitised-search": "Ubicación, país, método, estudio...",
+      "digitised-start": "p. ej. 1800",
+      "digitised-finish": "p. ej. 1950",
+      "undigitised-search": "Ubicación, país, fuente, tipo...",
+      "undigitised-start": "p. ej. 1800",
+      "undigitised-finish": "p. ej. 1950",
+      "tools-search": "Nombre de la herramienta, precio o enlace..."
+    },
+    de: {
+      "digitised-search": "Ort, Land, Methode, Studie...",
+      "digitised-start": "z. B. 1800",
+      "digitised-finish": "z. B. 1950",
+      "undigitised-search": "Ort, Land, Quelle, Typ...",
+      "undigitised-start": "z. B. 1800",
+      "undigitised-finish": "z. B. 1950",
+      "tools-search": "Werkzeugname, Preis oder Link..."
+    },
+    nl: {
+      "digitised-search": "Locatie, land, methode, studie...",
+      "digitised-start": "bijv. 1800",
+      "digitised-finish": "bijv. 1950",
+      "undigitised-search": "Locatie, land, bron, type...",
+      "undigitised-start": "bijv. 1800",
+      "undigitised-finish": "bijv. 1950",
+      "tools-search": "Naam hulpmiddel, prijs of link..."
+    },
+    it: {
+      "digitised-search": "Località, paese, metodo, studio...",
+      "digitised-start": "es. 1800",
+      "digitised-finish": "es. 1950",
+      "undigitised-search": "Località, paese, fonte, tipo...",
+      "undigitised-start": "es. 1800",
+      "undigitised-finish": "es. 1950",
+      "tools-search": "Nome strumento, prezzo o link..."
+    }
+  };
 
+  const chosen = placeholderTranslations[lang] || placeholderTranslations.en;
+
+  Object.entries(chosen).forEach(([id, text]) => {
+    const el = document.getElementById(id);
+    if (el) el.placeholder = text;
+  });
+}
   function applyFilters(datasetKey) {
     const dataset = datasets[datasetKey];
     const searchTerm = dataset.filters.search
@@ -1700,11 +1764,35 @@ function setLanguage(lang) {
 
   document.querySelectorAll("[data-i18n]").forEach(el => {
     const key = el.getAttribute("data-i18n");
-    if (selected[key]) {
-      el.textContent = selected[key];
+    const value = selected[key] || translations.en[key];
+
+    if (!value) return;
+
+    if (
+      el.tagName === "A" ||
+      el.tagName === "BUTTON" ||
+      el.tagName === "OPTION" ||
+      el.tagName === "LABEL" ||
+      el.tagName === "H1" ||
+      el.tagName === "H2" ||
+      el.tagName === "H3" ||
+      el.tagName === "P" ||
+      el.tagName === "SPAN" ||
+      el.tagName === "DIV"
+    ) {
+      if (
+        value.includes("<br") ||
+        value.includes("<strong") ||
+        value.includes("<em")
+      ) {
+        el.innerHTML = value;
+      } else {
+        el.textContent = value;
+      }
     }
   });
 
+  updatePlaceholders(lang);
   localStorage.setItem("siteLanguage", lang);
 }
 
