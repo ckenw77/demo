@@ -570,38 +570,43 @@
 
   <section id="about">
     <!-- EDIT SECTION HEADING -->
-    <h2 class="section-title" data-i18n="about.title">About</h2>
+   <h2 class="section-title" data-i18n="about.title">About</h2>
 
-    <div class="card">
-      <!-- EDIT ABOUT TEXT -->
-      <p>
-        Sea level rise is a major consequence of climate change, increasing the risk of flooding, erosion, and loss of coastal ecosystems. Developing effective adaptation strategies requires accurate projections of future sea level change, the accuracy of which depends on the length of the available time series.<br><br>
-        Tidal measurements have been collected for centuries and represent some of the oldest environmental observations. However, much of this information remains stored in historical paper records and has not yet been digitised, limiting its accessibility and use in scientific analysis. As a result, many existing sea level datasets extend back only to the late nineteenth century despite the existence of earlier observations.<br><br>
-        Data archaeology initiatives have demonstrated the value of recovering and digitising historical tide records. Examples include extended tide gauge records from Amsterdam (Netherlands), Brest (France), and Sheerness (UK). Nevertheless, many historical records remain undigitized and are at risk of deterioration or loss.<br><br>
-        This website provides a catalogue of historical tide records worldwide. The aim is to improve the discoverability of these records, support data rescue initiatives, and provide information that can help prioritise and plan digitisation efforts. By facilitating access to these historical observations, the catalogue contributes to the preservation and extension of long-term sea level datasets for use in climate research and coastal planning.<br><br>
-        Historical tidal observations were recorded in 2 primary formats: ledgers and marigrams (tide charts). Examples of both formats are shown below.
-      </p>
-      <div class="about-figures">
+<div class="card">
+  <p data-i18n="about.body">
+    Sea level rise is a major consequence of climate change, increasing the risk of flooding, erosion, and loss of coastal ecosystems. Developing effective adaptation strategies requires accurate projections of future sea level change, the accuracy of which depends on the length of the available time series.<br><br>
+    Tidal measurements have been collected for centuries and represent some of the oldest environmental observations. However, much of this information remains stored in historical paper records and has not yet been digitised, limiting its accessibility and use in scientific analysis. As a result, many existing sea level datasets extend back only to the late nineteenth century despite the existence of earlier observations.<br><br>
+    Data archaeology initiatives have demonstrated the value of recovering and digitising historical tide records. Examples include extended tide gauge records from Amsterdam (Netherlands), Brest (France), and Sheerness (UK). Nevertheless, many historical records remain undigitized and are at risk of deterioration or loss.<br><br>
+    This website provides a catalogue of historical tide records worldwide. The aim is to improve the discoverability of these records, support data rescue initiatives, and provide information that can help prioritise and plan digitisation efforts. By facilitating access to these historical observations, the catalogue contributes to the preservation and extension of long-term sea level datasets for use in climate research and coastal planning.<br><br>
+    Historical tidal observations were recorded in 2 primary formats: ledgers and marigrams (tide charts). Examples of both formats are shown below.
+  </p>
 
-  <figure>
-    <img src="Ledger.jpg" alt="Historical tide ledger showing daily tide and weather observations">
-    <figcaption>
-      <strong>Figure 1.</strong> Example of a historical tide ledger. These records typically contain handwritten observations of tidal heights, times of high and low water, and weather conditions. This ledger is from Bowling Harbour in the Clyde Estuary, Scotland.
-    </figcaption>
-  </figure>
+  <div class="about-figures">
+    <figure>
+      <img
+        src="Ledger.jpg"
+        alt="Historical tide ledger showing daily tide and weather observations"
+        data-i18n-alt="about.figure1.alt"
+      >
+      <figcaption data-i18n="about.figure1.caption">
+        <strong>Figure 1.</strong> Example of a historical tide ledger. These records typically contain handwritten observations of tidal heights, times of high and low water, and weather conditions. This ledger is from Bowling Harbour in the Clyde Estuary, Scotland.
+      </figcaption>
+    </figure>
 
-  <figure>
-    <img src="Marigram.jpg" alt="Historical marigram showing tidal cycles plotted on graph paper">
-    <figcaption>
-      <strong>Figure 2.</strong> Example of a historical marigram (tide chart). These diagrams were produced by tide gauges that continuously recorded water level on chart paper, providing detailed information on tidal cycles and variability. This marigram is from Gourock at the mouth of the Clyde Estuary, Scotland.
-    </figcaption>
-  </figure>
-
+    <figure>
+      <img
+        src="Marigram.jpg"
+        alt="Historical marigram showing tidal cycles plotted on graph paper"
+        data-i18n-alt="about.figure2.alt"
+      >
+      <figcaption data-i18n="about.figure2.caption">
+        <strong>Figure 2.</strong> Example of a historical marigram (tide chart). These diagrams were produced by tide gauges that continuously recorded water level on chart paper, providing detailed information on tidal cycles and variability. This marigram is from Gourock at the mouth of the Clyde Estuary, Scotland.
+      </figcaption>
+    </figure>
+  </div>
 </div>
 
-    </div>
   </section>
-
   <section id="map">
     <!-- EDIT SECTION HEADING -->
     <h2 class="section-title" data-i18n="map.title">Location of Records</h2>
@@ -610,11 +615,11 @@
       <div class="map-controls">
         <div>
           <!-- EDIT MAP FILTER LABEL -->
-          <label for="map-layer-filter">Show on map</label>
+          <label for="map-layer-filter" data-i18n="map.filter.label">Show on map</label>
           <select id="map-layer-filter">
-            <option value="both">All Records</option>
-            <option value="digitised">Digitised Records</option>
-            <option value="undigitised">Undigitized Records</option>
+            <option value="both" data-i18n="map.filter.all">All Records</option>
+            <option value="digitised" data-i18n="map.filter.digitised">Digitised Records</option>
+            <option value="undigitised" data-i18n="map.filter.undigitised">Undigitized Records</option>
           </select>
         </div>
       </div>
@@ -625,17 +630,17 @@
         <div class="legend-item">
           <span class="legend-circle"></span>
           <!-- EDIT LEGEND LABEL -->
-          <span>Digitised records</span>
+          <span data-i18n="map.legend.digitised">Digitised records</span>
         </div>
         <div class="legend-item">
           <span class="legend-square"></span>
           <!-- EDIT LEGEND LABEL -->
-          <span>Undigitized records</span>
+          <span data-i18n="map.legend.undigitised">Undigitized records</span>
         </div>
       </div>
 
       <!-- EDIT MAP DISCLAIMER -->
-      <p id="map-status" class="map-disclaimer">
+      <p id="map-status" class="map-disclaimer" data-i18n="map.disclaimer">
         <em>Disclaimer: Markers on the map show a rough indication of where the original record came from, not the exact location of the original record.</em>
       </p>
     </div>
@@ -734,55 +739,84 @@
 
       <div class="card">
         <!-- EDIT DATASET HEADING -->
-        <h3>Undigitized Historical Tide Records</h3>
-
-        <!-- EDIT DATASET DESCRIPTION -->
-        <p>A compilation of the known undigitized historical tide records that remain in a paper format. The catalogue contains information on the location, duration, type of record and who identified it. The file may be downloaded as an excel file or viewed on the website.</p>
-
-        <a class="file-button" href="Undigitized_Records_2026_03_13.xlsx" download>Download File</a>
-        <button class="toggle-button secondary" onclick="toggleDataset('undigitised')">View Data</button>
+      <h3 data-i18n="data.undigitised.title">Undigitized Historical Tide Records</h3>
+      
+      <p data-i18n="data.undigitised.desc">
+        A compilation of the known undigitized historical tide records that remain in a paper format. The catalogue contains information on the location, duration, type of record and who identified it. The file may be downloaded as an excel file or viewed on the website.
+      </p>
+      
+      <a
+        class="file-button"
+        href="Undigitized_Records_2026_03_13.xlsx"
+        download
+        data-i18n="button.downloadFile"
+      >
+        Download File
+      </a>
+      
+      <button
+        class="toggle-button secondary"
+        onclick="toggleDataset('undigitised')"
+        data-i18n="button.viewData"
+      >
+        View Data
+      </button>
 
         <div id="undigitised-table" class="table-container">
-          <div class="dataset-tools">
-            <div>
-              <label for="undigitised-search">Search any field</label>
-              <input id="undigitised-search" type="text" placeholder="Location, country, source, type...">
-            </div>
-            <div>
-              <label for="undigitised-country">Country</label>
-              <select id="undigitised-country"><option value="">All countries</option></select>
-            </div>
-            <div>
-              <label for="undigitised-type">Data type</label>
-              <select id="undigitised-type"><option value="">All data types</option></select>
-            </div>
-            <div>
-              <label for="undigitised-study">Study</label>
-              <select id="undigitised-study"><option value="">All studies</option></select>
-            </div>
-            <div>
-              <label for="undigitised-start">Start year from</label>
-              <input id="undigitised-start" type="number" placeholder="e.g. 1800">
-            </div>
-            <div>
-              <label for="undigitised-finish">Finish year to</label>
-              <input id="undigitised-finish" type="number" placeholder="e.g. 1950">
-            </div>
-          </div>
-          <div class="dataset-meta" id="undigitised-meta">Loading spreadsheet...</div>
-          <div class="table-scroll">
-            <table id="undigitised-live-table"></table>
-          </div>
-          <div class="empty-message" id="undigitised-empty">No rows match the current filters.</div>
-          <div class="pager">
-            <div id="undigitised-page-info">Page 1</div>
-            <div>
-              <button type="button" onclick="changePage('undigitised', -1)">Previous</button>
-              <button type="button" onclick="changePage('undigitised', 1)">Next</button>
-              <button type="button" class="clear-button" onclick="resetFilters('undigitised')">Clear filters</button>
-            </div>
-          </div>
-        </div>
+  <div class="dataset-tools">
+    <div>
+      <label for="undigitised-search" data-i18n="filters.searchAnyField">Search any field</label>
+      <input id="undigitised-search" type="text" placeholder="Location, country, source, type...">
+    </div>
+    <div>
+      <label for="undigitised-country" data-i18n="filters.country">Country</label>
+      <select id="undigitised-country">
+        <option value="" data-i18n="filters.allCountries">All countries</option>
+      </select>
+    </div>
+    <div>
+      <label for="undigitised-type" data-i18n="filters.dataType">Data type</label>
+      <select id="undigitised-type">
+        <option value="" data-i18n="filters.allDataTypes">All data types</option>
+      </select>
+    </div>
+    <div>
+      <label for="undigitised-study" data-i18n="filters.study">Study</label>
+      <select id="undigitised-study">
+        <option value="" data-i18n="filters.allStudies">All studies</option>
+      </select>
+    </div>
+    <div>
+      <label for="undigitised-start" data-i18n="filters.startYearFrom">Start year from</label>
+      <input id="undigitised-start" type="number" placeholder="e.g. 1800">
+    </div>
+    <div>
+      <label for="undigitised-finish" data-i18n="filters.finishYearTo">Finish year to</label>
+      <input id="undigitised-finish" type="number" placeholder="e.g. 1950">
+    </div>
+  </div>
+
+  <div class="dataset-meta" id="undigitised-meta" data-i18n="messages.loadingSpreadsheet">
+    Loading spreadsheet...
+  </div>
+
+  <div class="table-scroll">
+    <table id="undigitised-live-table"></table>
+  </div>
+
+  <div class="empty-message" id="undigitised-empty" data-i18n="messages.noRowsMatch">
+    No rows match the current filters.
+  </div>
+
+  <div class="pager">
+    <div id="undigitised-page-info">Page 1</div>
+    <div>
+      <button type="button" onclick="changePage('undigitised', -1)" data-i18n="pager.previous">Previous</button>
+      <button type="button" onclick="changePage('undigitised', 1)" data-i18n="pager.next">Next</button>
+      <button type="button" class="clear-button" onclick="resetFilters('undigitised')" data-i18n="pager.clearFilters">Clear filters</button>
+    </div>
+  </div>
+</div>
       </div>
     </div>
   </section>
@@ -797,32 +831,42 @@
     </p>
 
     <div class="card">
-      <p>      An inventory of digitisation tools that may be useful for digitising marigrams, including the name, price, and a download link for each tool. The inventory includes NUNIEAU, WebPlotDigitizer, and Plot Digitizer, which have already been used for this purpose. The file can be downloaded as an Excel file or viewed on the website.</p>
+    <p data-i18n="tools.body">
+      An inventory of digitisation tools that may be useful for digitising marigrams, including the name, price, and a download link for each tool. The inventory includes NUNIEAU, WebPlotDigitizer, and Plot Digitizer, which have already been used for this purpose. The file can be downloaded as an Excel file or viewed on the website.
+    </p>
+    
+    <a class="file-button" href="Software_List.xlsx" download data-i18n="button.downloadFile">Download File</a>
+    <button class="toggle-button secondary" onclick="toggleDataset('tools')" data-i18n="button.viewData">View Data</button>
 
-      <a class="file-button" href="Software_List.xlsx" download>Download File</a>
-      <button class="toggle-button secondary" onclick="toggleDataset('tools')">View Data</button>
+<div id="tools-table" class="table-container">
+  <div class="dataset-tools">
+    <div>
+      <label for="tools-search" data-i18n="filters.searchAnyField">Search any field</label>
+      <input id="tools-search" type="text" placeholder="Tool name, price, or link...">
+    </div>
+  </div>
 
-      <div id="tools-table" class="table-container">
-        <div class="dataset-tools">
-          <div>
-            <label for="tools-search">Search any field</label>
-            <input id="tools-search" type="text" placeholder="Tool name, price, or link...">
-          </div>
-        </div>
-        <div class="dataset-meta" id="tools-meta">Loading spreadsheet...</div>
-        <div class="table-scroll">
-          <table id="tools-live-table"></table>
-        </div>
-        <div class="empty-message" id="tools-empty">No rows match the current filters.</div>
-        <div class="pager">
-          <div id="tools-page-info">Page 1</div>
-          <div>
-            <button type="button" onclick="changePage('tools', -1)">Previous</button>
-            <button type="button" onclick="changePage('tools', 1)">Next</button>
-            <button type="button" class="clear-button" onclick="resetFilters('tools')">Clear filters</button>
-          </div>
-        </div>
-      </div>
+  <div class="dataset-meta" id="tools-meta" data-i18n="messages.loadingSpreadsheet">
+    Loading spreadsheet...
+  </div>
+
+  <div class="table-scroll">
+    <table id="tools-live-table"></table>
+  </div>
+
+  <div class="empty-message" id="tools-empty" data-i18n="messages.noRowsMatch">
+    No rows match the current filters.
+  </div>
+
+  <div class="pager">
+    <div id="tools-page-info">Page 1</div>
+    <div>
+      <button type="button" onclick="changePage('tools', -1)" data-i18n="pager.previous">Previous</button>
+      <button type="button" onclick="changePage('tools', 1)" data-i18n="pager.next">Next</button>
+      <button type="button" class="clear-button" onclick="resetFilters('tools')" data-i18n="pager.clearFilters">Clear filters</button>
+    </div>
+  </div>
+</div>
     </div>
   </section>
   
@@ -862,25 +906,26 @@
     <!-- EDIT SECTION HEADING -->
     <h2 class="section-title" data-i18n="citation.title">Citation</h2>
     <div class="card">
-      <div class="citation-block">
-        <p class="citation-label">If you use this site, please cite it as:</p>
-        <p class="citation-text">
-          Kenwright, C., DATE, <em>Tidal Time Capsules: A Global Catalogue of Historical Tide Records</em>, available at: .................................
-        </p>
-      </div>
-
-      <div class="citation-block">
-        <p class="citation-label">Additionally, please cite the paper that details the work behind this site:</p>
-        <p class="citation-text">
-          Kenwright, C., Haigh, I.D., Williams, J., Chan, D., Nicholls, R.J., McFarland, S. and Becker, M., (DATE) <em>Tidal Time Capsules: A Global Catalogue of Historical Tide Records</em>. Journal, VOL, PAGE.
-        </p>
-      </div>
-            <div class="citation-block">
-        
-        <p class="citation-text">
-          If you use any of the data from these studies or the digitisation tools for your own invesitgations please site them accordingly        </p>
-      </div>
+    <div class="citation-block">
+      <p class="citation-label" data-i18n="citation.site.label">If you use this site, please cite it as:</p>
+      <p class="citation-text" data-i18n="citation.site.text">
+        Kenwright, C., DATE, <em>Tidal Time Capsules: A Global Catalogue of Historical Tide Records</em>, available at: .................................
+      </p>
     </div>
+  
+    <div class="citation-block">
+      <p class="citation-label" data-i18n="citation.paper.label">Additionally, please cite the paper that details the work behind this site:</p>
+      <p class="citation-text" data-i18n="citation.paper.text">
+        Kenwright, C., Haigh, I.D., Williams, J., Chan, D., Nicholls, R.J., McFarland, S. and Becker, M., (DATE) <em>Tidal Time Capsules: A Global Catalogue of Historical Tide Records</em>. Journal, VOL, PAGE.
+      </p>
+    </div>
+  
+    <div class="citation-block">
+      <p class="citation-text" data-i18n="citation.note">
+        If you use any of the data from these studies or the digitisation tools for your own investigations please cite them accordingly
+      </p>
+    </div>
+  </div>
   </section>
 
   <section id="contact">
@@ -888,7 +933,7 @@
     <h2 class="section-title" data-i18n="contact.title">Contact</h2>
     <div class="card">
       <!-- EDIT CONTACT TEXT -->
-      <p>Email: ck1g20@soton.ac.uk</p>
+      <p data-i18n="contact.email">Email: ck1g20@soton.ac.uk</p>
     </div>
   </section>
 
@@ -1586,9 +1631,9 @@ function updatePlaceholders(lang) {
   
 const translations = {
   en: {
+    // Global / nav
     brand: "Tidal Time Capsules",
     "language.label": "Language",
-
     "nav.about": "About",
     "nav.map": "Map",
     "nav.data": "Data",
@@ -1597,48 +1642,64 @@ const translations = {
     "nav.citation": "Citation",
     "nav.contact": "Contact",
 
+    // Hero
     "hero.title": "Tidal Time Capsules",
     "hero.subtitle": "A catalogue of known digitised and undigitized historical tide records.",
     "hero.button": "Browse Data",
 
+    // About
     "about.title": "About",
+    "about.body": "Sea level rise is a major consequence of climate change, increasing the risk of flooding, erosion, and loss of coastal ecosystems. Developing effective adaptation strategies requires accurate projections of future sea level change, the accuracy of which depends on the length of the available time series.<br><br>Tidal measurements have been collected for centuries and represent some of the oldest environmental observations. However, much of this information remains stored in historical paper records and has not yet been digitised, limiting its accessibility and use in scientific analysis. As a result, many existing sea level datasets extend back only to the late nineteenth century despite the existence of earlier observations.<br><br>Data archaeology initiatives have demonstrated the value of recovering and digitising historical tide records. Examples include extended tide gauge records from Amsterdam (Netherlands), Brest (France), and Sheerness (UK). Nevertheless, many historical records remain undigitized and are at risk of deterioration or loss.<br><br>This website provides a catalogue of historical tide records worldwide. The aim is to improve the discoverability of these records, support data rescue initiatives, and provide information that can help prioritise and plan digitisation efforts. By facilitating access to these historical observations, the catalogue contributes to the preservation and extension of long-term sea level datasets for use in climate research and coastal planning.<br><br>Historical tidal observations were recorded in 2 primary formats: ledgers and marigrams (tide charts). Examples of both formats are shown below.",
+    "about.figure1.alt": "Historical tide ledger showing daily tide and weather observations",
+    "about.figure1.caption": "<strong>Figure 1.</strong> Example of a historical tide ledger. These records typically contain handwritten observations of tidal heights, times of high and low water, and weather conditions. This ledger is from Bowling Harbour in the Clyde Estuary, Scotland.",
+    "about.figure2.alt": "Historical marigram showing tidal cycles plotted on graph paper",
+    "about.figure2.caption": "<strong>Figure 2.</strong> Example of a historical marigram (tide chart). These diagrams were produced by tide gauges that continuously recorded water level on chart paper, providing detailed information on tidal cycles and variability. This marigram is from Gourock at the mouth of the Clyde Estuary, Scotland.",
+
+    // Map
     "map.title": "Location of Records",
+    "map.filter.label": "Show on map",
+    "map.filter.all": "All Records",
+    "map.filter.digitised": "Digitised Records",
+    "map.filter.undigitised": "Undigitized Records",
+    "map.legend.digitised": "Digitised records",
+    "map.legend.undigitised": "Undigitized records",
+    "map.disclaimer": "<em>Disclaimer: Markers on the map show a rough indication of where the original record came from, not the exact location of the original record.</em>",
+
+    // Data
     "data.title": "Data",
-    "tools.title": "Inventory of Digitisation Tools",
-    "contribute.title": "Contribute",
-    "citation.title": "Citation",
-    "contact.title": "Contact",
-    "button.downloadFile": "Download File",
-"button.viewData": "View Data",
-"pager.previous": "Previous",
-"pager.next": "Next",
-"pager.clearFilters": "Clear filters",
-"filters.searchAnyField": "Search any field",
-"filters.country": "Country",
-"filters.dataType": "Data type",
-"filters.method": "Method",
-"filters.study": "Study",
-"filters.startYearFrom": "Start year from",
-"filters.finishYearTo": "Finish year to",
-"filters.allCountries": "All countries",
-"filters.allDataTypes": "All data types",
-"filters.allMethods": "All methods",
-"filters.allStudies": "All studies",
-"messages.loadingSpreadsheet": "Loading spreadsheet...",
-"messages.noRowsMatch": "No rows match the current filters.",
-    "contribute.intro": "We welcome contributions that help expand and improve this catalogue.",
-
-    "footer.text": "© 2026 Tidal Time Capsules: A Global Catalogue of Historical Tide Records",
-
     "data.digitised.title": "Digitised Historical Tide Records",
     "data.digitised.desc": "A compilation of all digitised historical records. The catalogue contains information on the location, duration, type of record, method of recovery and who recovered the data. The file may be downloaded as an excel file or viewed on the website.",
-
     "data.undigitised.title": "Undigitized Historical Tide Records",
     "data.undigitised.desc": "A compilation of the known undigitized historical tide records that remain in a paper format. The catalogue contains information on the location, duration, type of record and who identified it. The file may be downloaded as an excel file or viewed on the website.",
 
+    // Tools
+    "tools.title": "Inventory of Digitisation Tools",
+    "tools.body": "An inventory of digitisation tools that may be useful for digitising marigrams, including the name, price, and a download link for each tool. The inventory includes NUNIEAU, WebPlotDigitizer, and Plot Digitizer, which have already been used for this purpose. The file can be downloaded as an Excel file or viewed on the website.",
+
+    // Contribute
+    "contribute.title": "Contribute",
+    "contribute.intro": "We welcome contributions that help expand and improve this catalogue.",
+    "contribute.body1": "We welcome contributions that can be made to help expand the catalogue of historical records and inventory of digitisation tools and encourage you to contact us if you know of additional digitised datasets, undigitized archives, or useful digitisation tools that are not yet included on this site.",
+    "contribute.body2": "To contribute, please fill out the correct form and send it via email to ck1g20@soton.ac.uk.",
+    "contribute.formDigitised": "Download Digitised Records Form",
+    "contribute.formUndigitised": "Download Undigitized Records Form",
+    "contribute.formTools": "Download Digitisation Tools Form",
+
+    // Citation
+    "citation.title": "Citation",
+    "citation.site.label": "If you use this site, please cite it as:",
+    "citation.site.text": "Kenwright, C., DATE, <em>Tidal Time Capsules: A Global Catalogue of Historical Tide Records</em>, available at: .................................",
+    "citation.paper.label": "Additionally, please cite the paper that details the work behind this site:",
+    "citation.paper.text": "Kenwright, C., Haigh, I.D., Williams, J., Chan, D., Nicholls, R.J., McFarland, S. and Becker, M., (DATE) <em>Tidal Time Capsules: A Global Catalogue of Historical Tide Records</em>. Journal, VOL, PAGE.",
+    "citation.note": "If you use any of the data from these studies or the digitisation tools for your own investigations please cite them accordingly",
+
+    // Contact
+    "contact.title": "Contact",
+    "contact.email": "Email: ck1g20@soton.ac.uk",
+
+    // Shared controls / messages
     "button.downloadFile": "Download File",
     "button.viewData": "View Data",
-
     "filters.searchAnyField": "Search any field",
     "filters.country": "Country",
     "filters.dataType": "Data type",
@@ -1650,25 +1711,20 @@ const translations = {
     "filters.allDataTypes": "All data types",
     "filters.allMethods": "All methods",
     "filters.allStudies": "All studies",
-
     "messages.loadingSpreadsheet": "Loading spreadsheet...",
     "messages.noRowsMatch": "No rows match the current filters.",
-
     "pager.previous": "Previous",
     "pager.next": "Next",
     "pager.clearFilters": "Clear filters",
 
-    "contribute.body1": "We welcome contributions that can be made to help expand the catalogue of historical records and inventory of digitisation tools and encourage you to contact us if you know of additional digitised datasets, undigitized archives, or useful digitisation tools that are not yet included on this site.",
-    "contribute.body2": "To contribute, please fill out the correct form and send it via email to ck1g20@soton.ac.uk.",
-    "contribute.formDigitised": "Download Digitised Records Form",
-    "contribute.formUndigitised": "Download Undigitized Records Form",
-    "contribute.formTools": "Download Digitisation Tools Form"
+    // Footer
+    "footer.text": "© 2026 Tidal Time Capsules: A Global Catalogue of Historical Tide Records"
   },
 
   fr: {
+    // Global / nav
     brand: "Capsules Temporelles des Marées",
     "language.label": "Langue",
-
     "nav.about": "À propos",
     "nav.map": "Carte",
     "nav.data": "Données",
@@ -1676,45 +1732,90 @@ const translations = {
     "nav.contribute": "Contribuer",
     "nav.citation": "Citation",
     "nav.contact": "Contact",
-"button.downloadFile": "Télécharger le fichier",
-"button.viewData": "Voir les données",
-"pager.previous": "Précédent",
-"pager.next": "Suivant",
-"pager.clearFilters": "Effacer les filtres",
-"filters.searchAnyField": "Rechercher dans tous les champs",
-"filters.country": "Pays",
-"filters.dataType": "Type de données",
-"filters.method": "Méthode",
-"filters.study": "Étude",
-"filters.startYearFrom": "Année de début à partir de",
-"filters.finishYearTo": "Année de fin jusqu’à",
-"filters.allCountries": "Tous les pays",
-"filters.allDataTypes": "Tous les types de données",
-"filters.allMethods": "Toutes les méthodes",
-"filters.allStudies": "Toutes les études",
-"messages.loadingSpreadsheet": "Chargement du fichier...",
-"messages.noRowsMatch": "Aucune ligne ne correspond aux filtres actuels.",
+
+    // Hero
     "hero.title": "Capsules Temporelles des Marées",
     "hero.subtitle": "Un catalogue des archives historiques des marées numérisées et non numérisées.",
     "hero.button": "Explorer les données",
 
+    // About
     "about.title": "À propos",
+    "about.body": "L’élévation du niveau de la mer est une conséquence majeure du changement climatique, augmentant les risques d’inondation, d’érosion et de perte des écosystèmes côtiers. Le développement de stratégies d’adaptation efficaces nécessite des projections précises de l’évolution future du niveau de la mer, dont la qualité dépend de la longueur des séries temporelles disponibles.<br><br>Les mesures des marées sont recueillies depuis des siècles et comptent parmi les plus anciennes observations environnementales. Cependant, une grande partie de ces informations reste conservée dans des archives papier historiques et n’a pas encore été numérisée, ce qui limite leur accessibilité et leur utilisation dans l’analyse scientifique. En conséquence, de nombreux jeux de données existants sur le niveau de la mer ne remontent qu’à la fin du XIXe siècle malgré l’existence d’observations plus anciennes.<br><br>Les initiatives d’archéologie des données ont démontré l’intérêt de récupérer et de numériser les archives historiques des marées. On peut citer, par exemple, les longues séries marégraphiques d’Amsterdam (Pays-Bas), Brest (France) et Sheerness (Royaume-Uni). Néanmoins, de nombreuses archives historiques restent non numérisées et risquent de se détériorer ou d’être perdues.<br><br>Ce site propose un catalogue mondial des archives historiques des marées. Son objectif est d’améliorer leur repérabilité, de soutenir les initiatives de sauvetage de données et de fournir des informations permettant de prioriser et de planifier les efforts de numérisation. En facilitant l’accès à ces observations historiques, le catalogue contribue à la préservation et à l’extension des séries à long terme du niveau de la mer, utiles pour la recherche climatique et la planification côtière.<br><br>Les observations historiques des marées ont été enregistrées principalement sous deux formes : des registres et des marigrammes (diagrammes de marée). Des exemples des deux formats sont présentés ci-dessous.",
+    "about.figure1.alt": "Registre historique des marées montrant des observations quotidiennes de marée et de météo",
+    "about.figure1.caption": "<strong>Figure 1.</strong> Exemple de registre historique des marées. Ces archives contiennent généralement des observations manuscrites des hauteurs d’eau, des heures de pleine et basse mer, ainsi que des conditions météorologiques. Ce registre provient de Bowling Harbour, dans l’estuaire de la Clyde, en Écosse.",
+    "about.figure2.alt": "Marigramme historique montrant les cycles de marée tracés sur papier millimétré",
+    "about.figure2.caption": "<strong>Figure 2.</strong> Exemple de marigramme historique (diagramme de marée). Ces diagrammes étaient produits par des marégraphes qui enregistraient en continu le niveau de l’eau sur papier, fournissant des informations détaillées sur les cycles de marée et leur variabilité. Ce marigramme provient de Gourock, à l’embouchure de l’estuaire de la Clyde, en Écosse.",
+
+    // Map
     "map.title": "Localisation des archives",
+    "map.filter.label": "Afficher sur la carte",
+    "map.filter.all": "Toutes les archives",
+    "map.filter.digitised": "Archives numérisées",
+    "map.filter.undigitised": "Archives non numérisées",
+    "map.legend.digitised": "Archives numérisées",
+    "map.legend.undigitised": "Archives non numérisées",
+    "map.disclaimer": "<em>Avertissement : les marqueurs sur la carte donnent une indication approximative de l’origine de l’archive, et non l’emplacement exact de l’archive originale.</em>",
+
+    // Data
     "data.title": "Données",
-    "tools.title": "Inventaire des outils de numérisation",
+    "data.digitised.title": "Archives Historiques des Marées Numérisées",
+    "data.digitised.desc": "Une compilation de toutes les archives historiques numérisées. Le catalogue contient des informations sur le lieu, la durée, le type de document, la méthode de récupération et les personnes ayant récupéré les données. Le fichier peut être téléchargé au format Excel ou consulté sur le site.",
+    "data.undigitised.title": "Archives Historiques des Marées Non Numérisées",
+    "data.undigitised.desc": "Une compilation des archives historiques des marées connues qui restent sous format papier. Le catalogue contient des informations sur le lieu, la durée, le type de document et les personnes les ayant identifiées. Le fichier peut être téléchargé au format Excel ou consulté sur le site.",
+
+    // Tools
+    "tools.title": "Inventaire des Outils de Numérisation",
+    "tools.body": "Un inventaire des outils de numérisation pouvant être utiles pour numériser les marigrammes, comprenant le nom, le prix et un lien de téléchargement pour chaque outil. L’inventaire inclut NUNIEAU, WebPlotDigitizer et Plot Digitizer, qui ont déjà été utilisés à cette fin. Le fichier peut être téléchargé au format Excel ou consulté sur le site.",
+
+    // Contribute
     "contribute.title": "Contribuer",
+    "contribute.intro": "Nous accueillons les contributions qui aident à enrichir et améliorer ce catalogue.",
+    "contribute.body1": "Nous accueillons volontiers toute contribution permettant d’élargir le catalogue des archives historiques et l’inventaire des outils de numérisation, et nous vous encourageons à nous contacter si vous connaissez d’autres jeux de données numérisés, archives non numérisées ou outils de numérisation utiles qui ne figurent pas encore sur ce site.",
+    "contribute.body2": "Pour contribuer, veuillez remplir le formulaire approprié et l’envoyer par e-mail à ck1g20@soton.ac.uk.",
+    "contribute.formDigitised": "Télécharger le formulaire des archives numérisées",
+    "contribute.formUndigitised": "Télécharger le formulaire des archives non numérisées",
+    "contribute.formTools": "Télécharger le formulaire des outils de numérisation",
+
+    // Citation
     "citation.title": "Citation",
+    "citation.site.label": "Si vous utilisez ce site, veuillez le citer comme suit :",
+    "citation.site.text": "Kenwright, C., DATE, <em>Tidal Time Capsules: A Global Catalogue of Historical Tide Records</em>, disponible à l’adresse : .................................",
+    "citation.paper.label": "Veuillez également citer l’article présentant le travail à l’origine de ce site :",
+    "citation.paper.text": "Kenwright, C., Haigh, I.D., Williams, J., Chan, D., Nicholls, R.J., McFarland, S. and Becker, M., (DATE) <em>Tidal Time Capsules: A Global Catalogue of Historical Tide Records</em>. Journal, VOL, PAGE.",
+    "citation.note": "Si vous utilisez des données issues de ces études ou les outils de numérisation pour vos propres travaux, veuillez également les citer de manière appropriée.",
+
+    // Contact
     "contact.title": "Contact",
+    "contact.email": "E-mail : ck1g20@soton.ac.uk",
 
-    "contribute.intro": "Nous accueillons les contributions qui aident à améliorer ce catalogue.",
+    // Shared controls / messages
+    "button.downloadFile": "Télécharger le fichier",
+    "button.viewData": "Voir les données",
+    "filters.searchAnyField": "Rechercher dans tous les champs",
+    "filters.country": "Pays",
+    "filters.dataType": "Type de données",
+    "filters.method": "Méthode",
+    "filters.study": "Étude",
+    "filters.startYearFrom": "Année de début à partir de",
+    "filters.finishYearTo": "Année de fin jusqu’à",
+    "filters.allCountries": "Tous les pays",
+    "filters.allDataTypes": "Tous les types de données",
+    "filters.allMethods": "Toutes les méthodes",
+    "filters.allStudies": "Toutes les études",
+    "messages.loadingSpreadsheet": "Chargement du fichier...",
+    "messages.noRowsMatch": "Aucune ligne ne correspond aux filtres actuels.",
+    "pager.previous": "Précédent",
+    "pager.next": "Suivant",
+    "pager.clearFilters": "Effacer les filtres",
 
-    "footer.text": "© 2026 Tidal Time Capsules"
+    // Footer
+    "footer.text": "© 2026 Tidal Time Capsules : Un Catalogue Mondial des Archives Historiques des Marées"
   },
 
   es: {
+    // Global / nav
     brand: "Cápsulas del Tiempo de las Mareas",
     "language.label": "Idioma",
-
     "nav.about": "Acerca de",
     "nav.map": "Mapa",
     "nav.data": "Datos",
@@ -1722,175 +1823,358 @@ const translations = {
     "nav.contribute": "Contribuir",
     "nav.citation": "Citación",
     "nav.contact": "Contacto",
-"button.downloadFile": "Descargar archivo",
-"button.viewData": "Ver datos",
-"pager.previous": "Anterior",
-"pager.next": "Siguiente",
-"pager.clearFilters": "Borrar filtros",
-"filters.searchAnyField": "Buscar en cualquier campo",
-"filters.country": "País",
-"filters.dataType": "Tipo de datos",
-"filters.method": "Método",
-"filters.study": "Estudio",
-"filters.startYearFrom": "Año inicial desde",
-"filters.finishYearTo": "Año final hasta",
-"filters.allCountries": "Todos los países",
-"filters.allDataTypes": "Todos los tipos de datos",
-"filters.allMethods": "Todos los métodos",
-"filters.allStudies": "Todos los estudios",
-"messages.loadingSpreadsheet": "Cargando hoja de cálculo...",
-"messages.noRowsMatch": "Ninguna fila coincide con los filtros actuales.",
+
+    // Hero
     "hero.title": "Cápsulas del Tiempo de las Mareas",
     "hero.subtitle": "Un catálogo de registros históricos de mareas digitalizados y no digitalizados.",
     "hero.button": "Explorar datos",
 
+    // About
     "about.title": "Acerca de",
+    "about.body": "El aumento del nivel del mar es una consecuencia importante del cambio climático, ya que incrementa el riesgo de inundaciones, erosión y pérdida de ecosistemas costeros. Desarrollar estrategias de adaptación eficaces requiere proyecciones precisas de los cambios futuros del nivel del mar, cuya exactitud depende de la longitud de las series temporales disponibles.<br><br>Las mediciones de las mareas se han recogido durante siglos y representan algunas de las observaciones ambientales más antiguas. Sin embargo, gran parte de esta información sigue almacenada en registros históricos en papel y aún no ha sido digitalizada, lo que limita su accesibilidad y su uso en análisis científicos. Como resultado, muchos conjuntos de datos existentes sobre el nivel del mar solo se remontan a finales del siglo XIX, a pesar de la existencia de observaciones anteriores.<br><br>Las iniciativas de arqueología de datos han demostrado el valor de recuperar y digitalizar registros históricos de mareas. Entre los ejemplos se incluyen las series extendidas de mareógrafos de Ámsterdam (Países Bajos), Brest (Francia) y Sheerness (Reino Unido). No obstante, muchos registros históricos siguen sin digitalizarse y corren el riesgo de deteriorarse o perderse.<br><br>Este sitio web ofrece un catálogo mundial de registros históricos de mareas. Su objetivo es mejorar la localización de estos registros, apoyar las iniciativas de rescate de datos y proporcionar información que ayude a priorizar y planificar los esfuerzos de digitalización. Al facilitar el acceso a estas observaciones históricas, el catálogo contribuye a la preservación y ampliación de los conjuntos de datos de nivel del mar a largo plazo para su uso en la investigación climática y la planificación costera.<br><br>Las observaciones históricas de las mareas se registraron principalmente en dos formatos: libros de registro y marigramas (gráficos de marea). A continuación se muestran ejemplos de ambos formatos.",
+    "about.figure1.alt": "Libro histórico de mareas que muestra observaciones diarias de mareas y del tiempo",
+    "about.figure1.caption": "<strong>Figura 1.</strong> Ejemplo de un libro histórico de mareas. Estos registros suelen contener observaciones manuscritas de alturas de marea, horas de pleamar y bajamar, y condiciones meteorológicas. Este libro procede de Bowling Harbour, en el estuario del Clyde, Escocia.",
+    "about.figure2.alt": "Marigrama histórico que muestra ciclos de marea trazados en papel cuadriculado",
+    "about.figure2.caption": "<strong>Figura 2.</strong> Ejemplo de un marigrama histórico (gráfico de marea). Estos diagramas eran producidos por mareógrafos que registraban continuamente el nivel del agua en papel gráfico, proporcionando información detallada sobre los ciclos de marea y su variabilidad. Este marigrama procede de Gourock, en la desembocadura del estuario del Clyde, Escocia.",
+
+    // Map
     "map.title": "Ubicación de los registros",
+    "map.filter.label": "Mostrar en el mapa",
+    "map.filter.all": "Todos los registros",
+    "map.filter.digitised": "Registros digitalizados",
+    "map.filter.undigitised": "Registros no digitalizados",
+    "map.legend.digitised": "Registros digitalizados",
+    "map.legend.undigitised": "Registros no digitalizados",
+    "map.disclaimer": "<em>Aviso: los marcadores del mapa muestran una indicación aproximada de dónde procedía el registro original, no la ubicación exacta del registro original.</em>",
+
+    // Data
     "data.title": "Datos",
-    "tools.title": "Inventario de herramientas de digitalización",
+    "data.digitised.title": "Registros Históricos de Mareas Digitalizados",
+    "data.digitised.desc": "Una recopilación de todos los registros históricos digitalizados. El catálogo contiene información sobre la ubicación, la duración, el tipo de registro, el método de recuperación y quién recuperó los datos. El archivo puede descargarse como archivo Excel o consultarse en el sitio web.",
+    "data.undigitised.title": "Registros Históricos de Mareas No Digitalizados",
+    "data.undigitised.desc": "Una recopilación de los registros históricos de mareas conocidos que permanecen en formato papel. El catálogo contiene información sobre la ubicación, la duración, el tipo de registro y quién lo identificó. El archivo puede descargarse como archivo Excel o consultarse en el sitio web.",
+
+    // Tools
+    "tools.title": "Inventario de Herramientas de Digitalización",
+    "tools.body": "Un inventario de herramientas de digitalización que pueden ser útiles para digitalizar marigramas, incluyendo el nombre, el precio y un enlace de descarga para cada herramienta. El inventario incluye NUNIEAU, WebPlotDigitizer y Plot Digitizer, que ya se han utilizado con este fin. El archivo puede descargarse como archivo Excel o consultarse en el sitio web.",
+
+    // Contribute
     "contribute.title": "Contribuir",
+    "contribute.intro": "Agradecemos las contribuciones que ayuden a ampliar y mejorar este catálogo.",
+    "contribute.body1": "Agradecemos las contribuciones que puedan ayudar a ampliar el catálogo de registros históricos y el inventario de herramientas de digitalización, y le animamos a ponerse en contacto con nosotros si conoce conjuntos de datos digitalizados adicionales, archivos no digitalizados o herramientas útiles de digitalización que todavía no estén incluidos en este sitio.",
+    "contribute.body2": "Para contribuir, complete el formulario correspondiente y envíelo por correo electrónico a ck1g20@soton.ac.uk.",
+    "contribute.formDigitised": "Descargar formulario de registros digitalizados",
+    "contribute.formUndigitised": "Descargar formulario de registros no digitalizados",
+    "contribute.formTools": "Descargar formulario de herramientas de digitalización",
+
+    // Citation
     "citation.title": "Citación",
+    "citation.site.label": "Si utiliza este sitio, cítelo de la siguiente manera:",
+    "citation.site.text": "Kenwright, C., DATE, <em>Tidal Time Capsules: A Global Catalogue of Historical Tide Records</em>, disponible en: .................................",
+    "citation.paper.label": "Además, cite el artículo que describe el trabajo que hay detrás de este sitio:",
+    "citation.paper.text": "Kenwright, C., Haigh, I.D., Williams, J., Chan, D., Nicholls, R.J., McFarland, S. and Becker, M., (DATE) <em>Tidal Time Capsules: A Global Catalogue of Historical Tide Records</em>. Journal, VOL, PAGE.",
+    "citation.note": "Si utiliza alguno de los datos de estos estudios o las herramientas de digitalización para sus propias investigaciones, cítelos también según corresponda.",
+
+    // Contact
     "contact.title": "Contacto",
+    "contact.email": "Correo electrónico: ck1g20@soton.ac.uk",
 
-    "contribute.intro": "Agradecemos contribuciones que ayuden a mejorar este catálogo.",
+    // Shared controls / messages
+    "button.downloadFile": "Descargar archivo",
+    "button.viewData": "Ver datos",
+    "filters.searchAnyField": "Buscar en cualquier campo",
+    "filters.country": "País",
+    "filters.dataType": "Tipo de datos",
+    "filters.method": "Método",
+    "filters.study": "Estudio",
+    "filters.startYearFrom": "Año inicial desde",
+    "filters.finishYearTo": "Año final hasta",
+    "filters.allCountries": "Todos los países",
+    "filters.allDataTypes": "Todos los tipos de datos",
+    "filters.allMethods": "Todos los métodos",
+    "filters.allStudies": "Todos los estudios",
+    "messages.loadingSpreadsheet": "Cargando hoja de cálculo...",
+    "messages.noRowsMatch": "Ninguna fila coincide con los filtros actuales.",
+    "pager.previous": "Anterior",
+    "pager.next": "Siguiente",
+    "pager.clearFilters": "Borrar filtros",
 
-    "footer.text": "© 2026 Tidal Time Capsules"
+    // Footer
+    "footer.text": "© 2026 Tidal Time Capsules: Un Catálogo Global de Registros Históricos de Mareas"
   },
+
   de: {
-  brand: "Gezeiten-Zeitkapseln",
-  "language.label": "Sprache",
+    // Global / nav
+    brand: "Gezeiten-Zeitkapseln",
+    "language.label": "Sprache",
+    "nav.about": "Über",
+    "nav.map": "Karte",
+    "nav.data": "Daten",
+    "nav.tools": "Werkzeuge",
+    "nav.contribute": "Beitragen",
+    "nav.citation": "Zitat",
+    "nav.contact": "Kontakt",
 
-  "nav.about": "Über",
-  "nav.map": "Karte",
-  "nav.data": "Daten",
-  "nav.tools": "Werkzeuge",
-  "nav.contribute": "Beitragen",
-  "nav.citation": "Zitation",
-  "nav.contact": "Kontakt",
-"button.downloadFile": "Datei herunterladen",
-"button.viewData": "Daten anzeigen",
-"pager.previous": "Zurück",
-"pager.next": "Weiter",
-"pager.clearFilters": "Filter löschen",
-"filters.searchAnyField": "Alle Felder durchsuchen",
-"filters.country": "Land",
-"filters.dataType": "Datentyp",
-"filters.method": "Methode",
-"filters.study": "Studie",
-"filters.startYearFrom": "Startjahr ab",
-"filters.finishYearTo": "Endjahr bis",
-"filters.allCountries": "Alle Länder",
-"filters.allDataTypes": "Alle Datentypen",
-"filters.allMethods": "Alle Methoden",
-"filters.allStudies": "Alle Studien",
-"messages.loadingSpreadsheet": "Tabelle wird geladen...",
-"messages.noRowsMatch": "Keine Zeilen entsprechen den aktuellen Filtern.",
-  "hero.title": "Gezeiten-Zeitkapseln",
-  "hero.subtitle": "Ein Katalog bekannter digitalisierter und nicht digitalisierter historischer Gezeitenaufzeichnungen.",
-  "hero.button": "Daten durchsuchen",
+    // Hero
+    "hero.title": "Gezeiten-Zeitkapseln",
+    "hero.subtitle": "Ein Katalog bekannter digitalisierter und nicht digitalisierter historischer Gezeitenaufzeichnungen.",
+    "hero.button": "Daten durchsuchen",
 
-  "about.title": "Über",
-  "map.title": "Standorte der Aufzeichnungen",
-  "data.title": "Daten",
-  "tools.title": "Inventar der Digitalisierungswerkzeuge",
-  "contribute.title": "Beitragen",
-  "citation.title": "Zitation",
-  "contact.title": "Kontakt",
+    // About
+    "about.title": "Über",
+    "about.body": "Der Anstieg des Meeresspiegels ist eine wesentliche Folge des Klimawandels und erhöht das Risiko von Überschwemmungen, Erosion und dem Verlust küstennaher Ökosysteme. Die Entwicklung wirksamer Anpassungsstrategien erfordert genaue Projektionen zukünftiger Meeresspiegeländerungen, deren Genauigkeit von der Länge der verfügbaren Zeitreihen abhängt.<br><br>Gezeitenmessungen werden seit Jahrhunderten durchgeführt und gehören zu den ältesten Umweltbeobachtungen überhaupt. Ein großer Teil dieser Informationen liegt jedoch weiterhin in historischen Papierarchiven vor und wurde noch nicht digitalisiert, was ihre Zugänglichkeit und Nutzung für wissenschaftliche Analysen einschränkt. Daher reichen viele bestehende Meeresspiegeldatensätze nur bis ins späte 19. Jahrhundert zurück, obwohl frühere Beobachtungen existieren.<br><br>Initiativen der Datenarchäologie haben gezeigt, wie wertvoll die Wiederentdeckung und Digitalisierung historischer Gezeitenaufzeichnungen ist. Beispiele sind verlängerte Pegelreihen aus Amsterdam (Niederlande), Brest (Frankreich) und Sheerness (Vereinigtes Königreich). Dennoch bleiben viele historische Aufzeichnungen undigitalisiert und sind vom Verfall oder Verlust bedroht.<br><br>Diese Website bietet einen weltweiten Katalog historischer Gezeitenaufzeichnungen. Ziel ist es, ihre Auffindbarkeit zu verbessern, Datenrettungsinitiativen zu unterstützen und Informationen bereitzustellen, die bei der Priorisierung und Planung von Digitalisierungsmaßnahmen helfen können. Durch die Erleichterung des Zugangs zu diesen historischen Beobachtungen trägt der Katalog zur Erhaltung und Erweiterung langfristiger Meeresspiegeldatensätze für die Klimaforschung und Küstenplanung bei.<br><br>Historische Gezeitenbeobachtungen wurden hauptsächlich in zwei Formaten aufgezeichnet: in Registern und in Marigrammen (Gezeitendiagrammen). Beispiele für beide Formate sind unten dargestellt.",
+    "about.figure1.alt": "Historisches Gezeitenregister mit täglichen Beobachtungen von Gezeiten und Wetter",
+    "about.figure1.caption": "<strong>Abbildung 1.</strong> Beispiel eines historischen Gezeitenregisters. Diese Aufzeichnungen enthalten typischerweise handschriftliche Beobachtungen von Wasserständen, Zeiten von Hoch- und Niedrigwasser sowie Wetterbedingungen. Dieses Register stammt aus Bowling Harbour im Clyde-Ästuar in Schottland.",
+    "about.figure2.alt": "Historisches Marigramm mit auf Millimeterpapier aufgezeichneten Gezeitenzyklen",
+    "about.figure2.caption": "<strong>Abbildung 2.</strong> Beispiel eines historischen Marigramms (Gezeitendiagramms). Diese Diagramme wurden von Pegeln erzeugt, die den Wasserstand kontinuierlich auf Papier aufzeichneten und detaillierte Informationen über Gezeitenzyklen und ihre Variabilität lieferten. Dieses Marigramm stammt aus Gourock an der Mündung des Clyde-Ästuars in Schottland.",
 
-  "contribute.intro": "Wir freuen uns über Beiträge, die helfen, diesen Katalog zu erweitern und zu verbessern.",
+    // Map
+    "map.title": "Standorte der Aufzeichnungen",
+    "map.filter.label": "Auf der Karte anzeigen",
+    "map.filter.all": "Alle Aufzeichnungen",
+    "map.filter.digitised": "Digitalisierte Aufzeichnungen",
+    "map.filter.undigitised": "Nicht digitalisierte Aufzeichnungen",
+    "map.legend.digitised": "Digitalisierte Aufzeichnungen",
+    "map.legend.undigitised": "Nicht digitalisierte Aufzeichnungen",
+    "map.disclaimer": "<em>Hinweis: Die Marker auf der Karte zeigen nur ungefähr an, woher die ursprüngliche Aufzeichnung stammt, nicht den exakten Standort der Originalquelle.</em>",
 
-  "footer.text": "© 2026 Tidal Time Capsules: A Global Catalogue of Historical Tide Records"
-},
-nl: {
-  brand: "Getijden-Tijdcapsules",
-  "language.label": "Taal",
+    // Data
+    "data.title": "Daten",
+    "data.digitised.title": "Digitalisierte Historische Gezeitenaufzeichnungen",
+    "data.digitised.desc": "Eine Zusammenstellung aller digitalisierten historischen Aufzeichnungen. Der Katalog enthält Informationen zum Standort, zur Dauer, zur Art der Aufzeichnung, zur Methode der Wiedergewinnung und dazu, wer die Daten wiedergewonnen hat. Die Datei kann als Excel-Datei heruntergeladen oder auf der Website eingesehen werden.",
+    "data.undigitised.title": "Nicht Digitalisierte Historische Gezeitenaufzeichnungen",
+    "data.undigitised.desc": "Eine Zusammenstellung bekannter historischer Gezeitenaufzeichnungen, die noch in Papierform vorliegen. Der Katalog enthält Informationen zum Standort, zur Dauer, zur Art der Aufzeichnung und dazu, wer sie identifiziert hat. Die Datei kann als Excel-Datei heruntergeladen oder auf der Website eingesehen werden.",
 
-  "nav.about": "Over",
-  "nav.map": "Kaart",
-  "nav.data": "Gegevens",
-  "nav.tools": "Hulpmiddelen",
-  "nav.contribute": "Bijdragen",
-  "nav.citation": "Citeren",
-  "nav.contact": "Contact",
-"button.downloadFile": "Bestand downloaden",
-"button.viewData": "Gegevens bekijken",
-"pager.previous": "Vorige",
-"pager.next": "Volgende",
-"pager.clearFilters": "Filters wissen",
-"filters.searchAnyField": "Zoek in alle velden",
-"filters.country": "Land",
-"filters.dataType": "Gegevenstype",
-"filters.method": "Methode",
-"filters.study": "Studie",
-"filters.startYearFrom": "Begingebied vanaf jaar",
-"filters.finishYearTo": "Eindjaar tot",
-"filters.allCountries": "Alle landen",
-"filters.allDataTypes": "Alle gegevenstypen",
-"filters.allMethods": "Alle methoden",
-"filters.allStudies": "Alle studies",
-"messages.loadingSpreadsheet": "Spreadsheet wordt geladen...",
-"messages.noRowsMatch": "Geen rijen komen overeen met de huidige filters.",
-  "hero.title": "Getijden-Tijdcapsules",
-  "hero.subtitle": "Een catalogus van bekende gedigitaliseerde en niet-gedigitaliseerde historische getijdengegevens.",
-  "hero.button": "Gegevens bekijken",
+    // Tools
+    "tools.title": "Inventar der Digitalisierungswerkzeuge",
+    "tools.body": "Ein Inventar von Digitalisierungswerkzeugen, die für die Digitalisierung von Marigrammen nützlich sein können, einschließlich Name, Preis und Download-Link für jedes Werkzeug. Das Inventar umfasst NUNIEAU, WebPlotDigitizer und Plot Digitizer, die bereits zu diesem Zweck eingesetzt wurden. Die Datei kann als Excel-Datei heruntergeladen oder auf der Website eingesehen werden.",
 
-  "about.title": "Over",
-  "map.title": "Locaties van de gegevens",
-  "data.title": "Gegevens",
-  "tools.title": "Overzicht van digitaliseringshulpmiddelen",
-  "contribute.title": "Bijdragen",
-  "citation.title": "Citeren",
-  "contact.title": "Contact",
+    // Contribute
+    "contribute.title": "Beitragen",
+    "contribute.intro": "Wir begrüßen Beiträge, die helfen, diesen Katalog zu erweitern und zu verbessern.",
+    "contribute.body1": "Wir freuen uns über Beiträge, die zur Erweiterung des Katalogs historischer Aufzeichnungen und des Inventars von Digitalisierungswerkzeugen beitragen, und ermutigen Sie, uns zu kontaktieren, wenn Sie weitere digitalisierte Datensätze, undigitalisierte Archive oder nützliche Digitalisierungswerkzeuge kennen, die noch nicht auf dieser Website enthalten sind.",
+    "contribute.body2": "Um beizutragen, füllen Sie bitte das entsprechende Formular aus und senden Sie es per E-Mail an ck1g20@soton.ac.uk.",
+    "contribute.formDigitised": "Formular für digitalisierte Aufzeichnungen herunterladen",
+    "contribute.formUndigitised": "Formular für nicht digitalisierte Aufzeichnungen herunterladen",
+    "contribute.formTools": "Formular für Digitalisierungswerkzeuge herunterladen",
 
-  "contribute.intro": "Bijdragen die helpen deze catalogus uit te breiden en te verbeteren zijn van harte welkom.",
+    // Citation
+    "citation.title": "Zitat",
+    "citation.site.label": "Wenn Sie diese Website verwenden, zitieren Sie sie bitte wie folgt:",
+    "citation.site.text": "Kenwright, C., DATE, <em>Tidal Time Capsules: A Global Catalogue of Historical Tide Records</em>, verfügbar unter: .................................",
+    "citation.paper.label": "Bitte zitieren Sie außerdem den Artikel, der die Arbeit hinter dieser Website beschreibt:",
+    "citation.paper.text": "Kenwright, C., Haigh, I.D., Williams, J., Chan, D., Nicholls, R.J., McFarland, S. and Becker, M., (DATE) <em>Tidal Time Capsules: A Global Catalogue of Historical Tide Records</em>. Journal, VOL, PAGE.",
+    "citation.note": "Wenn Sie Daten aus diesen Studien oder die Digitalisierungswerkzeuge für Ihre eigenen Untersuchungen verwenden, zitieren Sie diese bitte ebenfalls entsprechend.",
 
-  "footer.text": "© 2026 Tidal Time Capsules: A Global Catalogue of Historical Tide Records"
-},
-it: {
-  brand: "Capsule Temporali delle Maree",
-  "language.label": "Lingua",
+    // Contact
+    "contact.title": "Kontakt",
+    "contact.email": "E-Mail: ck1g20@soton.ac.uk",
 
-  "nav.about": "Informazioni",
-  "nav.map": "Mappa",
-  "nav.data": "Dati",
-  "nav.tools": "Strumenti",
-  "nav.contribute": "Contribuire",
-  "nav.citation": "Citazione",
-  "nav.contact": "Contatto",
-"button.downloadFile": "Scarica file",
-"button.viewData": "Visualizza dati",
-"pager.previous": "Precedente",
-"pager.next": "Successivo",
-"pager.clearFilters": "Cancella filtri",
-"filters.searchAnyField": "Cerca in tutti i campi",
-"filters.country": "Paese",
-"filters.dataType": "Tipo di dati",
-"filters.method": "Metodo",
-"filters.study": "Studio",
-"filters.startYearFrom": "Anno iniziale da",
-"filters.finishYearTo": "Anno finale fino a",
-"filters.allCountries": "Tutti i paesi",
-"filters.allDataTypes": "Tutti i tipi di dati",
-"filters.allMethods": "Tutti i metodi",
-"filters.allStudies": "Tutti gli studi",
-"messages.loadingSpreadsheet": "Caricamento del foglio di calcolo...",
-"messages.noRowsMatch": "Nessuna riga corrisponde ai filtri attuali.",
-  "hero.title": "Capsule Temporali delle Maree",
-  "hero.subtitle": "Un catalogo di registri storici delle maree digitalizzati e non digitalizzati.",
-  "hero.button": "Esplora i dati",
+    // Shared controls / messages
+    "button.downloadFile": "Datei herunterladen",
+    "button.viewData": "Daten anzeigen",
+    "filters.searchAnyField": "Alle Felder durchsuchen",
+    "filters.country": "Land",
+    "filters.dataType": "Datentyp",
+    "filters.method": "Methode",
+    "filters.study": "Studie",
+    "filters.startYearFrom": "Startjahr ab",
+    "filters.finishYearTo": "Endjahr bis",
+    "filters.allCountries": "Alle Länder",
+    "filters.allDataTypes": "Alle Datentypen",
+    "filters.allMethods": "Alle Methoden",
+    "filters.allStudies": "Alle Studien",
+    "messages.loadingSpreadsheet": "Tabelle wird geladen...",
+    "messages.noRowsMatch": "Keine Zeilen entsprechen den aktuellen Filtern.",
+    "pager.previous": "Zurück",
+    "pager.next": "Weiter",
+    "pager.clearFilters": "Filter löschen",
 
-  "about.title": "Informazioni",
-  "map.title": "Posizione dei registri",
-  "data.title": "Dati",
-  "tools.title": "Inventario degli strumenti di digitalizzazione",
-  "contribute.title": "Contribuire",
-  "citation.title": "Citazione",
-  "contact.title": "Contatto",
+    // Footer
+    "footer.text": "© 2026 Tidal Time Capsules: Ein Globaler Katalog Historischer Gezeitenaufzeichnungen"
+  },
 
-  "contribute.intro": "Accogliamo con favore contributi che aiutino ad ampliare e migliorare questo catalogo.",
+  nl: {
+    // Global / nav
+    brand: "Getijden-Tijdcapsules",
+    "language.label": "Taal",
+    "nav.about": "Over",
+    "nav.map": "Kaart",
+    "nav.data": "Gegevens",
+    "nav.tools": "Hulpmiddelen",
+    "nav.contribute": "Bijdragen",
+    "nav.citation": "Citeren",
+    "nav.contact": "Contact",
 
-  "footer.text": "© 2026 Tidal Time Capsules: A Global Catalogue of Historical Tide Records"
-}
+    // Hero
+    "hero.title": "Getijden-Tijdcapsules",
+    "hero.subtitle": "Een catalogus van bekende gedigitaliseerde en niet-gedigitaliseerde historische getijdengegevens.",
+    "hero.button": "Gegevens bekijken",
+
+    // About
+    "about.title": "Over",
+    "about.body": "Zeespiegelstijging is een belangrijk gevolg van klimaatverandering en vergroot het risico op overstromingen, erosie en verlies van kustecosystemen. Het ontwikkelen van doeltreffende aanpassingsstrategieën vereist nauwkeurige projecties van toekomstige veranderingen in de zeespiegel, waarvan de nauwkeurigheid afhangt van de lengte van de beschikbare tijdreeksen.<br><br>Getijdenmetingen worden al eeuwenlang verzameld en behoren tot de oudste milieuwaarnemingen. Toch blijft veel van deze informatie opgeslagen in historische papieren archieven en is zij nog niet gedigitaliseerd, wat de toegankelijkheid en het gebruik in wetenschappelijke analyses beperkt. Daardoor gaan veel bestaande zeespiegeldatasets slechts terug tot het einde van de negentiende eeuw, ondanks het bestaan van oudere waarnemingen.<br><br>Data-archeologische initiatieven hebben het belang aangetoond van het terugvinden en digitaliseren van historische getijdengegevens. Voorbeelden zijn verlengde meetreeksen van getijdestations uit Amsterdam (Nederland), Brest (Frankrijk) en Sheerness (Verenigd Koninkrijk). Toch blijven veel historische gegevens ongedigitaliseerd en lopen ze risico op achteruitgang of verlies.<br><br>Deze website biedt een wereldwijde catalogus van historische getijdengegevens. Het doel is om de vindbaarheid van deze gegevens te verbeteren, datareddingsinitiatieven te ondersteunen en informatie te bieden die kan helpen bij het prioriteren en plannen van digitaliseringsinspanningen. Door de toegang tot deze historische waarnemingen te vergemakkelijken, draagt de catalogus bij aan het behoud en de uitbreiding van langetermijn-zeespiegeldatasets voor gebruik in klimaatonderzoek en kustplanning.<br><br>Historische getijdenwaarnemingen werden voornamelijk vastgelegd in twee formaten: registers en marigrammen (getijdediagrammen). Hieronder worden voorbeelden van beide formaten getoond.",
+    "about.figure1.alt": "Historisch getijdenregister met dagelijkse waarnemingen van getij en weer",
+    "about.figure1.caption": "<strong>Figuur 1.</strong> Voorbeeld van een historisch getijdenregister. Deze archieven bevatten doorgaans handgeschreven waarnemingen van waterhoogten, tijden van hoog- en laagwater en weersomstandigheden. Dit register komt uit Bowling Harbour in het estuarium van de Clyde in Schotland.",
+    "about.figure2.alt": "Historisch marigram met getijdencycli uitgezet op ruitjespapier",
+    "about.figure2.caption": "<strong>Figuur 2.</strong> Voorbeeld van een historisch marigram (getijdediagram). Deze diagrammen werden geproduceerd door getijdenmeters die het waterniveau continu op papier registreerden en gedetailleerde informatie gaven over getijdencycli en variabiliteit. Dit marigram komt uit Gourock aan de monding van het estuarium van de Clyde in Schotland.",
+
+    // Map
+    "map.title": "Locaties van de gegevens",
+    "map.filter.label": "Weergeven op kaart",
+    "map.filter.all": "Alle gegevens",
+    "map.filter.digitised": "Gedigitaliseerde gegevens",
+    "map.filter.undigitised": "Niet-gedigitaliseerde gegevens",
+    "map.legend.digitised": "Gedigitaliseerde gegevens",
+    "map.legend.undigitised": "Niet-gedigitaliseerde gegevens",
+    "map.disclaimer": "<em>Disclaimer: de markeringen op de kaart geven slechts een ruwe indicatie van waar het oorspronkelijke archief vandaan komt, niet de exacte locatie van het oorspronkelijke archief.</em>",
+
+    // Data
+    "data.title": "Gegevens",
+    "data.digitised.title": "Gedigitaliseerde Historische Getijdengegevens",
+    "data.digitised.desc": "Een compilatie van alle gedigitaliseerde historische gegevens. De catalogus bevat informatie over locatie, duur, type archief, methode van herstel en wie de gegevens heeft teruggewonnen. Het bestand kan als Excel-bestand worden gedownload of op de website worden bekeken.",
+    "data.undigitised.title": "Niet-Gedigitaliseerde Historische Getijdengegevens",
+    "data.undigitised.desc": "Een compilatie van de bekende historische getijdengegevens die nog in papieren vorm bestaan. De catalogus bevat informatie over locatie, duur, type archief en wie het heeft geïdentificeerd. Het bestand kan als Excel-bestand worden gedownload of op de website worden bekeken.",
+
+    // Tools
+    "tools.title": "Overzicht van Digitaliseringshulpmiddelen",
+    "tools.body": "Een overzicht van digitaliseringshulpmiddelen die nuttig kunnen zijn voor het digitaliseren van marigrammen, inclusief naam, prijs en een downloadlink voor elk hulpmiddel. Het overzicht bevat NUNIEAU, WebPlotDigitizer en Plot Digitizer, die al voor dit doel zijn gebruikt. Het bestand kan als Excel-bestand worden gedownload of op de website worden bekeken.",
+
+    // Contribute
+    "contribute.title": "Bijdragen",
+    "contribute.intro": "Bijdragen die helpen deze catalogus uit te breiden en te verbeteren zijn van harte welkom.",
+    "contribute.body1": "Wij verwelkomen bijdragen die helpen de catalogus van historische gegevens en het overzicht van digitaliseringshulpmiddelen uit te breiden, en moedigen u aan contact met ons op te nemen als u aanvullende gedigitaliseerde datasets, niet-gedigitaliseerde archieven of nuttige digitaliseringshulpmiddelen kent die nog niet op deze site zijn opgenomen.",
+    "contribute.body2": "Om bij te dragen, vult u het juiste formulier in en stuurt u het per e-mail naar ck1g20@soton.ac.uk.",
+    "contribute.formDigitised": "Formulier voor gedigitaliseerde gegevens downloaden",
+    "contribute.formUndigitised": "Formulier voor niet-gedigitaliseerde gegevens downloaden",
+    "contribute.formTools": "Formulier voor digitaliseringshulpmiddelen downloaden",
+
+    // Citation
+    "citation.title": "Citeren",
+    "citation.site.label": "Als u deze site gebruikt, citeer deze dan als volgt:",
+    "citation.site.text": "Kenwright, C., DATE, <em>Tidal Time Capsules: A Global Catalogue of Historical Tide Records</em>, beschikbaar op: .................................",
+    "citation.paper.label": "Citeer daarnaast ook het artikel dat het werk achter deze site beschrijft:",
+    "citation.paper.text": "Kenwright, C., Haigh, I.D., Williams, J., Chan, D., Nicholls, R.J., McFarland, S. and Becker, M., (DATE) <em>Tidal Time Capsules: A Global Catalogue of Historical Tide Records</em>. Journal, VOL, PAGE.",
+    "citation.note": "Als u gegevens uit deze studies of de digitaliseringshulpmiddelen gebruikt voor uw eigen onderzoek, citeer deze dan ook overeenkomstig.",
+
+    // Contact
+    "contact.title": "Contact",
+    "contact.email": "E-mail: ck1g20@soton.ac.uk",
+
+    // Shared controls / messages
+    "button.downloadFile": "Bestand downloaden",
+    "button.viewData": "Gegevens bekijken",
+    "filters.searchAnyField": "Zoek in alle velden",
+    "filters.country": "Land",
+    "filters.dataType": "Gegevenstype",
+    "filters.method": "Methode",
+    "filters.study": "Studie",
+    "filters.startYearFrom": "Begingebied vanaf jaar",
+    "filters.finishYearTo": "Eindjaar tot",
+    "filters.allCountries": "Alle landen",
+    "filters.allDataTypes": "Alle gegevenstypen",
+    "filters.allMethods": "Alle methoden",
+    "filters.allStudies": "Alle studies",
+    "messages.loadingSpreadsheet": "Spreadsheet wordt geladen...",
+    "messages.noRowsMatch": "Geen rijen komen overeen met de huidige filters.",
+    "pager.previous": "Vorige",
+    "pager.next": "Volgende",
+    "pager.clearFilters": "Filters wissen",
+
+    // Footer
+    "footer.text": "© 2026 Tidal Time Capsules: Een Wereldwijde Catalogus van Historische Getijdengegevens"
+  },
+
+  it: {
+    // Global / nav
+    brand: "Capsule Temporali delle Maree",
+    "language.label": "Lingua",
+    "nav.about": "Informazioni",
+    "nav.map": "Mappa",
+    "nav.data": "Dati",
+    "nav.tools": "Strumenti",
+    "nav.contribute": "Contribuire",
+    "nav.citation": "Citazione",
+    "nav.contact": "Contatto",
+
+    // Hero
+    "hero.title": "Capsule Temporali delle Maree",
+    "hero.subtitle": "Un catalogo di registri storici delle maree digitalizzati e non digitalizzati.",
+    "hero.button": "Esplora i dati",
+
+    // About
+    "about.title": "Informazioni",
+    "about.body": "L’innalzamento del livello del mare è una conseguenza importante del cambiamento climatico, poiché aumenta il rischio di inondazioni, erosione e perdita degli ecosistemi costieri. Lo sviluppo di strategie di adattamento efficaci richiede proiezioni accurate delle future variazioni del livello del mare, la cui precisione dipende dalla lunghezza delle serie temporali disponibili.<br><br>Le misurazioni di marea vengono raccolte da secoli e rappresentano alcune delle più antiche osservazioni ambientali. Tuttavia, gran parte di queste informazioni è ancora conservata in archivi cartacei storici e non è stata ancora digitalizzata, limitandone l’accessibilità e l’utilizzo nelle analisi scientifiche. Di conseguenza, molti dataset esistenti sul livello del mare risalgono solo alla fine del XIX secolo, nonostante l’esistenza di osservazioni precedenti.<br><br>Le iniziative di archeologia dei dati hanno dimostrato il valore del recupero e della digitalizzazione dei registri storici delle maree. Tra gli esempi figurano le serie estese di mareografi di Amsterdam (Paesi Bassi), Brest (Francia) e Sheerness (Regno Unito). Tuttavia, molti registri storici restano non digitalizzati e sono a rischio di deterioramento o perdita.<br><br>Questo sito web fornisce un catalogo mondiale dei registri storici delle maree. L’obiettivo è migliorare la reperibilità di questi archivi, sostenere le iniziative di recupero dei dati e fornire informazioni utili a stabilire le priorità e pianificare gli sforzi di digitalizzazione. Facilitando l’accesso a queste osservazioni storiche, il catalogo contribuisce alla conservazione e all’estensione dei dataset a lungo termine sul livello del mare per la ricerca climatica e la pianificazione costiera.<br><br>Le osservazioni storiche delle maree sono state registrate principalmente in due formati: registri e marigrammi (grafici di marea). Di seguito sono mostrati esempi di entrambi i formati.",
+    "about.figure1.alt": "Registro storico delle maree con osservazioni giornaliere di marea e meteo",
+    "about.figure1.caption": "<strong>Figura 1.</strong> Esempio di un registro storico delle maree. Questi documenti contengono tipicamente osservazioni manoscritte delle altezze di marea, degli orari di alta e bassa marea e delle condizioni meteorologiche. Questo registro proviene da Bowling Harbour, nell’estuario del Clyde, in Scozia.",
+    "about.figure2.alt": "Marigramma storico che mostra cicli di marea tracciati su carta millimetrata",
+    "about.figure2.caption": "<strong>Figura 2.</strong> Esempio di un marigramma storico (grafico di marea). Questi diagrammi erano prodotti da mareografi che registravano continuamente il livello dell’acqua su carta, fornendo informazioni dettagliate sui cicli di marea e sulla loro variabilità. Questo marigramma proviene da Gourock, alla foce dell’estuario del Clyde, in Scozia.",
+
+    // Map
+    "map.title": "Posizione dei registri",
+    "map.filter.label": "Mostra sulla mappa",
+    "map.filter.all": "Tutti i registri",
+    "map.filter.digitised": "Registri digitalizzati",
+    "map.filter.undigitised": "Registri non digitalizzati",
+    "map.legend.digitised": "Registri digitalizzati",
+    "map.legend.undigitised": "Registri non digitalizzati",
+    "map.disclaimer": "<em>Avvertenza: i marcatori sulla mappa mostrano un’indicazione approssimativa del luogo di provenienza del registro originale, non la posizione esatta del registro originale.</em>",
+
+    // Data
+    "data.title": "Dati",
+    "data.digitised.title": "Registri Storici delle Maree Digitalizzati",
+    "data.digitised.desc": "Una raccolta di tutti i registri storici digitalizzati. Il catalogo contiene informazioni sulla località, la durata, il tipo di registro, il metodo di recupero e su chi ha recuperato i dati. Il file può essere scaricato come file Excel o consultato sul sito web.",
+    "data.undigitised.title": "Registri Storici delle Maree Non Digitalizzati",
+    "data.undigitised.desc": "Una raccolta dei registri storici delle maree conosciuti che restano in formato cartaceo. Il catalogo contiene informazioni sulla località, la durata, il tipo di registro e su chi lo ha identificato. Il file può essere scaricato come file Excel o consultato sul sito web.",
+
+    // Tools
+    "tools.title": "Inventario degli Strumenti di Digitalizzazione",
+    "tools.body": "Un inventario degli strumenti di digitalizzazione che possono essere utili per digitalizzare i marigrammi, comprendente il nome, il prezzo e un link per il download di ciascuno strumento. L’inventario include NUNIEAU, WebPlotDigitizer e Plot Digitizer, già utilizzati per questo scopo. Il file può essere scaricato come file Excel o consultato sul sito web.",
+
+    // Contribute
+    "contribute.title": "Contribuire",
+    "contribute.intro": "Accogliamo con favore contributi che aiutino ad ampliare e migliorare questo catalogo.",
+    "contribute.body1": "Accogliamo con favore contributi che possano aiutare ad ampliare il catalogo dei registri storici e l’inventario degli strumenti di digitalizzazione, e vi incoraggiamo a contattarci se conoscete ulteriori dataset digitalizzati, archivi non digitalizzati o strumenti utili di digitalizzazione non ancora inclusi in questo sito.",
+    "contribute.body2": "Per contribuire, compilate il modulo corretto e inviatelo via e-mail a ck1g20@soton.ac.uk.",
+    "contribute.formDigitised": "Scarica il modulo dei registri digitalizzati",
+    "contribute.formUndigitised": "Scarica il modulo dei registri non digitalizzati",
+    "contribute.formTools": "Scarica il modulo degli strumenti di digitalizzazione",
+
+    // Citation
+    "citation.title": "Citazione",
+    "citation.site.label": "Se utilizzate questo sito, citatelo come segue:",
+    "citation.site.text": "Kenwright, C., DATE, <em>Tidal Time Capsules: A Global Catalogue of Historical Tide Records</em>, disponibile su: .................................",
+    "citation.paper.label": "Inoltre, citate l’articolo che descrive il lavoro alla base di questo sito:",
+    "citation.paper.text": "Kenwright, C., Haigh, I.D., Williams, J., Chan, D., Nicholls, R.J., McFarland, S. and Becker, M., (DATE) <em>Tidal Time Capsules: A Global Catalogue of Historical Tide Records</em>. Journal, VOL, PAGE.",
+    "citation.note": "Se utilizzate dati provenienti da questi studi o gli strumenti di digitalizzazione per le vostre indagini, citateli di conseguenza.",
+
+    // Contact
+    "contact.title": "Contatto",
+    "contact.email": "E-mail: ck1g20@soton.ac.uk",
+
+    // Shared controls / messages
+    "button.downloadFile": "Scarica file",
+    "button.viewData": "Visualizza dati",
+    "filters.searchAnyField": "Cerca in tutti i campi",
+    "filters.country": "Paese",
+    "filters.dataType": "Tipo di dati",
+    "filters.method": "Metodo",
+    "filters.study": "Studio",
+    "filters.startYearFrom": "Anno iniziale da",
+    "filters.finishYearTo": "Anno finale fino a",
+    "filters.allCountries": "Tutti i paesi",
+    "filters.allDataTypes": "Tutti i tipi di dati",
+    "filters.allMethods": "Tutti i metodi",
+    "filters.allStudies": "Tutti gli studi",
+    "messages.loadingSpreadsheet": "Caricamento del foglio di calcolo...",
+    "messages.noRowsMatch": "Nessuna riga corrisponde ai filtri attuali.",
+    "pager.previous": "Precedente",
+    "pager.next": "Successivo",
+    "pager.clearFilters": "Cancella filtri",
+
+    // Footer
+    "footer.text": "© 2026 Tidal Time Capsules: Un Catalogo Globale dei Registri Storici delle Maree"
+  }
 };
 
 function setLanguage(lang) {
@@ -1926,6 +2210,12 @@ function setLanguage(lang) {
         el.textContent = value;
       }
     }
+  });
+
+  document.querySelectorAll("[data-i18n-alt]").forEach(el => {
+    const key = el.getAttribute("data-i18n-alt");
+    const value = selected[key] || translations.en[key];
+    if (value) el.setAttribute("alt", value);
   });
 
   updatePlaceholders(lang);
