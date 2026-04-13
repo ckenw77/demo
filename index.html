@@ -66,6 +66,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 1rem;
+      align-items: center;
     }
 
     .nav a {
@@ -415,29 +416,31 @@
       font-size: 0.84rem;
       font-style: italic;
     }
+
     .about-figures {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 1.5rem;
       margin-top: 1.5rem;
     }
-    
+
     .about-figures figure {
       margin: 0;
     }
-    
+
     .about-figures img {
       width: 100%;
       border-radius: 14px;
       border: 1px solid var(--border);
     }
-    
+
     .about-figures figcaption {
       margin-top: 0.5rem;
       font-size: 0.9rem;
       color: var(--muted);
       line-height: 1.4;
     }
+
     .leaflet-popup-content {
       line-height: 1.5;
       font-size: 0.95rem;
@@ -482,48 +485,36 @@
       td { font-size: 0.76rem; padding: 0.5rem 0.5rem; }
       th { font-size: 0.72rem; padding: 0.5rem 0.5rem; }
     }
-    nav {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    align-items: center;
-  }
-  
-
   </style>
 </head>
 <body>
 
 <header>
   <div class="nav">
-    <div class="brand" data-i18n="brand">Tidal Time Capsules</div>
+    <div class="brand">Tidal Time Capsules</div>
 
     <nav>
-      <a href="#about" data-i18n="nav.about">About</a>
-      <a href="#map" data-i18n="nav.map">Map</a>
-      <a href="#data" data-i18n="nav.data">Data</a>
-      <a href="#tools" data-i18n="nav.tools">Tools</a>
-      <a href="#contribute" data-i18n="nav.contribute">Contribute</a>
-      <a href="#citation" data-i18n="nav.citation">Citation</a>
-      <a href="#contact" data-i18n="nav.contact">Contact</a>
-
-
+      <a href="#about">About</a>
+      <a href="#map">Map</a>
+      <a href="#data">Data</a>
+      <a href="#tools">Tools</a>
+      <a href="#contribute">Contribute</a>
+      <a href="#citation">Citation</a>
+      <a href="#contact">Contact</a>
     </nav>
   </div>
 </header>
 
-  
-   
 <section class="hero" id="home">
   <div class="hero-inner">
-    <h1 data-i18n="hero.title">Tidal Time Capsules</h1>
+    <h1>Tidal Time Capsules</h1>
 
-    <p class="subtitle" data-i18n="hero.subtitle">
+    <p class="subtitle">
       A catalogue of known digitised and undigitized historical tide records.
     </p>
 
     <div class="button-row">
-      <a class="button primary" href="#data" data-i18n="hero.button">Browse Data</a>
+      <a class="button primary" href="#data">Browse Data</a>
     </div>
   </div>
 </section>
@@ -531,57 +522,52 @@
 <main>
 
   <section id="about">
-    <!-- EDIT SECTION HEADING -->
-   <h2 class="section-title" data-i18n="about.title">About</h2>
+    <h2 class="section-title">About</h2>
 
-<div class="card">
-  <p data-i18n="about.body">
-    Sea level rise is a major consequence of climate change, increasing the risk of flooding, erosion, and loss of coastal ecosystems. Developing effective adaptation strategies requires accurate projections of future sea level change, the accuracy of which depends on the length of the available time series.<br><br>
-    Tidal measurements have been collected for centuries and represent some of the oldest environmental observations. However, much of this information remains stored in historical paper records and has not yet been digitised, limiting its accessibility and use in scientific analysis. As a result, many existing sea level datasets extend back only to the late nineteenth century despite the existence of earlier observations.<br><br>
-    Data archaeology initiatives have demonstrated the value of recovering and digitising historical tide records. Examples include extended tide gauge records from Amsterdam (Netherlands), Brest (France), and Sheerness (UK). Nevertheless, many historical records remain undigitized and are at risk of deterioration or loss.<br><br>
-    This website provides a catalogue of historical tide records worldwide. The aim is to improve the discoverability of these records, support data rescue initiatives, and provide information that can help prioritise and plan digitisation efforts. By facilitating access to these historical observations, the catalogue contributes to the preservation and extension of long-term sea level datasets for use in climate research and coastal planning.<br><br>
-    Historical tidal observations were recorded in 2 primary formats: ledgers and marigrams (tide charts). Examples of both formats are shown below. We hope that this site will be updated as new records are identified or digitised, if you know of the existence of any records that are not listed here please contribute by following the instructions in the contribute section.
-  </p>
+    <div class="card">
+      <p>
+        Sea level rise is a major consequence of climate change, increasing the risk of flooding, erosion, and loss of coastal ecosystems. Developing effective adaptation strategies requires accurate projections of future sea level change, the accuracy of which depends on the length of the available time series.<br><br>
+        Tidal measurements have been collected for centuries and represent some of the oldest environmental observations. However, much of this information remains stored in historical paper records and has not yet been digitised, limiting its accessibility and use in scientific analysis. As a result, many existing sea level datasets extend back only to the late nineteenth century despite the existence of earlier observations.<br><br>
+        Data archaeology initiatives have demonstrated the value of recovering and digitising historical tide records. Examples include extended tide gauge records from Amsterdam (Netherlands), Brest (France), and Sheerness (UK). Nevertheless, many historical records remain undigitized and are at risk of deterioration or loss.<br><br>
+        This website provides a catalogue of historical tide records worldwide. The aim is to improve the discoverability of these records, support data rescue initiatives, and provide information that can help prioritise and plan digitisation efforts. By facilitating access to these historical observations, the catalogue contributes to the preservation and extension of long-term sea level datasets for use in climate research and coastal planning.<br><br>
+        Historical tidal observations were recorded in 2 primary formats: ledgers and marigrams (tide charts). Examples of both formats are shown below. We hope that this site will be updated as new records are identified or digitised. If you know of any records that are not listed here, please contribute by following the instructions in the contribute section.
+      </p>
 
-  <div class="about-figures">
-    <figure>
-      <img
-        src="Ledger.jpg"
-        alt="Historical tide ledger showing daily tide and weather observations"
-        data-i18n-alt="about.figure1.alt"
-      >
-      <figcaption data-i18n="about.figure1.caption">
-        <strong>Figure 1.</strong> Example of a historical tide ledger. These records typically contain handwritten observations of tidal heights, times of high and low water, and weather conditions. This ledger is from Bowling Harbour in the Clyde Estuary, Scotland.
-      </figcaption>
-    </figure>
+      <div class="about-figures">
+        <figure>
+          <img
+            src="Ledger.jpg"
+            alt="Historical tide ledger showing daily tide and weather observations"
+          >
+          <figcaption>
+            <strong>Figure 1.</strong> Example of a historical tide ledger. These records typically contain handwritten observations of tidal heights, times of high and low water, and weather conditions. This ledger is from Bowling Harbour in the Clyde Estuary, Scotland.
+          </figcaption>
+        </figure>
 
-    <figure>
-      <img
-        src="Marigram.jpg"
-        alt="Historical marigram showing tidal cycles plotted on graph paper"
-        data-i18n-alt="about.figure2.alt"
-      >
-      <figcaption data-i18n="about.figure2.caption">
-        <strong>Figure 2.</strong> Example of a historical marigram (tide chart). These diagrams were produced by tide gauges that continuously recorded water level on chart paper, providing detailed information on tidal cycles and variability. This marigram is from Gourock at the mouth of the Clyde Estuary, Scotland.
-      </figcaption>
-    </figure>
-  </div>
-</div>
-
+        <figure>
+          <img
+            src="Marigram.jpg"
+            alt="Historical marigram showing tidal cycles plotted on graph paper"
+          >
+          <figcaption>
+            <strong>Figure 2.</strong> Example of a historical marigram (tide chart). These diagrams were produced by tide gauges that continuously recorded water level on chart paper, providing detailed information on tidal cycles and variability. This marigram is from Gourock at the mouth of the Clyde Estuary, Scotland.
+          </figcaption>
+        </figure>
+      </div>
+    </div>
   </section>
+
   <section id="map">
-    <!-- EDIT SECTION HEADING -->
-    <h2 class="section-title" data-i18n="map.title">Location of Records</h2>
+    <h2 class="section-title">Location of Records</h2>
 
     <div class="card">
       <div class="map-controls">
         <div>
-          <!-- EDIT MAP FILTER LABEL -->
-          <label for="map-layer-filter" data-i18n="map.filter.label">Show on map</label>
+          <label for="map-layer-filter">Show on map</label>
           <select id="map-layer-filter">
-            <option value="both" data-i18n="map.filter.all">All Records</option>
-            <option value="digitised" data-i18n="map.filter.digitised">Digitised Records</option>
-            <option value="undigitised" data-i18n="map.filter.undigitised">Undigitized Records</option>
+            <option value="both">All Records</option>
+            <option value="digitised">Digitised Records</option>
+            <option value="undigitised">Undigitized Records</option>
           </select>
         </div>
       </div>
@@ -591,318 +577,282 @@
       <div class="map-legend">
         <div class="legend-item">
           <span class="legend-circle"></span>
-          <!-- EDIT LEGEND LABEL -->
-          <span data-i18n="map.legend.digitised">Digitised records</span>
+          <span>Digitised records</span>
         </div>
         <div class="legend-item">
           <span class="legend-square"></span>
-          <!-- EDIT LEGEND LABEL -->
-          <span data-i18n="map.legend.undigitised">Undigitized records</span>
+          <span>Undigitized records</span>
         </div>
       </div>
 
-      <!-- EDIT MAP DISCLAIMER -->
-      <p id="map-status" class="map-disclaimer" data-i18n="map.disclaimer">
+      <p id="map-status" class="map-disclaimer">
         <em>Disclaimer: Markers on the map show a rough indication of where the original record came from, not the exact location of the original record.</em>
       </p>
     </div>
   </section>
 
-<section id="data">
-  <h2 class="section-title" data-i18n="data.title">Data</h2>
+  <section id="data">
+    <h2 class="section-title">Data</h2>
 
-  <div class="data-grid">
-    <div class="card">
-      <h3 data-i18n="data.digitised.title">Digitised Historical Tide Records</h3>
+    <div class="data-grid">
+      <div class="card">
+        <h3>Digitised Historical Tide Records</h3>
 
-      <p data-i18n="data.digitised.desc">
-        A compilation of all digitised historical records. The catalogue contains information on the location, duration, type of record, method of recovery and who recovered the data. The file may be downloaded as an excel file or viewed on the website.
-      </p>
+        <p>
+          A compilation of all digitised historical records. The catalogue contains information on the location, duration, type of record, method of recovery and who recovered the data. The file may be downloaded as an Excel file or viewed on the website.
+        </p>
 
-      <a
-        class="file-button"
-        href="Digitised_Records_2026_03_13.xlsx"
-        download
-        data-i18n="button.downloadFile"
-      >
-        Download File
-      </a>
+        <a class="file-button" href="Digitised_Records_2026_03_13.xlsx" download>
+          Download File
+        </a>
 
-      <button
-        class="toggle-button secondary"
-        onclick="toggleDataset('digitised')"
-        data-i18n="button.viewData"
-      >
-        View Data
-      </button>
+        <button class="toggle-button secondary" onclick="toggleDataset('digitised')">
+          View Data
+        </button>
 
-      <div id="digitised-table" class="table-container">
-        <div class="dataset-tools">
-          <div>
-            <label for="digitised-search" data-i18n="filters.searchAnyField">Search any field</label>
-            <input id="digitised-search" type="text" placeholder="Location, country, method, study...">
+        <div id="digitised-table" class="table-container">
+          <div class="dataset-tools">
+            <div>
+              <label for="digitised-search">Search any field</label>
+              <input id="digitised-search" type="text" placeholder="Location, country, method, study...">
+            </div>
+            <div>
+              <label for="digitised-country">Country</label>
+              <select id="digitised-country">
+                <option value="">All countries</option>
+              </select>
+            </div>
+            <div>
+              <label for="digitised-type">Data type</label>
+              <select id="digitised-type">
+                <option value="">All data types</option>
+              </select>
+            </div>
+            <div>
+              <label for="digitised-method">Method</label>
+              <select id="digitised-method">
+                <option value="">All methods</option>
+              </select>
+            </div>
+            <div>
+              <label for="digitised-start">Start year from</label>
+              <input id="digitised-start" type="number" placeholder="e.g. 1800">
+            </div>
+            <div>
+              <label for="digitised-finish">Finish year to</label>
+              <input id="digitised-finish" type="number" placeholder="e.g. 1950">
+            </div>
           </div>
-          <div>
-            <label for="digitised-country" data-i18n="filters.country">Country</label>
-            <select id="digitised-country">
-              <option value="" data-i18n="filters.allCountries">All countries</option>
-            </select>
-          </div>
-          <div>
-            <label for="digitised-type" data-i18n="filters.dataType">Data type</label>
-            <select id="digitised-type">
-              <option value="" data-i18n="filters.allDataTypes">All data types</option>
-            </select>
-          </div>
-          <div>
-            <label for="digitised-method" data-i18n="filters.method">Method</label>
-            <select id="digitised-method">
-              <option value="" data-i18n="filters.allMethods">All methods</option>
-            </select>
-          </div>
-          <div>
-            <label for="digitised-start" data-i18n="filters.startYearFrom">Start year from</label>
-            <input id="digitised-start" type="number" placeholder="e.g. 1800">
-          </div>
-          <div>
-            <label for="digitised-finish" data-i18n="filters.finishYearTo">Finish year to</label>
-            <input id="digitised-finish" type="number" placeholder="e.g. 1950">
-          </div>
-        </div>
 
-        <div class="dataset-meta" id="digitised-meta" data-i18n="messages.loadingSpreadsheet">
-          Loading spreadsheet...
-        </div>
+          <div class="dataset-meta" id="digitised-meta">
+            Loading spreadsheet...
+          </div>
 
-        <div class="table-scroll">
-          <table id="digitised-live-table"></table>
-        </div>
+          <div class="table-scroll">
+            <table id="digitised-live-table"></table>
+          </div>
 
-        <div class="empty-message" id="digitised-empty" data-i18n="messages.noRowsMatch">
-          No rows match the current filters.
-        </div>
+          <div class="empty-message" id="digitised-empty">
+            No rows match the current filters.
+          </div>
 
-        <div class="pager">
-          <div id="digitised-page-info">Page 1</div>
-          <div>
-            <button type="button" onclick="changePage('digitised', -1)" data-i18n="pager.previous">
-              Previous
-            </button>
-            <button type="button" onclick="changePage('digitised', 1)" data-i18n="pager.next">
-              Next
-            </button>
-            <button type="button" class="clear-button" onclick="resetFilters('digitised')" data-i18n="pager.clearFilters">
-              Clear filters
-            </button>
+          <div class="pager">
+            <div id="digitised-page-info">Page 1</div>
+            <div>
+              <button type="button" onclick="changePage('digitised', -1)">Previous</button>
+              <button type="button" onclick="changePage('digitised', 1)">Next</button>
+              <button type="button" class="clear-button" onclick="resetFilters('digitised')">Clear filters</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
       <div class="card">
-        <!-- EDIT DATASET HEADING -->
-      <h3 data-i18n="data.undigitised.title">Undigitized Historical Tide Records</h3>
-      
-      <p data-i18n="data.undigitised.desc">
-        A compilation of the known undigitized historical tide records that remain in a paper format. The catalogue contains information on the location, duration, type of record and who identified it. The file may be downloaded as an excel file or viewed on the website.
-      </p>
-      
-      <a
-        class="file-button"
-        href="Undigitized_Records_2026_03_13.xlsx"
-        download
-        data-i18n="button.downloadFile"
-      >
-        Download File
-      </a>
-      
-      <button
-        class="toggle-button secondary"
-        onclick="toggleDataset('undigitised')"
-        data-i18n="button.viewData"
-      >
-        View Data
-      </button>
+        <h3>Undigitized Historical Tide Records</h3>
+
+        <p>
+          A compilation of the known undigitized historical tide records that remain in a paper format. The catalogue contains information on the location, duration, type of record and who identified it. The file may be downloaded as an Excel file or viewed on the website.
+        </p>
+
+        <a class="file-button" href="Undigitized_Records_2026_03_13.xlsx" download>
+          Download File
+        </a>
+
+        <button class="toggle-button secondary" onclick="toggleDataset('undigitised')">
+          View Data
+        </button>
 
         <div id="undigitised-table" class="table-container">
-  <div class="dataset-tools">
-    <div>
-      <label for="undigitised-search" data-i18n="filters.searchAnyField">Search any field</label>
-      <input id="undigitised-search" type="text" placeholder="Location, country, source, type...">
-    </div>
-    <div>
-      <label for="undigitised-country" data-i18n="filters.country">Country</label>
-      <select id="undigitised-country">
-        <option value="" data-i18n="filters.allCountries">All countries</option>
-      </select>
-    </div>
-    <div>
-      <label for="undigitised-type" data-i18n="filters.dataType">Data type</label>
-      <select id="undigitised-type">
-        <option value="" data-i18n="filters.allDataTypes">All data types</option>
-      </select>
-    </div>
-    <div>
-      <label for="undigitised-study" data-i18n="filters.study">Study</label>
-      <select id="undigitised-study">
-        <option value="" data-i18n="filters.allStudies">All studies</option>
-      </select>
-    </div>
-    <div>
-      <label for="undigitised-start" data-i18n="filters.startYearFrom">Start year from</label>
-      <input id="undigitised-start" type="number" placeholder="e.g. 1800">
-    </div>
-    <div>
-      <label for="undigitised-finish" data-i18n="filters.finishYearTo">Finish year to</label>
-      <input id="undigitised-finish" type="number" placeholder="e.g. 1950">
-    </div>
-  </div>
+          <div class="dataset-tools">
+            <div>
+              <label for="undigitised-search">Search any field</label>
+              <input id="undigitised-search" type="text" placeholder="Location, country, source, type...">
+            </div>
+            <div>
+              <label for="undigitised-country">Country</label>
+              <select id="undigitised-country">
+                <option value="">All countries</option>
+              </select>
+            </div>
+            <div>
+              <label for="undigitised-type">Data type</label>
+              <select id="undigitised-type">
+                <option value="">All data types</option>
+              </select>
+            </div>
+            <div>
+              <label for="undigitised-study">Study</label>
+              <select id="undigitised-study">
+                <option value="">All studies</option>
+              </select>
+            </div>
+            <div>
+              <label for="undigitised-start">Start year from</label>
+              <input id="undigitised-start" type="number" placeholder="e.g. 1800">
+            </div>
+            <div>
+              <label for="undigitised-finish">Finish year to</label>
+              <input id="undigitised-finish" type="number" placeholder="e.g. 1950">
+            </div>
+          </div>
 
-  <div class="dataset-meta" id="undigitised-meta" data-i18n="messages.loadingSpreadsheet">
-    Loading spreadsheet...
-  </div>
+          <div class="dataset-meta" id="undigitised-meta">
+            Loading spreadsheet...
+          </div>
 
-  <div class="table-scroll">
-    <table id="undigitised-live-table"></table>
-  </div>
+          <div class="table-scroll">
+            <table id="undigitised-live-table"></table>
+          </div>
 
-  <div class="empty-message" id="undigitised-empty" data-i18n="messages.noRowsMatch">
-    No rows match the current filters.
-  </div>
+          <div class="empty-message" id="undigitised-empty">
+            No rows match the current filters.
+          </div>
 
-  <div class="pager">
-    <div id="undigitised-page-info">Page 1</div>
-    <div>
-      <button type="button" onclick="changePage('undigitised', -1)" data-i18n="pager.previous">Previous</button>
-      <button type="button" onclick="changePage('undigitised', 1)" data-i18n="pager.next">Next</button>
-      <button type="button" class="clear-button" onclick="resetFilters('undigitised')" data-i18n="pager.clearFilters">Clear filters</button>
-    </div>
-  </div>
-</div>
+          <div class="pager">
+            <div id="undigitised-page-info">Page 1</div>
+            <div>
+              <button type="button" onclick="changePage('undigitised', -1)">Previous</button>
+              <button type="button" onclick="changePage('undigitised', 1)">Next</button>
+              <button type="button" class="clear-button" onclick="resetFilters('undigitised')">Clear filters</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <section id="tools">
-    <!-- EDIT SECTION HEADING -->
-    <h2 class="section-title" data-i18n="tools.title">Inventory of Digitisation Tools</h2>
+    <h2 class="section-title">Inventory of Digitisation Tools</h2>
 
-    <!-- EDIT SECTION INTRO -->
-    <p class="section-intro">
-
-    </p>
+    <p class="section-intro"></p>
 
     <div class="card">
-    <p data-i18n="tools.body">
-      An inventory of digitisation tools that may be useful for digitising marigrams, including the name, price, and a download link for each tool. The inventory includes NUNIEAU, WebPlotDigitizer, and Plot Digitizer, which have already been used for this purpose. The file can be downloaded as an Excel file or viewed on the website.
-    </p>
-    
-    <a class="file-button" href="Software_List.xlsx" download data-i18n="button.downloadFile">Download File</a>
-    <button class="toggle-button secondary" onclick="toggleDataset('tools')" data-i18n="button.viewData">View Data</button>
+      <p>
+        An inventory of digitisation tools that may be useful for digitising marigrams, including the name, price, and a download link for each tool. The inventory includes NUNIEAU, WebPlotDigitizer, and Plot Digitizer, which have already been used for this purpose. The file can be downloaded as an Excel file or viewed on the website.
+      </p>
 
-<div id="tools-table" class="table-container">
-  <div class="dataset-tools">
-    <div>
-      <label for="tools-search" data-i18n="filters.searchAnyField">Search any field</label>
-      <input id="tools-search" type="text" placeholder="Tool name, price, or link...">
-    </div>
-  </div>
+      <a class="file-button" href="Software_List.xlsx" download>Download File</a>
+      <button class="toggle-button secondary" onclick="toggleDataset('tools')">View Data</button>
 
-  <div class="dataset-meta" id="tools-meta" data-i18n="messages.loadingSpreadsheet">
-    Loading spreadsheet...
-  </div>
+      <div id="tools-table" class="table-container">
+        <div class="dataset-tools">
+          <div>
+            <label for="tools-search">Search any field</label>
+            <input id="tools-search" type="text" placeholder="Tool name, price, or link...">
+          </div>
+        </div>
 
-  <div class="table-scroll">
-    <table id="tools-live-table"></table>
-  </div>
+        <div class="dataset-meta" id="tools-meta">
+          Loading spreadsheet...
+        </div>
 
-  <div class="empty-message" id="tools-empty" data-i18n="messages.noRowsMatch">
-    No rows match the current filters.
-  </div>
+        <div class="table-scroll">
+          <table id="tools-live-table"></table>
+        </div>
 
-  <div class="pager">
-    <div id="tools-page-info">Page 1</div>
-    <div>
-      <button type="button" onclick="changePage('tools', -1)" data-i18n="pager.previous">Previous</button>
-      <button type="button" onclick="changePage('tools', 1)" data-i18n="pager.next">Next</button>
-      <button type="button" class="clear-button" onclick="resetFilters('tools')" data-i18n="pager.clearFilters">Clear filters</button>
-    </div>
-  </div>
-</div>
+        <div class="empty-message" id="tools-empty">
+          No rows match the current filters.
+        </div>
+
+        <div class="pager">
+          <div id="tools-page-info">Page 1</div>
+          <div>
+            <button type="button" onclick="changePage('tools', -1)">Previous</button>
+            <button type="button" onclick="changePage('tools', 1)">Next</button>
+            <button type="button" class="clear-button" onclick="resetFilters('tools')">Clear filters</button>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
-  
-<section id="contribute">
-  <h2 class="section-title" data-i18n="contribute.title">Contribute</h2>
 
-  <p class="section-intro" data-i18n="contribute.intro">
-    We welcome contributions that help expand and improve this catalogue.
-  </p>
+  <section id="contribute">
+    <h2 class="section-title">Contribute</h2>
 
-  <div class="card">
-    <p data-i18n="contribute.body1">
-      We welcome contributions that can be made to help expand the catalogue of historical records and inventory of digitisation tools and encourage you to contact us if you know of additional digitised datasets, undigitized archives, or useful digitisation tools that are not yet included on this site.
+    <p class="section-intro">
+      We welcome contributions that help expand and improve this catalogue.
     </p>
 
-    <p data-i18n="contribute.body2">
-      To contribute, please fill out the correct form and send it via email to ck1g20@soton.ac.uk.
-    </p>
+    <div class="card">
+      <p>
+        We welcome contributions that can be made to help expand the catalogue of historical records and inventory of digitisation tools and encourage you to contact us if you know of additional digitised datasets, undigitized archives, or useful digitisation tools that are not yet included on this site.
+      </p>
 
-    <div class="button-row">
-      <a class="file-button" href="Digitised_Records_Form.xlsx" download data-i18n="contribute.formDigitised">
-        Download Digitised Records Form
-      </a>
+      <p>
+        To contribute, please fill out the correct form and send it via email to ck1g20@soton.ac.uk.
+      </p>
 
-      <a class="file-button" href="Undigitized_Records_Form.xlsx" download data-i18n="contribute.formUndigitised">
-        Download Undigitized Records Form
-      </a>
+      <div class="button-row">
+        <a class="file-button" href="Digitised_Records_Form.xlsx" download>
+          Download Digitised Records Form
+        </a>
 
-      <a class="file-button" href="Software_List_Form.xlsx" download data-i18n="contribute.formTools">
-        Download Digitisation Tools Form
-      </a>
+        <a class="file-button" href="Undigitized_Records_Form.xlsx" download>
+          Download Undigitized Records Form
+        </a>
+
+        <a class="file-button" href="Software_List_Form.xlsx" download>
+          Download Digitisation Tools Form
+        </a>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
   <section id="citation">
-    <!-- EDIT SECTION HEADING -->
-    <h2 class="section-title" data-i18n="citation.title">Citation</h2>
+    <h2 class="section-title">Citation</h2>
     <div class="card">
-    <div class="citation-block">
-      <p class="citation-label" data-i18n="citation.site.label">If you use this site, please cite it as:</p>
-      <p class="citation-text" data-i18n="citation.site.text">
-        Kenwright, C., DATE, <em>Tidal Time Capsules: A Global Catalogue of Historical Tide Records</em>, available at: .................................
-      </p>
+      <div class="citation-block">
+        <p class="citation-label">If you use this site, please cite it as:</p>
+        <p class="citation-text">
+          Kenwright, C., DATE, <em>Tidal Time Capsules: A Global Catalogue of Historical Tide Records</em>, available at: .................................
+        </p>
+      </div>
+
+      <div class="citation-block">
+        <p class="citation-label">Additionally, please cite the paper that details the work behind this site:</p>
+        <p class="citation-text">
+          Kenwright, C., Haigh, I.D., Williams, J., Chan, D., Nicholls, R.J., McFarland, S. and Becker, M., (DATE) <em>Tidal Time Capsules: A Global Catalogue of Historical Tide Records</em>. Journal, VOL, PAGE.
+        </p>
+      </div>
+
+      <div class="citation-block">
+        <p class="citation-text">
+          If you use any of the data from these studies or the digitisation tools for your own investigations please cite them accordingly
+        </p>
+      </div>
     </div>
-  
-    <div class="citation-block">
-      <p class="citation-label" data-i18n="citation.paper.label">Additionally, please cite the paper that details the work behind this site:</p>
-      <p class="citation-text" data-i18n="citation.paper.text">
-        Kenwright, C., Haigh, I.D., Williams, J., Chan, D., Nicholls, R.J., McFarland, S. and Becker, M., (DATE) <em>Tidal Time Capsules: A Global Catalogue of Historical Tide Records</em>. Journal, VOL, PAGE.
-      </p>
-    </div>
-  
-    <div class="citation-block">
-      <p class="citation-text" data-i18n="citation.note">
-        If you use any of the data from these studies or the digitisation tools for your own investigations please cite them accordingly
-      </p>
-    </div>
-  </div>
   </section>
 
   <section id="contact">
-    <!-- EDIT SECTION HEADING -->
-    <h2 class="section-title" data-i18n="contact.title">Contact</h2>
+    <h2 class="section-title">Contact</h2>
     <div class="card">
-      <!-- EDIT CONTACT TEXT -->
-      <p data-i18n="contact.email">Email: ck1g20@soton.ac.uk</p>
+      <p>Email: ck1g20@soton.ac.uk</p>
     </div>
   </section>
 
 </main>
 
-<footer data-i18n="footer.text">
-  <!-- EDIT FOOTER TEXT -->
+<footer>
   © 2026 Tidal Time Capsules: A Global Catalogue of Historical Tide Records
 </footer>
 
@@ -911,6 +861,7 @@
   src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
   crossorigin=""
 ></script>
+
 <script>
   const PAGE_SIZE = 25;
   const INITIAL_WORLD_ZOOM = 1;
@@ -1054,9 +1005,7 @@
 
   function getUniqueValues(rows, columnName) {
     return [...new Set(
-      rows
-        .map(row => normalizeValue(row[columnName]))
-        .filter(Boolean)
+      rows.map(row => normalizeValue(row[columnName])).filter(Boolean)
     )].sort((a, b) => a.localeCompare(b));
   }
 
