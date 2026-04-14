@@ -1139,16 +1139,26 @@ function buildPopupContent(row, datasetKey) {
   const finish = formatPopupValue(row[mapCols.finish]);
   const type = formatPopupValue(row[mapCols.type]);
 
-  const rawLink = row["Link"];
+  // 👇 Try multiple possible link column names
+  const possibleLinkColumns = ["Link", "link", "URL", "Url", "Study Link"];
 
   let link = "";
-  if (rawLink && typeof rawLink === "object" && rawLink.url) {
-    link = rawLink.url;
-  } else {
-    link = normalizeValue(rawLink);
+
+  for (const col of possibleLinkColumns) {
+    const raw = row[col];
+
+    if (raw && typeof raw === "object" && raw.url) {
+      link = raw.url;
+      break;
+    }
+
+    if (typeof raw === "string" && /^https?:\/\//i.test(raw)) {
+      link = raw;
+      break;
+    }
   }
 
-  const studyHtml = link && /^https?:\/\//i.test(link)
+  const studyHtml = link
     ? `<a href="${escapeHtml(link)}" target="_blank" rel="noopener noreferrer">${escapeHtml(study)}</a>`
     : escapeHtml(study);
 
