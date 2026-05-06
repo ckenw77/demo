@@ -1089,55 +1089,69 @@
     `;
   }
 
-  function initialiseMap() {
-    map = L.map("map-frame", {
-      worldCopyJump: true,
-      minZoom: INITIAL_WORLD_ZOOM,
-      maxZoom: MAP_MAX_ZOOM,
-      zoomSnap: 1
-    }).setView([20, 0], INITIAL_WORLD_ZOOM);
+function initialiseMap() {
+  map = L.map("map-frame", {
+    worldCopyJump: true,
+    minZoom: INITIAL_WORLD_ZOOM,
+    maxZoom: MAP_MAX_ZOOM,
+    zoomSnap: 1
+  }).setView([20, 0], INITIAL_WORLD_ZOOM);
 
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      maxZoom: MAP_MAX_ZOOM,
-      minZoom: INITIAL_WORLD_ZOOM,
-      attribution: "&copy; OpenStreetMap contributors"
-    }).addTo(map);
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: MAP_MAX_ZOOM,
+    minZoom: INITIAL_WORLD_ZOOM,
+    attribution: "&copy; OpenStreetMap contributors"
+  }).addTo(map);
 
-    lowFrequencyLayer = L.layerGroup().addTo(map);
-    undigitisedLayer = L.layerGroup().addTo(map);
-    highFrequencyLayer = L.layerGroup().addTo(map);
+  map.createPane("lowPane");
+  map.createPane("undigitisedPane");
+  map.createPane("highPane");
 
-    const layerFilter = document.getElementById("map-layer-filter");
-    if (layerFilter) layerFilter.addEventListener("change", updateMapVisibility);
+  map.getPane("lowPane").style.zIndex = 400;
+  map.getPane("undigitisedPane").style.zIndex = 500;
+  map.getPane("highPane").style.zIndex = 600;
+
+  lowFrequencyLayer = L.layerGroup().addTo(map);
+  undigitisedLayer = L.layerGroup().addTo(map);
+  highFrequencyLayer = L.layerGroup().addTo(map);
+
+  const layerFilter = document.getElementById("map-layer-filter");
+  if (layerFilter) layerFilter.addEventListener("change", updateMapVisibility);
+}
+function addMapMarker(row, datasetKey, layer) {
+  const dataset = datasets[datasetKey];
+  const mapCols = dataset.mapColumns;
+
+  const lat = Number(normalizeValue(row[mapCols.lat]));
+  const lng = Number(normalizeValue(row[mapCols.lng]));
+
+  if (!isValidCoordinate(lat, lng)) return;
+
+  let pane = "highPane";
+  if (datasetKey === "Low_Frequency") pane = "lowPane";
+  if (datasetKey === "undigitised") pane = "undigitisedPane";
+
+  let marker;
+
+  if (dataset.shape === "square") {
+    marker = L.marker([lat, lng], {
+      icon: createSquareIcon(dataset.colour),
+      pane: pane
+    });
+  } else {
+    marker = L.circleMarker([lat, lng], {
+      radius: 6,
+      color: "#ffffff",
+      weight: 1.5,
+      fillColor: dataset.colour,
+      fillOpacity: 0.9,
+      pane: pane
+    });
   }
 
-  function addMapMarker(row, datasetKey, layer) {
-    const dataset = datasets[datasetKey];
-    const mapCols = dataset.mapColumns;
-
-    const lat = Number(normalizeValue(row[mapCols.lat]));
-    const lng = Number(normalizeValue(row[mapCols.lng]));
-
-    if (!isValidCoordinate(lat, lng)) return;
-
-    let marker;
-
-    if (dataset.shape === "square") {
-      marker = L.marker([lat, lng], { icon: createSquareIcon(dataset.colour) });
-    } else {
-      marker = L.circleMarker([lat, lng], {
-        radius: 6,
-        color: "#ffffff",
-        weight: 1.5,
-        fillColor: dataset.colour,
-        fillOpacity: 0.9
-      });
-    }
-
-    marker.bindPopup(buildPopupContent(row, datasetKey));
-    marker.addTo(layer);
-  }
-
+  marker.bindPopup(buildPopupContent(row, datasetKey));
+  marker.addTo(layer);
+}
   function rebuildMapLayers() {
     if (!map || !highFrequencyLayer || !lowFrequencyLayer || !undigitisedLayer) return;
 
@@ -1153,36 +1167,32 @@
     map.setView([20, 0], INITIAL_WORLD_ZOOM);
   }
 
-  function updateMapVisibility() {
-    const filter = document.getElementById("map-layer-filter");
-    const mode = filter ? filter.value : "all";
+function updateMapVisibility() {
+  const filter = document.getElementById("map-layer-filter");
+  const mode = filter ? filter.value : "all";
 
-    const showHigh = mode === "all" || mode === "High_Frequency";
-    const showLow = mode === "all" || mode === "Low_Frequency";
-    const showUndigitised = mode === "all" || mode === "undigitised";
+  const showHigh = mode === "all" || mode === "High_Frequency";
+  const showLow = mode === "all" || mode === "Low_Frequency";
+  const showUndigitised = mode === "all" || mode === "undigitised";
 
-    if (showLow) {
-      if (!map.hasLayer(lowFrequencyLayer)) lowFrequencyLayer.addTo(map);
-    } else if (map.hasLayer(lowFrequencyLayer)) {
-      map.removeLayer(lowFrequencyLayer);
-    }
-
-    if (showUndigitised) {
-      if (!map.hasLayer(undigitisedLayer)) undigitisedLayer.addTo(map);
-    } else if (map.hasLayer(undigitisedLayer)) {
-      map.removeLayer(undigitisedLayer);
-    }
-
-    if (showHigh) {
-      if (!map.hasLayer(highFrequencyLayer)) highFrequencyLayer.addTo(map);
-    } else if (map.hasLayer(highFrequencyLayer)) {
-      map.removeLayer(highFrequencyLayer);
-    }
-
-    if (map.hasLayer(lowFrequencyLayer)) lowFrequencyLayer.bringToBack();
-    if (map.hasLayer(undigitisedLayer)) undigitisedLayer.bringToFront();
-    if (map.hasLayer(highFrequencyLayer)) highFrequencyLayer.bringToFront();
+  if (showLow) {
+    if (!map.hasLayer(lowFrequencyLayer)) lowFrequencyLayer.addTo(map);
+  } else if (map.hasLayer(lowFrequencyLayer)) {
+    map.removeLayer(lowFrequencyLayer);
   }
+
+  if (showUndigitised) {
+    if (!map.hasLayer(undigitisedLayer)) undigitisedLayer.addTo(map);
+  } else if (map.hasLayer(undigitisedLayer)) {
+    map.removeLayer(undigitisedLayer);
+  }
+
+  if (showHigh) {
+    if (!map.hasLayer(highFrequencyLayer)) highFrequencyLayer.addTo(map);
+  } else if (map.hasLayer(highFrequencyLayer)) {
+    map.removeLayer(highFrequencyLayer);
+  }
+}
 
   async function loadDataset(datasetKey) {
     const dataset = datasets[datasetKey];
@@ -1212,7 +1222,7 @@
       dataset.rows = rows;
       dataset.filteredRows = [...rows];
       dataset.loaded = true;
-
+      console.log(datasetKey, "loaded rows:", rows.length, "headers:", headers);
       Object.entries(dataset.selectColumns || {}).forEach(([filterName, columnName]) => {
         const filterId = dataset.filters[filterName];
         const labelMap = {
