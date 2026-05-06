@@ -21,22 +21,16 @@
       --muted: #5b6b7a;
       --border: #d8e2ea;
       --shadow: 0 10px 30px rgba(15, 92, 122, 0.10);
-      --hero-overlay: rgba(8, 27, 40, 0.42);
-      --digitised: #1f8db3;
-      --undigitized: #c0392b;
+      --high-frequency: #2ecc71;
+      --low-frequency: #1f8db3;
+      --undigitised: #e67e22;
     }
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
 
-    html, body {
-    min-height: 100%;
-      }
-      
-    html, body {
-      min-height: 100%;
-    }
-    
+    html, body { min-height: 100%; }
+
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
@@ -44,14 +38,15 @@
       line-height: 1.6;
       background-color: #e6f4fb;
     }
-        header {
-          background: rgba(255,255,255,0.94);
-          backdrop-filter: blur(10px);
-          border-bottom: 1px solid var(--border);
-          position: sticky;
-          top: 0;
-          z-index: 1000;
-        }
+
+    header {
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
 
     .nav {
       max-width: 1400px;
@@ -120,7 +115,10 @@
       margin-top: 1rem;
     }
 
-    .button {
+    .button,
+    .file-button,
+    .toggle-button,
+    .clear-button {
       display: inline-block;
       padding: 0.85rem 1.2rem;
       border-radius: 12px;
@@ -131,19 +129,33 @@
       color: var(--text);
       box-shadow: var(--shadow);
       transition: transform 0.2s ease, opacity 0.2s ease;
+      cursor: pointer;
+      font-size: 0.95rem;
+      margin-top: 0.8rem;
+      margin-right: 0.6rem;
     }
 
     .button:hover,
     .file-button:hover,
     .toggle-button:hover,
+    .clear-button:hover,
     .pager button:hover {
       transform: translateY(-2px);
     }
 
-    .button.primary {
+    .button.primary,
+    .file-button,
+    .toggle-button {
       background: var(--accent-2);
       color: white;
       border-color: var(--accent-2);
+    }
+
+    .toggle-button.secondary,
+    .clear-button {
+      background: #e9f2f6;
+      color: var(--accent);
+      border: 1px solid var(--border);
     }
 
     main {
@@ -180,31 +192,6 @@
       gap: 1.5rem;
     }
 
-    .file-button,
-    .toggle-button,
-    .clear-button {
-      display: inline-block;
-      margin-top: 0.8rem;
-      margin-right: 0.6rem;
-      padding: 0.7rem 1rem;
-      background: var(--accent-2);
-      color: white;
-      border-radius: 10px;
-      text-decoration: none;
-      font-weight: 600;
-      border: none;
-      cursor: pointer;
-      font-size: 0.95rem;
-      transition: transform 0.2s ease, opacity 0.2s ease;
-    }
-
-    .toggle-button.secondary,
-    .clear-button {
-      background: #e9f2f6;
-      color: var(--accent);
-      border: 1px solid var(--border);
-    }
-
     .table-container {
       display: none;
       margin-top: 1rem;
@@ -214,9 +201,7 @@
       background: white;
     }
 
-    .table-container.active {
-      display: block;
-    }
+    .table-container.active { display: block; }
 
     .table-scroll {
       overflow-x: hidden;
@@ -269,7 +254,8 @@
       color: var(--muted);
     }
 
-    .cell-clip {
+    .cell-clip,
+    .cell-link {
       display: block;
       width: 100%;
       white-space: nowrap;
@@ -278,18 +264,11 @@
     }
 
     .cell-link {
-      display: block;
-      width: 100%;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
       color: var(--accent);
       text-decoration: none;
     }
 
-    .cell-link:hover {
-      text-decoration: underline;
-    }
+    .cell-link:hover { text-decoration: underline; }
 
     .dataset-tools {
       display: grid;
@@ -330,13 +309,8 @@
       background: #fcfeff;
     }
 
-    .empty-message {
-      display: none;
-    }
-
-    .empty-message.active {
-      display: block;
-    }
+    .empty-message { display: none; }
+    .empty-message.active { display: block; }
 
     .pager {
       display: flex;
@@ -398,22 +372,18 @@
       gap: 0.5rem;
     }
 
-    .legend-circle {
+    .legend-circle,
+    .legend-square {
       width: 14px;
       height: 14px;
-      border-radius: 50%;
-      background: var(--digitised);
       border: 2px solid white;
       box-shadow: 0 0 0 1px rgba(0,0,0,0.15);
     }
 
-    .legend-square {
-      width: 14px;
-      height: 14px;
-      background: var(--undigitized);
-      border: 2px solid white;
-      box-shadow: 0 0 0 1px rgba(0,0,0,0.15);
-    }
+    .legend-circle { border-radius: 50%; }
+    .legend-high { background: var(--high-frequency); }
+    .legend-low { background: var(--low-frequency); }
+    .legend-undigitised { background: var(--undigitised); }
 
     .map-disclaimer {
       margin-top: 1rem;
@@ -429,9 +399,7 @@
       margin-top: 1.5rem;
     }
 
-    .about-figures figure {
-      margin: 0;
-    }
+    .about-figures figure { margin: 0; }
 
     .about-figures img {
       width: 100%;
@@ -459,9 +427,7 @@
       border-radius: 14px;
     }
 
-    .citation-block:last-child {
-      margin-bottom: 0;
-    }
+    .citation-block:last-child { margin-bottom: 0; }
 
     .citation-label {
       font-weight: 700;
@@ -469,9 +435,7 @@
       margin: 0 0 0.5rem 0;
     }
 
-    .citation-text {
-      margin: 0;
-    }
+    .citation-text { margin: 0; }
 
     footer {
       margin-top: 3rem;
@@ -497,7 +461,6 @@
 <header>
   <div class="nav">
     <div class="brand">Tidal Time Capsules</div>
-
     <nav>
       <a href="#about">About</a>
       <a href="#map">Map</a>
@@ -513,11 +476,7 @@
 <section class="hero" id="home">
   <div class="hero-inner">
     <h1>Tidal Time Capsules</h1>
-
-    <p class="subtitle">
-      A catalogue of known digitised and undigitized historical tide records.
-    </p>
-
+    <p class="subtitle">A catalogue of known digitised and undigitized historical tide records.</p>
     <div class="button-row">
       <a class="button primary" href="#data">Browse Data</a>
     </div>
@@ -526,67 +485,54 @@
 
 <main>
 
-<section id="about">
-  <h2 class="section-title">About</h2>
+  <section id="about">
+    <h2 class="section-title">About</h2>
+    <div class="data-grid">
+      <div class="card">
+        <h3>The Aims of this Website</h3>
+        <p>
+          This website aims to provide a global catalogue of historical tide records, both digitised and undigitized, as well as relevant digitisation tools. We hope that this resource will improve the discoverability of these records, support data rescue initiatives, and provide information that can help prioritise and plan future digitisation efforts.<br><br>
+          If you are aware of any records or tools not listed on this site, please do not hesitate to contribute or get in touch. We are always eager to hear from you and aim to make this inventory as complete as possible.
+        </p>
 
-  <div class="data-grid">
-    <div class="card">          
-      
-<h3>The Aims of this Website</h3>
-<p>
-  This website aims to provide a global catalogue of historical tide records, both digitised and undigitized, as well as relevant digitisation tools. We hope that this resource will improve the discoverability of these records, support data rescue initiatives, and provide information that can help prioritise and plan future digitisation efforts.<br><br>
+        <h3>The Importance of Historical Tide Records</h3>
+        <p>
+          Sea level rise is a major consequence of climate change, increasing the risk of flooding, coastal erosion, and loss of ecosystems. Developing effective adaptation strategies requires accurate projections of future sea level change, the reliability of which depends on the length and quality of available time series. Additionally, the recovery of historical tide records enables the identification of extreme water level events, which are essential for calibrating and validating flood forecasting models.<br><br>
+          Tidal measurements have been collected for centuries and represent some of the longest continuous environmental observations. However, much of this information remains stored in historical paper records and has not yet been digitised, limiting its accessibility and use in scientific analysis. As a result, many existing sea level datasets extend back only to the late nineteenth century, despite the existence of much earlier observations.<br><br>
+          Some of these records have already been recovered through data archaeology initiatives, significantly extending sea level time series. Examples include long-term tide gauge records from Amsterdam, Brest, Battery, and Sheerness. Nevertheless, many historical records remain undigitized and are at risk of deterioration or permanent loss.<br><br>
+          Historical tidal observations were typically recorded in two primary formats: ledgers and marigrams.
+        </p>
 
-  If you are aware of any records or tools not listed on this site, please do not hesitate to contribute or get in touch. We are always eager to hear from you and aim to make this inventory as complete as possible.
-</p>
+        <div class="about-figures">
+          <figure>
+            <img src="Ledger.jpg" alt="Historical tide ledger showing daily tide and weather observations">
+            <figcaption>
+              Example of a historical tide ledger. These records typically contain handwritten observations of tidal heights, times of high and low water, and weather conditions. This ledger is from Bowling Harbour in the Clyde Estuary, Scotland.
+            </figcaption>
+          </figure>
 
-<h3>The Importance of Historical Tide Records</h3>
-<p>
-  Sea level rise is a major consequence of climate change, increasing the risk of flooding, coastal erosion, and loss of ecosystems. Developing effective adaptation strategies requires accurate projections of future sea level change, the reliability of which depends on the length and quality of available time series. Additionally, the recovery of historical tide records enables the identification of extreme water level events, which are essential for calibrating and validating flood forecasting models.<br><br>
-
-  Tidal measurements have been collected for centuries and represent some of the longest continuous environmental observations. However, much of this information remains stored in historical paper records and has not yet been digitised, limiting its accessibility and use in scientific analysis. As a result, many existing sea level datasets extend back only to the late nineteenth century, despite the existence of much earlier observations.<br><br>
-
-  Some of these records have already been recovered through data archaeology initiatives, significantly extending sea level time series. Examples include long-term tide gauge records from Amsterdam (Netherlands), Brest (France), Battery (USA), and Sheerness (UK). Nevertheless, many historical records remain undigitized and are at risk of deterioration or permanent loss.<br><br>
-
-  Historical tidal observations were typically recorded in two primary formats: ledgers and marigrams (tide charts).
-</p>
-
-
-      <div class="about-figures">
-        <figure>
-          <img
-            src="Ledger.jpg"
-            alt="Historical tide ledger showing daily tide and weather observations"
-          >
-          <figcaption>
-            Example of a historical tide ledger. These records typically contain handwritten observations of tidal heights, times of high and low water, and weather conditions. This ledger is from Bowling Harbour in the Clyde Estuary, Scotland.
-          </figcaption>
-        </figure>
-
-        <figure>
-          <img
-            src="Marigram.jpg"
-            alt="Historical marigram showing tidal cycles plotted on graph paper"
-          >
-          <figcaption>
-            Example of a historical marigram (tide chart). These diagrams were produced by tide gauges that continuously recorded water level on chart paper, providing detailed information on tidal cycles and variability. This marigram is from Gourock in the Clyde Estuary, Scotland. Water level is shown on the y-axis in feet and the time of day is displayed on the x-axis. Each curve represents an individual day.
-          </figcaption>
-        </figure>
+          <figure>
+            <img src="Marigram.jpg" alt="Historical marigram showing tidal cycles plotted on graph paper">
+            <figcaption>
+              Example of a historical marigram. These diagrams were produced by tide gauges that continuously recorded water level on chart paper, providing detailed information on tidal cycles and variability. This marigram is from Gourock in the Clyde Estuary, Scotland.
+            </figcaption>
+          </figure>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
   <section id="map">
     <h2 class="section-title">Location of Records</h2>
-
     <div class="card">
       <div class="map-controls">
         <div>
           <label for="map-layer-filter">Show on map</label>
           <select id="map-layer-filter">
-            <option value="both">All Records</option>
-            <option value="digitised">Digitised Records</option>
-            <option value="undigitised">Undigitized Records</option>
+            <option value="all">All records</option>
+            <option value="High_Frequency">High frequency records</option>
+            <option value="Low_Frequency">Low frequency records</option>
+            <option value="undigitised">Undigitized records</option>
           </select>
         </div>
       </div>
@@ -595,11 +541,15 @@
 
       <div class="map-legend">
         <div class="legend-item">
-          <span class="legend-circle"></span>
-          <span>Digitised records</span>
+          <span class="legend-circle legend-high"></span>
+          <span>High frequency records</span>
         </div>
         <div class="legend-item">
-          <span class="legend-square"></span>
+          <span class="legend-circle legend-low"></span>
+          <span>Low frequency records</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-square legend-undigitised"></span>
           <span>Undigitized records</span>
         </div>
       </div>
@@ -612,75 +562,65 @@
 
   <section id="data">
     <h2 class="section-title">Data</h2>
-
     <div class="data-grid">
+
       <div class="card">
-        <h3>Digitised Historical Tide Records</h3>
-
+        <h3>High Frequency Digitised Historical Tide Records</h3>
         <p>
-          A compilation of all digitised historical records. The catalogue contains information on the location, duration, type of record, method of recovery and who recovered the data. The file may be downloaded as an Excel file or viewed on the website.
+          A compilation of digitised high frequency historical tide records. The catalogue contains information on the location, duration, type of record, method of recovery, temporal resolution, and who recovered the data.
         </p>
+        <a class="file-button" href="Digitised_Records_High_Frequency_2026_05_05.xlsx" download>Download File</a>
+        <button class="toggle-button secondary" onclick="toggleDataset('High_Frequency')">View Data</button>
 
-        <a class="file-button" href="Digitised_Records_2026_03_13.xlsx" download>
-          Download File
-        </a>
-
-        <button class="toggle-button secondary" onclick="toggleDataset('digitised')">
-          View Data
-        </button>
-
-        <div id="digitised-table" class="table-container">
+        <div id="High_Frequency-table" class="table-container">
           <div class="dataset-tools">
-            <div>
-              <label for="digitised-search">Search any field</label>
-              <input id="digitised-search" type="text" placeholder="Location, country, method, study...">
-            </div>
-            <div>
-              <label for="digitised-country">Country</label>
-              <select id="digitised-country">
-                <option value="">All countries</option>
-              </select>
-            </div>
-            <div>
-              <label for="digitised-type">Data type</label>
-              <select id="digitised-type">
-                <option value="">All data types</option>
-              </select>
-            </div>
-            <div>
-              <label for="digitised-method">Method</label>
-              <select id="digitised-method">
-                <option value="">All methods</option>
-              </select>
-            </div>
-            <div>
-              <label for="digitised-start">Start year from</label>
-              <input id="digitised-start" type="number" placeholder="e.g. 1800">
-            </div>
-            <div>
-              <label for="digitised-finish">Finish year to</label>
-              <input id="digitised-finish" type="number" placeholder="e.g. 1950">
-            </div>
+            <div><label for="High_Frequency-search">Search any field</label><input id="High_Frequency-search" type="text" placeholder="Location, country, method, study..."></div>
+            <div><label for="High_Frequency-country">Country</label><select id="High_Frequency-country"><option value="">All countries</option></select></div>
+            <div><label for="High_Frequency-type">Data type</label><select id="High_Frequency-type"><option value="">All data types</option></select></div>
+            <div><label for="High_Frequency-method">Method</label><select id="High_Frequency-method"><option value="">All methods</option></select></div>
+            <div><label for="High_Frequency-start">Start year from</label><input id="High_Frequency-start" type="number" placeholder="e.g. 1800"></div>
+            <div><label for="High_Frequency-finish">Finish year to</label><input id="High_Frequency-finish" type="number" placeholder="e.g. 1950"></div>
           </div>
-
-          <div class="dataset-meta" id="digitised-meta">
-            Loading spreadsheet...
-          </div>
-
-          <div class="table-scroll">
-            <table id="digitised-live-table"></table>
-          </div>
-
-          <div class="empty-message" id="digitised-empty">
-            No rows match the current filters.
-          </div>
-
+          <div class="dataset-meta" id="High_Frequency-meta">Loading spreadsheet...</div>
+          <div class="table-scroll"><table id="High_Frequency-live-table"></table></div>
+          <div class="empty-message" id="High_Frequency-empty">No rows match the current filters.</div>
           <div class="pager">
-            <div id="digitised-page-info">Page 1</div>
+            <div id="High_Frequency-page-info">Page 1</div>
             <div>
-              <button type="button" onclick="changePage('digitised', -1)">Previous</button>
-              <button type="button" onclick="changePage('digitised', 1)">Next</button>
-              <button type="button" class="clear-button" onclick="resetFilters('digitised')">Clear filters</button>
+              <button type="button" onclick="changePage('High_Frequency', -1)">Previous</button>
+              <button type="button" onclick="changePage('High_Frequency', 1)">Next</button>
+              <button type="button" class="clear-button" onclick="resetFilters('High_Frequency')">Clear filters</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Low Frequency Digitised Historical Tide Records</h3>
+        <p>
+          A compilation of digitised low frequency historical tide records. These include records recovered at coarser temporal resolutions, such as annual maxima, annual means, monthly means, weekly maxima, and daily means.
+        </p>
+        <a class="file-button" href="Digitised_Records_Low_Frequency_2026_05_05.xlsx" download>Download File</a>
+        <button class="toggle-button secondary" onclick="toggleDataset('Low_Frequency')">View Data</button>
+
+        <div id="Low_Frequency-table" class="table-container">
+          <div class="dataset-tools">
+            <div><label for="Low_Frequency-search">Search any field</label><input id="Low_Frequency-search" type="text" placeholder="Location, country, method, study..."></div>
+            <div><label for="Low_Frequency-country">Country</label><select id="Low_Frequency-country"><option value="">All countries</option></select></div>
+            <div><label for="Low_Frequency-type">Data type</label><select id="Low_Frequency-type"><option value="">All data types</option></select></div>
+            <div><label for="Low_Frequency-method">Method</label><select id="Low_Frequency-method"><option value="">All methods</option></select></div>
+            <div><label for="Low_Frequency-start">Start year from</label><input id="Low_Frequency-start" type="number" placeholder="e.g. 1800"></div>
+            <div><label for="Low_Frequency-finish">Finish year to</label><input id="Low_Frequency-finish" type="number" placeholder="e.g. 1950"></div>
+          </div>
+          <div class="dataset-meta" id="Low_Frequency-meta">Loading spreadsheet...</div>
+          <div class="table-scroll"><table id="Low_Frequency-live-table"></table></div>
+          <div class="empty-message" id="Low_Frequency-empty">No rows match the current filters.</div>
+          <div class="pager">
+            <div id="Low_Frequency-page-info">Page 1</div>
+            <div>
+              <button type="button" onclick="changePage('Low_Frequency', -1)">Previous</button>
+              <button type="button" onclick="changePage('Low_Frequency', 1)">Next</button>
+              <button type="button" class="clear-button" onclick="resetFilters('Low_Frequency')">Clear filters</button>
             </div>
           </div>
         </div>
@@ -688,65 +628,24 @@
 
       <div class="card">
         <h3>Undigitized Historical Tide Records</h3>
-
         <p>
-          A compilation of the known undigitized historical tide records that remain in a paper format. The catalogue contains information on the location, duration, type of record and who identified it. The file may be downloaded as an Excel file or viewed on the website.
+          A compilation of known undigitized historical tide records that remain in paper or analogue format. The catalogue contains information on location, duration, type of record, and who identified it.
         </p>
-
-        <a class="file-button" href="Undigitized_Records_2026_03_13.xlsx" download>
-          Download File
-        </a>
-
-        <button class="toggle-button secondary" onclick="toggleDataset('undigitised')">
-          View Data
-        </button>
+        <a class="file-button" href="Undigitized_Records_2026_05_05.xlsx" download>Download File</a>
+        <button class="toggle-button secondary" onclick="toggleDataset('undigitised')">View Data</button>
 
         <div id="undigitised-table" class="table-container">
           <div class="dataset-tools">
-            <div>
-              <label for="undigitised-search">Search any field</label>
-              <input id="undigitised-search" type="text" placeholder="Location, country, source, type...">
-            </div>
-            <div>
-              <label for="undigitised-country">Country</label>
-              <select id="undigitised-country">
-                <option value="">All countries</option>
-              </select>
-            </div>
-            <div>
-              <label for="undigitised-type">Data type</label>
-              <select id="undigitised-type">
-                <option value="">All data types</option>
-              </select>
-            </div>
-            <div>
-              <label for="undigitised-study">Study</label>
-              <select id="undigitised-study">
-                <option value="">All studies</option>
-              </select>
-            </div>
-            <div>
-              <label for="undigitised-start">Start year from</label>
-              <input id="undigitised-start" type="number" placeholder="e.g. 1800">
-            </div>
-            <div>
-              <label for="undigitised-finish">Finish year to</label>
-              <input id="undigitised-finish" type="number" placeholder="e.g. 1950">
-            </div>
+            <div><label for="undigitised-search">Search any field</label><input id="undigitised-search" type="text" placeholder="Location, country, source, type..."></div>
+            <div><label for="undigitised-country">Country</label><select id="undigitised-country"><option value="">All countries</option></select></div>
+            <div><label for="undigitised-type">Data type</label><select id="undigitised-type"><option value="">All data types</option></select></div>
+            <div><label for="undigitised-study">Study</label><select id="undigitised-study"><option value="">All studies</option></select></div>
+            <div><label for="undigitised-start">Start year from</label><input id="undigitised-start" type="number" placeholder="e.g. 1800"></div>
+            <div><label for="undigitised-finish">Finish year to</label><input id="undigitised-finish" type="number" placeholder="e.g. 1950"></div>
           </div>
-
-          <div class="dataset-meta" id="undigitised-meta">
-            Loading spreadsheet...
-          </div>
-
-          <div class="table-scroll">
-            <table id="undigitised-live-table"></table>
-          </div>
-
-          <div class="empty-message" id="undigitised-empty">
-            No rows match the current filters.
-          </div>
-
+          <div class="dataset-meta" id="undigitised-meta">Loading spreadsheet...</div>
+          <div class="table-scroll"><table id="undigitised-live-table"></table></div>
+          <div class="empty-message" id="undigitised-empty">No rows match the current filters.</div>
           <div class="pager">
             <div id="undigitised-page-info">Page 1</div>
             <div>
@@ -757,42 +656,26 @@
           </div>
         </div>
       </div>
+
     </div>
   </section>
 
   <section id="tools">
     <h2 class="section-title">Inventory of Digitisation Tools</h2>
-
-    <p class="section-intro"></p>
-
     <div class="card">
       <p>
-        An inventory of digitisation tools that may be useful for digitising marigrams, including the name, price, and a download link for each tool. The inventory includes NUNIEAU, WebPlotDigitizer, and Plot Digitizer, which have already been used for this purpose. The file can be downloaded as an Excel file or viewed on the website.
+        An inventory of digitisation tools that may be useful for digitising marigrams, including the name, price, and a download link for each tool.
       </p>
-
       <a class="file-button" href="Software_List.xlsx" download>Download File</a>
       <button class="toggle-button secondary" onclick="toggleDataset('tools')">View Data</button>
 
       <div id="tools-table" class="table-container">
         <div class="dataset-tools">
-          <div>
-            <label for="tools-search">Search any field</label>
-            <input id="tools-search" type="text" placeholder="Tool name, price, or link...">
-          </div>
+          <div><label for="tools-search">Search any field</label><input id="tools-search" type="text" placeholder="Tool name, price, or link..."></div>
         </div>
-
-        <div class="dataset-meta" id="tools-meta">
-          Loading spreadsheet...
-        </div>
-
-        <div class="table-scroll">
-          <table id="tools-live-table"></table>
-        </div>
-
-        <div class="empty-message" id="tools-empty">
-          No rows match the current filters.
-        </div>
-
+        <div class="dataset-meta" id="tools-meta">Loading spreadsheet...</div>
+        <div class="table-scroll"><table id="tools-live-table"></table></div>
+        <div class="empty-message" id="tools-empty">No rows match the current filters.</div>
         <div class="pager">
           <div id="tools-page-info">Page 1</div>
           <div>
@@ -807,32 +690,16 @@
 
   <section id="contribute">
     <h2 class="section-title">Contribute</h2>
-
-    <p class="section-intro">
-      We welcome contributions that help expand and improve this catalogue.
-    </p>
-
+    <p class="section-intro">We welcome contributions that help expand and improve this catalogue.</p>
     <div class="card">
       <p>
-        We welcome contributions that can be made to help expand the catalogue of historical records and inventory of digitisation tools and encourage you to contact us if you know of additional digitised datasets, undigitized archives, or useful digitisation tools that are not yet included on this site.
+        We welcome contributions that can help expand the catalogue of historical records and inventory of digitisation tools. Please contact us if you know of additional digitised datasets, undigitized archives, or useful digitisation tools that are not yet included on this site.
       </p>
-
-      <p>
-        To contribute, please fill out the correct form and send it via email to ck1g20@soton.ac.uk.
-      </p>
-
+      <p>To contribute, please fill out the correct form and send it via email to ck1g20@soton.ac.uk.</p>
       <div class="button-row">
-        <a class="file-button" href="Digitised_Records_Form.xlsx" download>
-          Download Digitised Records Form
-        </a>
-
-        <a class="file-button" href="Undigitized_Records_Form.xlsx" download>
-          Download Undigitized Records Form
-        </a>
-
-        <a class="file-button" href="Software_List_Form.xlsx" download>
-          Download Digitisation Tools Form
-        </a>
+        <a class="file-button" href="Digitised_Records_Form.xlsx" download>Download Digitised Records Form</a>
+        <a class="file-button" href="Undigitized_Records_Form.xlsx" download>Download Undigitized Records Form</a>
+        <a class="file-button" href="Software_List_Form.xlsx" download>Download Digitisation Tools Form</a>
       </div>
     </div>
   </section>
@@ -842,22 +709,14 @@
     <div class="card">
       <div class="citation-block">
         <p class="citation-label">If you use this site, please cite it as:</p>
-        <p class="citation-text">
-          Kenwright, C., DATE, <em>Tidal Time Capsules: A Global Catalogue of Historical Tide Records</em>, available at: .................................
-        </p>
+        <p class="citation-text">Kenwright, C., DATE, <em>Tidal Time Capsules: A Global Catalogue of Historical Tide Records</em>, available at: .................................</p>
       </div>
-
       <div class="citation-block">
         <p class="citation-label">Additionally, please cite the paper that details the work behind this site:</p>
-        <p class="citation-text">
-          Kenwright, C., Haigh, I.D., Williams, J., Chan, D., Nicholls, R.J., McFarland, S. and Becker, M., (DATE) <em>Tidal Time Capsules: A Global Catalogue of Historical Tide Records</em>. Journal, VOL, PAGE.
-        </p>
+        <p class="citation-text">Kenwright, C., Haigh, I.D., Williams, J., Chan, D., Nicholls, R.J., McFarland, S. and Becker, M., DATE. <em>Tidal Time Capsules: A Global Catalogue of Historical Tide Records</em>. Journal, VOL, PAGE.</p>
       </div>
-
       <div class="citation-block">
-        <p class="citation-text">
-          If you use any of the data from these studies or the digitisation tools for your own investigations please cite them accordingly
-        </p>
+        <p class="citation-text">If you use any of the data from these studies or the digitisation tools for your own investigations, please cite them accordingly.</p>
       </div>
     </div>
   </section>
@@ -876,10 +735,7 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
-<script
-  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-  crossorigin=""
-></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 
 <script>
   const PAGE_SIZE = 25;
@@ -887,26 +743,27 @@
   const MAP_MAX_ZOOM = 10;
 
   let map;
-  let digitisedLayer;
+  let highFrequencyLayer;
+  let lowFrequencyLayer;
   let undigitisedLayer;
 
   const datasets = {
-    digitised: {
-      key: "digitised",
-      file: "Digitised_Records_2026_03_13.xlsx",
+    High_Frequency: {
+      key: "High_Frequency",
+      file: "Digitised_Records_High_Frequency_2026_05_05.xlsx",
       sheet: "Sheet1",
-      containerId: "digitised-table",
-      tableId: "digitised-live-table",
-      metaId: "digitised-meta",
-      emptyId: "digitised-empty",
-      pageInfoId: "digitised-page-info",
+      containerId: "High_Frequency-table",
+      tableId: "High_Frequency-live-table",
+      metaId: "High_Frequency-meta",
+      emptyId: "High_Frequency-empty",
+      pageInfoId: "High_Frequency-page-info",
       filters: {
-        search: "digitised-search",
-        country: "digitised-country",
-        type: "digitised-type",
-        method: "digitised-method",
-        start: "digitised-start",
-        finish: "digitised-finish"
+        search: "High_Frequency-search",
+        country: "High_Frequency-country",
+        type: "High_Frequency-type",
+        method: "High_Frequency-method",
+        start: "High_Frequency-start",
+        finish: "High_Frequency-finish"
       },
       selectColumns: {
         country: "Country",
@@ -927,6 +784,9 @@
         finish: "Record finish",
         type: "Data Type"
       },
+      label: "High frequency digitised",
+      colour: "#2ecc71",
+      shape: "circle",
       sort: { column: null, direction: "asc" },
       page: 1,
       rows: [],
@@ -935,9 +795,58 @@
       loaded: false,
       eventsBound: false
     },
+
+    Low_Frequency: {
+      key: "Low_Frequency",
+      file: "Digitised_Records_Low_Frequency_2026_05_05.xlsx",
+      sheet: "Sheet1",
+      containerId: "Low_Frequency-table",
+      tableId: "Low_Frequency-live-table",
+      metaId: "Low_Frequency-meta",
+      emptyId: "Low_Frequency-empty",
+      pageInfoId: "Low_Frequency-page-info",
+      filters: {
+        search: "Low_Frequency-search",
+        country: "Low_Frequency-country",
+        type: "Low_Frequency-type",
+        method: "Low_Frequency-method",
+        start: "Low_Frequency-start",
+        finish: "Low_Frequency-finish"
+      },
+      selectColumns: {
+        country: "Country",
+        type: "Data Type",
+        method: "Method"
+      },
+      yearColumns: {
+        start: "Record start",
+        finish: "Record finish"
+      },
+      mapColumns: {
+        lat: "Latitude",
+        lng: "Longitude",
+        location: "Location",
+        study: "Study",
+        country: "Country",
+        start: "Record start",
+        finish: "Record finish",
+        type: "Data Type"
+      },
+      label: "Low frequency digitised",
+      colour: "#1f8db3",
+      shape: "circle",
+      sort: { column: null, direction: "asc" },
+      page: 1,
+      rows: [],
+      filteredRows: [],
+      headers: [],
+      loaded: false,
+      eventsBound: false
+    },
+
     undigitised: {
       key: "undigitised",
-      file: "Undigitized_Records_2026_03_13.xlsx",
+      file: "Undigitized_Records_2026_05_05.xlsx",
       sheet: "Sheet1",
       containerId: "undigitised-table",
       tableId: "undigitised-live-table",
@@ -971,6 +880,9 @@
         finish: "Finish",
         type: "Data Type"
       },
+      label: "Undigitized",
+      colour: "#e67e22",
+      shape: "square",
       sort: { column: null, direction: "asc" },
       page: 1,
       rows: [],
@@ -979,6 +891,7 @@
       loaded: false,
       eventsBound: false
     },
+
     tools: {
       key: "tools",
       file: "Software_List.xlsx",
@@ -988,12 +901,11 @@
       metaId: "tools-meta",
       emptyId: "tools-empty",
       pageInfoId: "tools-page-info",
-      filters: {
-        search: "tools-search"
-      },
+      filters: { search: "tools-search" },
       selectColumns: {},
       yearColumns: {},
       mapColumns: {},
+      label: "Tools",
       sort: { column: null, direction: "asc" },
       page: 1,
       rows: [],
@@ -1023,9 +935,8 @@
   }
 
   function getUniqueValues(rows, columnName) {
-    return [...new Set(
-      rows.map(row => normalizeValue(row[columnName])).filter(Boolean)
-    )].sort((a, b) => a.localeCompare(b));
+    return [...new Set(rows.map(row => normalizeValue(row[columnName])).filter(Boolean))]
+      .sort((a, b) => a.localeCompare(b));
   }
 
   function populateSelect(selectId, values, placeholder) {
@@ -1059,14 +970,23 @@
       lng >= -180 && lng <= 180;
   }
 
-  function createSquareIcon() {
+  function escapeHtml(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
+  function createSquareIcon(colour = "#e67e22") {
     return L.divIcon({
       className: "",
       html: `
         <div style="
           width: 14px;
           height: 14px;
-          background: #c0392b;
+          background: ${colour};
           border: 2px solid white;
           box-shadow: 0 0 0 1px rgba(0,0,0,0.25);
         "></div>
@@ -1118,9 +1038,7 @@
           row[header] = value;
         }
 
-        if (normalizeValue(row[header]) !== "") {
-          hasData = true;
-        }
+        if (normalizeValue(row[header]) !== "") hasData = true;
       }
 
       if (hasData) rows.push(row);
@@ -1129,50 +1047,47 @@
     return { headers, rows };
   }
 
-function buildPopupContent(row, datasetKey) {
-  const mapCols = datasets[datasetKey].mapColumns;
+  function buildPopupContent(row, datasetKey) {
+    const dataset = datasets[datasetKey];
+    const mapCols = dataset.mapColumns;
 
-  const location = formatPopupValue(row[mapCols.location]);
-  const country = formatPopupValue(row[mapCols.country]);
-  const study = formatPopupValue(row[mapCols.study]);
-  const start = formatPopupValue(row[mapCols.start]);
-  const finish = formatPopupValue(row[mapCols.finish]);
-  const type = formatPopupValue(row[mapCols.type]);
+    const location = formatPopupValue(row[mapCols.location]);
+    const country = formatPopupValue(row[mapCols.country]);
+    const study = formatPopupValue(row[mapCols.study]);
+    const start = formatPopupValue(row[mapCols.start]);
+    const finish = formatPopupValue(row[mapCols.finish]);
+    const type = formatPopupValue(row[mapCols.type]);
 
-  // 👇 Try multiple possible link column names
-  const possibleLinkColumns = ["Link", "link", "URL", "Url", "Study Link"];
+    const possibleLinkColumns = ["Link", "link", "URL", "Url", "Study Link"];
+    let link = "";
 
-  let link = "";
-
-  for (const col of possibleLinkColumns) {
-    const raw = row[col];
-
-    if (raw && typeof raw === "object" && raw.url) {
-      link = raw.url;
-      break;
+    for (const col of possibleLinkColumns) {
+      const raw = row[col];
+      if (raw && typeof raw === "object" && raw.url) {
+        link = raw.url;
+        break;
+      }
+      if (typeof raw === "string" && /^https?:\/\//i.test(raw)) {
+        link = raw;
+        break;
+      }
     }
 
-    if (typeof raw === "string" && /^https?:\/\//i.test(raw)) {
-      link = raw;
-      break;
-    }
+    const studyHtml = link
+      ? `<a href="${escapeHtml(link)}" target="_blank" rel="noopener noreferrer">${escapeHtml(study)}</a>`
+      : escapeHtml(study);
+
+    return `
+      <div>
+        <strong>${escapeHtml(location)}</strong><br>
+        <strong>Dataset:</strong> ${escapeHtml(dataset.label)}<br>
+        <strong>Country:</strong> ${escapeHtml(country)}<br>
+        <strong>Study:</strong> ${studyHtml}<br>
+        <strong>Data type:</strong> ${escapeHtml(type)}<br>
+        <strong>Years:</strong> ${escapeHtml(start)}–${escapeHtml(finish)}
+      </div>
+    `;
   }
-
-  const studyHtml = link
-    ? `<a href="${escapeHtml(link)}" target="_blank" rel="noopener noreferrer">${escapeHtml(study)}</a>`
-    : escapeHtml(study);
-
-  return `
-    <div>
-      <strong>${escapeHtml(location)}</strong><br>
-      <strong>Dataset:</strong> ${datasetKey === "digitised" ? "Digitised" : "Undigitized"}<br>
-      <strong>Country:</strong> ${escapeHtml(country)}<br>
-      <strong>Study:</strong> ${studyHtml}<br>
-      <strong>Data type:</strong> ${escapeHtml(type)}<br>
-      <strong>Years:</strong> ${escapeHtml(start)}–${escapeHtml(finish)}
-    </div>
-  `;
-}
 
   function initialiseMap() {
     map = L.map("map-frame", {
@@ -1188,50 +1103,51 @@ function buildPopupContent(row, datasetKey) {
       attribution: "&copy; OpenStreetMap contributors"
     }).addTo(map);
 
+    lowFrequencyLayer = L.layerGroup().addTo(map);
     undigitisedLayer = L.layerGroup().addTo(map);
-    digitisedLayer = L.layerGroup().addTo(map);
+    highFrequencyLayer = L.layerGroup().addTo(map);
 
     const layerFilter = document.getElementById("map-layer-filter");
-    if (layerFilter) {
-      layerFilter.addEventListener("change", updateMapVisibility);
-    }
+    if (layerFilter) layerFilter.addEventListener("change", updateMapVisibility);
   }
 
-  function rebuildMapLayers() {
-    if (!map || !digitisedLayer || !undigitisedLayer) return;
+  function addMapMarker(row, datasetKey, layer) {
+    const dataset = datasets[datasetKey];
+    const mapCols = dataset.mapColumns;
 
-    digitisedLayer.clearLayers();
-    undigitisedLayer.clearLayers();
+    const lat = Number(normalizeValue(row[mapCols.lat]));
+    const lng = Number(normalizeValue(row[mapCols.lng]));
 
-    datasets.digitised.rows.forEach(row => {
-      const lat = Number(normalizeValue(row[datasets.digitised.mapColumns.lat]));
-      const lng = Number(normalizeValue(row[datasets.digitised.mapColumns.lng]));
+    if (!isValidCoordinate(lat, lng)) return;
 
-      if (!isValidCoordinate(lat, lng)) return;
+    let marker;
 
-      const marker = L.circleMarker([lat, lng], {
+    if (dataset.shape === "square") {
+      marker = L.marker([lat, lng], { icon: createSquareIcon(dataset.colour) });
+    } else {
+      marker = L.circleMarker([lat, lng], {
         radius: 6,
         color: "#ffffff",
         weight: 1.5,
-        fillColor: "#1f8db3",
+        fillColor: dataset.colour,
         fillOpacity: 0.9
-      }).bindPopup(buildPopupContent(row, "digitised"));
+      });
+    }
 
-      marker.addTo(digitisedLayer);
-    });
+    marker.bindPopup(buildPopupContent(row, datasetKey));
+    marker.addTo(layer);
+  }
 
-    datasets.undigitised.rows.forEach(row => {
-      const lat = Number(normalizeValue(row[datasets.undigitised.mapColumns.lat]));
-      const lng = Number(normalizeValue(row[datasets.undigitised.mapColumns.lng]));
+  function rebuildMapLayers() {
+    if (!map || !highFrequencyLayer || !lowFrequencyLayer || !undigitisedLayer) return;
 
-      if (!isValidCoordinate(lat, lng)) return;
+    highFrequencyLayer.clearLayers();
+    lowFrequencyLayer.clearLayers();
+    undigitisedLayer.clearLayers();
 
-      const marker = L.marker([lat, lng], {
-        icon: createSquareIcon()
-      }).bindPopup(buildPopupContent(row, "undigitised"));
-
-      marker.addTo(undigitisedLayer);
-    });
+    datasets.Low_Frequency.rows.forEach(row => addMapMarker(row, "Low_Frequency", lowFrequencyLayer));
+    datasets.undigitised.rows.forEach(row => addMapMarker(row, "undigitised", undigitisedLayer));
+    datasets.High_Frequency.rows.forEach(row => addMapMarker(row, "High_Frequency", highFrequencyLayer));
 
     updateMapVisibility();
     map.setView([20, 0], INITIAL_WORLD_ZOOM);
@@ -1239,22 +1155,33 @@ function buildPopupContent(row, datasetKey) {
 
   function updateMapVisibility() {
     const filter = document.getElementById("map-layer-filter");
-    const mode = filter ? filter.value : "both";
+    const mode = filter ? filter.value : "all";
 
-    if (mode === "both" || mode === "digitised") {
-      if (!map.hasLayer(digitisedLayer)) digitisedLayer.addTo(map);
-    } else {
-      if (map.hasLayer(digitisedLayer)) map.removeLayer(digitisedLayer);
+    const showHigh = mode === "all" || mode === "High_Frequency";
+    const showLow = mode === "all" || mode === "Low_Frequency";
+    const showUndigitised = mode === "all" || mode === "undigitised";
+
+    if (showLow) {
+      if (!map.hasLayer(lowFrequencyLayer)) lowFrequencyLayer.addTo(map);
+    } else if (map.hasLayer(lowFrequencyLayer)) {
+      map.removeLayer(lowFrequencyLayer);
     }
 
-    if (mode === "both" || mode === "undigitised") {
+    if (showUndigitised) {
       if (!map.hasLayer(undigitisedLayer)) undigitisedLayer.addTo(map);
-    } else {
-      if (map.hasLayer(undigitisedLayer)) map.removeLayer(undigitisedLayer);
+    } else if (map.hasLayer(undigitisedLayer)) {
+      map.removeLayer(undigitisedLayer);
     }
 
-    if (map.hasLayer(undigitisedLayer)) undigitisedLayer.bringToBack();
-    if (map.hasLayer(digitisedLayer)) digitisedLayer.bringToFront();
+    if (showHigh) {
+      if (!map.hasLayer(highFrequencyLayer)) highFrequencyLayer.addTo(map);
+    } else if (map.hasLayer(highFrequencyLayer)) {
+      map.removeLayer(highFrequencyLayer);
+    }
+
+    if (map.hasLayer(lowFrequencyLayer)) lowFrequencyLayer.bringToBack();
+    if (map.hasLayer(undigitisedLayer)) undigitisedLayer.bringToFront();
+    if (map.hasLayer(highFrequencyLayer)) highFrequencyLayer.bringToFront();
   }
 
   async function loadDataset(datasetKey) {
@@ -1305,7 +1232,11 @@ function buildPopupContent(row, datasetKey) {
       attachDatasetEvents(datasetKey);
       applyFilters(datasetKey);
 
-      if (datasets.digitised.loaded && datasets.undigitised.loaded) {
+      if (
+        datasets.High_Frequency.loaded &&
+        datasets.Low_Frequency.loaded &&
+        datasets.undigitised.loaded
+      ) {
         rebuildMapLayers();
       }
     } catch (error) {
@@ -1412,24 +1343,14 @@ function buildPopupContent(row, datasetKey) {
     const empty = document.getElementById(dataset.emptyId);
     const pageInfo = document.getElementById(dataset.pageInfoId);
 
-    let visibleHeaders = dataset.headers;
+    if (!table || !meta || !empty || !pageInfo) return;
 
-    if (datasetKey === "digitised") {
-      visibleHeaders = visibleHeaders.filter(header => {
-        const cleaned = String(header).trim().toLowerCase();
-        return !cleaned.includes("resolution");
-      });
-    }
+    let visibleHeaders = dataset.headers;
 
     if (datasetKey === "tools") {
       visibleHeaders = visibleHeaders.filter(header => {
         const cleaned = String(header).trim().toLowerCase();
-        return (
-          cleaned.includes("tool") ||
-          cleaned.includes("price") ||
-          cleaned.includes("cost") ||
-          cleaned === "link"
-        );
+        return cleaned.includes("tool") || cleaned.includes("price") || cleaned.includes("cost") || cleaned === "link";
       });
     }
 
@@ -1467,7 +1388,6 @@ function buildPopupContent(row, datasetKey) {
         const value = row[header];
         let text = normalizeValue(value);
         const cleanedHeader = String(header).trim().toLowerCase();
-
         const isPlainNumber = /^-?\d+(\.\d+)?$/.test(text.trim());
 
         const shouldRoundTwoDecimals =
@@ -1476,26 +1396,18 @@ function buildPopupContent(row, datasetKey) {
           (cleanedHeader.includes("recorded") && cleanedHeader.includes("year")) ||
           (cleanedHeader.includes("missing") && cleanedHeader.includes("year"));
 
-        if (shouldRoundTwoDecimals && isPlainNumber) {
-          text = Number(text).toFixed(2);
-        }
+        if (shouldRoundTwoDecimals && isPlainNumber) text = Number(text).toFixed(2);
 
-        const isPriceColumn =
-          datasetKey === "tools" &&
+        const isPriceColumn = datasetKey === "tools" &&
           (cleanedHeader.includes("price") || cleanedHeader.includes("cost"));
 
-        if (isPriceColumn && isPlainNumber) {
-          text = Number(text).toFixed(2);
-        }
+        if (isPriceColumn && isPlainNumber) text = Number(text).toFixed(2);
 
         td.title = text;
 
         let linkUrl = null;
-        if (value && typeof value === "object" && value.url) {
-          linkUrl = value.url;
-        } else if (/^https?:\/\//i.test(text)) {
-          linkUrl = text;
-        }
+        if (value && typeof value === "object" && value.url) linkUrl = value.url;
+        else if (/^https?:\/\//i.test(text)) linkUrl = text;
 
         const isLinkColumn = cleanedHeader === "link";
 
@@ -1576,25 +1488,16 @@ function buildPopupContent(row, datasetKey) {
 
   function toggleDataset(datasetKey) {
     const container = document.getElementById(datasets[datasetKey].containerId);
-    if (container) {
-      container.classList.toggle("active");
-    }
+    if (container) container.classList.toggle("active");
   }
 
   window.addEventListener("DOMContentLoaded", () => {
     initialiseMap();
-    loadDataset("digitised");
+    loadDataset("High_Frequency");
+    loadDataset("Low_Frequency");
     loadDataset("undigitised");
     loadDataset("tools");
   });
-function escapeHtml(value) {
-  return String(value ?? "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
-}
 </script>
 
 </body>
