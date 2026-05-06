@@ -569,7 +569,7 @@
         <p>
           A compilation of digitised high frequency historical tide records. The catalogue contains information on the location, duration, type of record, method of recovery, temporal resolution, and who recovered the data.
         </p>
-        <a class="file-button" href="Digitised_Records_High_Frequency_2026_05_05.xlsx" download>Download File</a>
+        <a class="file-button" href="Digitised_Records_High_Frequency_2026_05_06.xlsx" download>Download File</a>
         <button class="toggle-button secondary" onclick="toggleDataset('High_Frequency')">View Data</button>
 
         <div id="High_Frequency-table" class="table-container">
@@ -600,7 +600,7 @@
         <p>
           A compilation of digitised low frequency historical tide records. These include records recovered at coarser temporal resolutions, such as annual maxima, annual means, monthly means, weekly maxima, and daily means.
         </p>
-        <a class="file-button" href="Digitised_Records_Low_Frequency_2026_05_05.xlsx" download>Download File</a>
+        <a class="file-button" href="Digitised_Records_Low_Frequency_2026_05_06.xlsx" download>Download File</a>
         <button class="toggle-button secondary" onclick="toggleDataset('Low_Frequency')">View Data</button>
 
         <div id="Low_Frequency-table" class="table-container">
@@ -1200,7 +1200,7 @@
         cellHTML: false
       });
 
-      const worksheet = workbook.Sheets[dataset.sheet || workbook.SheetNames[0]];
+      const worksheet = workbook.Sheets[dataset.sheet] || workbook.Sheets[workbook.SheetNames[0]];
       const parsed = worksheetToRowsWithLinks(worksheet);
 
       const headers = cleanHeaders(parsed.headers);
@@ -1233,8 +1233,8 @@
       applyFilters(datasetKey);
 
       if (
-        datasets.High_Frequency.loaded &&
-        datasets.Low_Frequency.loaded &&
+        datasets.High_Frequency.loaded ||
+        datasets.Low_Frequency.loaded ||
         datasets.undigitised.loaded
       ) {
         rebuildMapLayers();
